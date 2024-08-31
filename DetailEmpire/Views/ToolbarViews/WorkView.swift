@@ -1,15 +1,31 @@
-//
-//  WorkView.swift
-//  DetailEmpire
-//
-//  Created by John Crawford on 8/29/24.
-//
-
 import SwiftUI
 
 struct WorkView: View {
+    
+    @ObservedObject var gameState = GameState()
+    @ObservedObject var vehicle = Vehicles().getVehicle()
+    //TODO timing
+    
     var body: some View {
-        Text("work")
+        
+        //TODO do while loop get vehicles with cooldown
+        VStack{
+            Text("$\(gameState.money)")
+            Text("\(vehicle.type)")
+            Text("Remaining: \(vehicle.clicksToComplete - vehicle.clicks)")
+            Text("\(vehicle.percentComplete)%")
+            Button(action: {
+                vehicle.detail()
+                if vehicle.isCompleted(){
+                    gameState.money += vehicle.baseRevenue
+                    gameState.xp += vehicle.xp
+                    //TODO new vehicle
+//                    vehicle = Vehicles.getVehicle()
+                }
+            }, label: {
+                Text("Detail")
+            })
+        }
     }
 }
 

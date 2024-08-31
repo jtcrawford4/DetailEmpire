@@ -6,24 +6,18 @@ struct GameView: View {
     @State private var selectedTab = 0
 
        var body: some View {
-//           HStack{
-//               Text("Level: \(gameState.level)")
-//               Spacer()
-//               Text("XP: \(gameState.xp)")
-//               Spacer()
-//               Text("$\(gameState.money)")
-//           }
            HStack{
                Text("Level \(gameState.level)")
-//                   .font(.caption)
                Spacer()
                Text("XP: \(gameState.xp)")
                Spacer()
                Text("$\(gameState.money, specifier: "%.2f")")
-//                   .font(.caption)
            }
            .font(.caption)
            .padding([.leading,.trailing], 50)
+           .padding(.bottom, 10)
+           .background(.blue)
+           .foregroundColor(.white)
            
            TabView(selection: $selectedTab) {
                WorkView()

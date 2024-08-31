@@ -38,9 +38,7 @@ struct StoreView: View {
         List(storeItems.storeItems){
             item in
             
-            //TODO
-//            @State var disabled = item.price < gameState.money //error here
-            @State var insufficientFunds = false
+            @State var insufficientFunds = item.price > gameState.money
             
             HStack{
                 VStack(alignment: .leading) {

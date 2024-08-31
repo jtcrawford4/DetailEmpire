@@ -8,14 +8,6 @@
 import Foundation
 
 struct InventoryItem:Identifiable{
-//    @Published var price = 0
-//    @Published var name = ""
-//    @Published var desc = ""
-//    @Published var levelUnlock = 0
-//    @Published var usesPerVehicle = -1
-//    
-//    @ObservedObject var gameState = GameState()
-    
     var id = UUID()
     var price:Double
     var name:String
