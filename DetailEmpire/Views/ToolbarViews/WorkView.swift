@@ -10,7 +10,7 @@ struct WorkView: View {
         
         //TODO do while loop get vehicles with cooldown
         VStack{
-            Text("$\(gameState.money)")
+            Text("$\(gameState.money, specifier: "%.2f")")            
             Text("\(vehicle.type)")
             Text("Remaining: \(vehicle.clicksToComplete - vehicle.clicks)")
             Text("\(vehicle.percentComplete)%")
@@ -25,6 +25,10 @@ struct WorkView: View {
             }, label: {
                 Text("Detail")
             })
+            .foregroundColor(.white)
+            .padding()
+            .background(.blue)
+            .cornerRadius(8)
         }
     }
 }

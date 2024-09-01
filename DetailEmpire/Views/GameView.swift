@@ -2,7 +2,7 @@ import SwiftUI
 
 struct GameView: View {
     
-    @ObservedObject var gameState = GameState()
+    @StateObject var gameState = GameState()
     @State private var selectedTab = 0
 
        var body: some View {
@@ -20,7 +20,7 @@ struct GameView: View {
            .foregroundColor(.white)
            
            TabView(selection: $selectedTab) {
-               WorkView()
+               WorkView(gameState: gameState)
                    .tabItem {
                        Image(systemName: "car.2.fill")
                        Text("Work")
