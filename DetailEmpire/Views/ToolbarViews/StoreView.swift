@@ -1,10 +1,3 @@
-//
-//  FinanceView.swift
-//  DetailEmpire
-//
-//  Created by John Crawford on 8/29/24.
-//
-
 import SwiftUI
 
 struct StoreView: View {
@@ -23,22 +16,12 @@ struct StoreView: View {
     
     //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
-//        Text("Store")
-//            .font(.headline)
-//        HStack{
-//            Text("Level \(gameState.level)")
-//                .font(.caption)
-//            Spacer()
-//            Text("$\(gameState.money, specifier: "%.2f")")
-//                .font(.caption)
-//        }
-//        .padding([.leading,.trailing], 10)
-            
         //TODO separate items from iventory vs store buy
         List(storeItems.storeItems){
             item in
             
             @State var insufficientFunds = item.price > gameState.money
+            @State var purchased = item.purchased
             
             HStack{
                 VStack(alignment: .leading) {
@@ -50,13 +33,17 @@ struct StoreView: View {
                 Spacer()
                 VStack{
                     //info icon to show detail view/usages/unlock/etc
-                    if item.purchased || item.startingItem{
+                    if purchased || item.startingItem{
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.green)
                     }else{
                         if gameState.level >= item.levelUnlocked{
-                            Button("$ \(item.price, specifier: "%.2f")", action: item.buy)
+                            Button("$ \(item.price, specifier: "%.2f")", action: {
+                                gameState.money -= item.price
+                                purchased = true
+                                
+                            })
                                 .background(insufficientFunds ? .gray : .green)
                                 .foregroundColor(.white)
                                 .disabled(insufficientFunds)
@@ -73,10 +60,6 @@ struct StoreView: View {
                 }
                 .buttonStyle(.bordered)
                 .cornerRadius(5)
-                
-//                Button("Sign In", systemImage: "arrow.up", action: item.buy)
-//                    .labelStyle(.iconOnly)
-
             }
         }
     }

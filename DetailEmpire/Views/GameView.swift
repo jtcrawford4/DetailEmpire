@@ -3,6 +3,7 @@ import SwiftUI
 struct GameView: View {
     
     @StateObject var gameState = GameState()
+    @StateObject var inventory = InventoryItems()
     @State private var selectedTab = 0
 
        var body: some View {
@@ -20,17 +21,17 @@ struct GameView: View {
            .foregroundColor(.white)
            
            TabView(selection: $selectedTab) {
-               WorkView(gameState: gameState)
+               WorkView(gameState: gameState, inventory: inventory)
                    .tabItem {
                        Image(systemName: "car.2.fill")
                        Text("Work")
                    }.tag(0)
-               InventoryView()
+               InventoryView(gameState: gameState, inventoryItems: inventory)
                    .tabItem {
                        Image(systemName: "shippingbox")
                        Text("Inventory")
                    }.tag(1)
-               StoreView()
+               StoreView(gameState: gameState)
                    .tabItem {
                        Image(systemName: "dollarsign.circle.fill")
                        Text("Store")

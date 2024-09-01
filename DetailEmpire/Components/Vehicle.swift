@@ -1,5 +1,3 @@
-//
-//  Vehicle2.swift
 import Foundation
 
 class Vehicle:ObservableObject{
@@ -29,9 +27,5 @@ class Vehicle:ObservableObject{
     func isCompleted() -> Bool{
         return self.clicks == self.clicksToComplete
     }
-    
-//    func calcPercentComplete() -> Int {
-//        return Int(round((Double(self.clicks) / Double(self.clicksToComplete)) * 100))
-//    }
     
 }

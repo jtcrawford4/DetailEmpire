@@ -4,31 +4,42 @@ struct WorkView: View {
     
     @ObservedObject var gameState = GameState()
     @ObservedObject var vehicle = Vehicles().getVehicle()
-    //TODO timing
+    @ObservedObject var inventory = InventoryItems()
     
     var body: some View {
-        
-        //TODO do while loop get vehicles with cooldown
+        @State var detailDisabled = inventory.itemEmpty()
         VStack{
-            Text("$\(gameState.money, specifier: "%.2f")")            
+            //debugging
+            Text("$\(gameState.money, specifier: "%.2f")")
+            Text("xp next level: \(gameState.xpToNextLevel)")
             Text("\(vehicle.type)")
             Text("Remaining: \(vehicle.clicksToComplete - vehicle.clicks)")
             Text("\(vehicle.percentComplete)%")
+            //
             Button(action: {
-                vehicle.detail()
+                vehicle.detail() //TODO should all go here?
                 if vehicle.isCompleted(){
                     gameState.money += vehicle.baseRevenue
                     gameState.xp += vehicle.xp
-                    //TODO new vehicle
-//                    vehicle = Vehicles.getVehicle()
+                    for item in inventory.inventoryItems{
+                        item.use()
+                        if item.usesRemaining == 0 {
+                            detailDisabled = true
+                        }
+                    }
+                    if gameState.xp >= gameState.xpToNextLevel {
+                        gameState.level += 1
+                        gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * 2.8))
+                    }
                 }
             }, label: {
                 Text("Detail")
             })
             .foregroundColor(.white)
             .padding()
-            .background(.blue)
+            .background(detailDisabled ? .gray : .blue)
             .cornerRadius(8)
+            .disabled(detailDisabled)
         }
     }
 }

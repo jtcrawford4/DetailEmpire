@@ -6,7 +6,10 @@ class GameState: ObservableObject{
     @Published var money = 0.00
 //    @Published var moneyPerSecond = 0.00
     @Published var employees = 0
+    @Published var xpToNextLevel = 500
     @Published var vehicleDetailMultipliers = 0.00
+    @Published var clickMulitplier = 0.00
+    //options
     
     var timer:Timer?
     

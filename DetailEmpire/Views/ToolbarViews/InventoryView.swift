@@ -1,33 +1,48 @@
 import SwiftUI
 
 struct InventoryView: View {
-        
+    @ObservedObject var gameState = GameState()
     @ObservedObject var inventoryItems = InventoryItems()
     
     //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
-//        Text("Current Inventory2")
-//            .font(.headline)
             
         //TODO separate items from iventory vs store buy
         List(inventoryItems.inventoryItems){
             item in
             HStack{
+//                Image(systemName: "\(item.icon)")
                 VStack(alignment: .leading) {
                     Text(item.name)
                         .font(.headline)
                     Text("\(item.desc)")
                         .font(.caption)
-//                    Text("$ \(item.price)")
-//                    Text("Price: \(item.price)")
                 }
                 Spacer()
                 VStack{
-                    Text("Uses remaining")
-                        .font(.caption)
-                    if item.usesRemaining != -1{
-                        Text("\(item.usesRemaining)")
+                    if item.usesRemaining != -1 {
+                        if item.usesRemaining == 0 {
+                            Button(action: {
+                                item.refill()
+                                gameState.money -= item.price
+                            }, label: {
+                                Image(systemName: "cart.badge.plus")
+                            })
+                                .padding([.leading,.trailing], 20)
+                                .padding([.top,.bottom], 8)
+                                .background(.red)
+                                .foregroundColor(.white)
+                                .disabled(gameState.money < item.price)
+                                .cornerRadius(8)
+                                .frame(maxWidth: 90)
+                        }else{
+                            Text("Uses remaining")
+                                .font(.caption)
+                            Text("\(item.usesRemaining)")
+                        }
                     }else{
+                        Text("Uses remaining")
+                            .font(.caption)
                         Image(systemName: "infinity")
                             .font(.system(size:16))
                             .padding(.top, 1)
