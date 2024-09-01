@@ -8,8 +8,9 @@ class InventoryItem:Identifiable{
     var levelUnlocked:Int
     var usesPerVehicle:Int
     var usesRemaining:Int
+    var usesPerContainer:Int
     var icon:String
-    var purchased:Bool
+    @Published var purchased:Bool
     var startingItem:Bool
     var itemMultiplier:Double?
     var clickMultiplier:Double?
@@ -22,6 +23,7 @@ class InventoryItem:Identifiable{
         self.levelUnlocked = levelUnlocked
         self.usesPerVehicle = usesPerVehicle
         self.usesRemaining = usesRemaining
+        self.usesPerContainer = self.usesRemaining
         self.icon = icon
         self.purchased = purchased
         self.startingItem = startingItem
@@ -29,8 +31,9 @@ class InventoryItem:Identifiable{
         self.clickMultiplier = clickMultiplier
     }
     
-    func buy(){
+    func purchaseFromStore(item:InventoryItem){
 //        gameState.money -= self.price
+        
     }
     
     func use(){
@@ -40,7 +43,7 @@ class InventoryItem:Identifiable{
     }
     
     func refill(){
-        self.usesRemaining = self.usesPerVehicle
+        self.usesRemaining = self.usesPerContainer
     }
 
 }

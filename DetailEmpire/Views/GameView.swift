@@ -10,7 +10,7 @@ struct GameView: View {
            HStack{
                Text("Level \(gameState.level)")
                Spacer()
-               Text("XP: \(gameState.xp)")
+               Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
                Spacer()
                Text("$\(gameState.money, specifier: "%.2f")")
            }
@@ -31,7 +31,7 @@ struct GameView: View {
                        Image(systemName: "shippingbox")
                        Text("Inventory")
                    }.tag(1)
-               StoreView(gameState: gameState)
+               StoreView(gameState: gameState, inventory: inventory)
                    .tabItem {
                        Image(systemName: "dollarsign.circle.fill")
                        Text("Store")

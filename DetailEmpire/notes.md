@@ -16,6 +16,7 @@
             price discount, multiple usages of item accordingly
     - percentage degrade for equipment
     - unlock ability to hold more items
+    - upgrade item stars/color coding (common/rare/epic style), last longer, more money etc. special ability
 
 //Eventually
     finance
@@ -24,3 +25,5 @@
     color coding item list?
         category for items
         meta data for items
+    - unlock specialty services/employee training
+        - results in new items/soaps that must be used, etc

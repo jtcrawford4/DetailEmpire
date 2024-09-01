@@ -7,7 +7,9 @@ struct WorkView: View {
     @ObservedObject var inventory = InventoryItems()
     
     var body: some View {
+        
         @State var detailDisabled = inventory.itemEmpty()
+
         VStack{
             //debugging
             Text("$\(gameState.money, specifier: "%.2f")")
@@ -15,6 +17,10 @@ struct WorkView: View {
             Text("\(vehicle.type)")
             Text("Remaining: \(vehicle.clicksToComplete - vehicle.clicks)")
             Text("\(vehicle.percentComplete)%")
+            ProgressView(value: Float(Double(vehicle.percentComplete) / 100)) //TODO make circle?
+                .progressViewStyle(.linear)
+                .padding(.horizontal, 150)
+                .padding(.vertical, 20)
             //
             Button(action: {
                 vehicle.detail() //TODO should all go here?
