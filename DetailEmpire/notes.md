@@ -27,3 +27,14 @@
         meta data for items
     - unlock specialty services/employee training
         - results in new items/soaps that must be used, etc
+        
+        
+//Snippets
+
+    //dialog button
+    Button("", systemImage: "info.circle"){}
+        .font(.system(size: 12))
+        .padding(.leading, -10)
+    .alert("Important message", isPresented: $showingItemInfo) {
+        Button("OK", role: .cancel){}
+    }

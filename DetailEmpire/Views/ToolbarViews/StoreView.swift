@@ -2,9 +2,9 @@ import SwiftUI
 
 struct StoreView: View {
     
-    @ObservedObject var storeItems = StoreItems()
     @ObservedObject var gameState = GameState()
     @ObservedObject var inventory = InventoryItems()
+    @ObservedObject var storeItems = StoreItems()
     
 //    struct BlueButtonStyle: ButtonStyle {
 //        func makeBody(configuration: Self.Configuration) -> some View {
@@ -19,11 +19,14 @@ struct StoreView: View {
     //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
         //TODO separate items from iventory vs store buy
+//        for idx in 0..<storeItems.storeItems.count {
+//            storeItems.storeItems[idx].isSelected = false
+//        }
         List(storeItems.storeItems){
             item in
             
             @State var insufficientFunds = item.price > gameState.money
-            @State var purchased = item.purchased
+//            @State var purchased = item.purchased
             
             HStack{
                 VStack(alignment: .leading) {
@@ -35,7 +38,7 @@ struct StoreView: View {
                 Spacer()
                 VStack{
                     //info icon to show detail view/usages/unlock/etc
-                    if purchased || item.startingItem {
+                    if item.purchased || item.startingItem {
                         Image(systemName: "checkmark.circle.fill")
                             .font(.system(size: 20, weight: .bold))
                             .foregroundColor(.green)
@@ -43,7 +46,7 @@ struct StoreView: View {
                         if gameState.level >= item.levelUnlocked{
                             Button("$ \(item.price, specifier: "%.2f")", action: {
                                 gameState.money -= item.price
-                                purchased = true
+//                                purchased = true
                                 item.purchased = true
                                 inventory.addItem(item: item)
                             })

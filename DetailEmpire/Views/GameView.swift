@@ -4,6 +4,7 @@ struct GameView: View {
     
     @StateObject var gameState = GameState()
     @StateObject var inventory = InventoryItems()
+    @StateObject var storeItems = StoreItems()
     @State private var selectedTab = 0
 
        var body: some View {
@@ -31,7 +32,7 @@ struct GameView: View {
                        Image(systemName: "shippingbox")
                        Text("Inventory")
                    }.tag(1)
-               StoreView(gameState: gameState, inventory: inventory)
+               StoreView(gameState: gameState, inventory: inventory, storeItems: storeItems)
                    .tabItem {
                        Image(systemName: "dollarsign.circle.fill")
                        Text("Store")

@@ -3,18 +3,28 @@ import SwiftUI
 struct InventoryView: View {
     @ObservedObject var gameState = GameState()
     @ObservedObject var inventoryItems = InventoryItems()
+    @State private var showingItemInfo = false
     
     //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
             
+        //
+       
+        
+        //
         //TODO separate items from iventory vs store buy
         List(inventoryItems.inventoryItems){
             item in
             HStack{
 //                Image(systemName: "\(item.icon)")
                 VStack(alignment: .leading) {
-                    Text(item.name)
-                        .font(.headline)
+                    HStack{
+                        Text(item.name)
+                            .font(.headline)
+//                        Button("info.circle") {
+//                            showingItemInfo = true
+//                        }
+                    }
                     Text("\(item.desc)")
                         .font(.caption)
                 }

@@ -10,6 +10,9 @@ class GameState: ObservableObject{
     @Published var vehicleDetailMultipliers = 0.00
     @Published var clickMulitplier = 0.00
     //options
+    //metrics
+//    @Published var vehcilesDetailed = 0
+//    @Published var totalMoneyEarned = 0.00
     
     var timer:Timer?
     

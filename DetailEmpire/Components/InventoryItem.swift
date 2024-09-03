@@ -1,6 +1,6 @@
 import Foundation
 
-class InventoryItem:Identifiable{
+class InventoryItem:Identifiable, ObservableObject{
     var id = UUID()
     var price:Double
     var name:String
