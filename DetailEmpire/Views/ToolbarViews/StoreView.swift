@@ -26,7 +26,6 @@ struct StoreView: View {
             item in
             
             @State var insufficientFunds = item.price > gameState.money
-//            @State var purchased = item.purchased
             
             HStack{
                 VStack(alignment: .leading) {
@@ -46,7 +45,6 @@ struct StoreView: View {
                         if gameState.level >= item.levelUnlocked{
                             Button("$ \(item.price, specifier: "%.2f")", action: {
                                 gameState.money -= item.price
-//                                purchased = true
                                 item.purchased = true
                                 inventory.addItem(item: item)
                             })

@@ -9,13 +9,14 @@ struct WorkView: View {
     var body: some View {
         
         @State var detailDisabled = inventory.itemEmpty()
+//        gameState.currentVehicle = vehicle
 
         VStack{
             //debugging
             Text("$\(gameState.money, specifier: "%.2f")")
             Text("xp next level: \(gameState.xpToNextLevel)")
             Text("\(vehicle.type)")
-            Text("Remaining: \(vehicle.clicksToComplete - vehicle.clicks)")
+            Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks)")
             Text("\(vehicle.percentComplete)%")
             ProgressView(value: Float(Double(vehicle.percentComplete) / 100)) //TODO make circle?
                 .progressViewStyle(.linear)

@@ -17,6 +17,9 @@
     - percentage degrade for equipment
     - unlock ability to hold more items
     - upgrade item stars/color coding (common/rare/epic style), last longer, more money etc. special ability
+    - equipment degrades, works slower after a threshold i.e. 20% works half as well, etc
+    - classifieds section for buying used equipment
+    - have multiple polishers for multiple bays/employees, etc
 
 //Eventually
     finance
@@ -27,6 +30,10 @@
         meta data for items
     - unlock specialty services/employee training
         - results in new items/soaps that must be used, etc
+        
+//Employee
+    - each garage can accept up to so many employees? x general employee, x specialist, x manager
+    - unlock to have more employees?
         
         
 //Snippets

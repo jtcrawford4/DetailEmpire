@@ -37,7 +37,7 @@ struct GameView: View {
                        Image(systemName: "dollarsign.circle.fill")
                        Text("Store")
                    }.tag(2)
-               EmployeeView()
+               EmployeeView(gameState: gameState)
                    .tabItem {
                        Image(systemName: "person.fill")
                        Text("Employee")

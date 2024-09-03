@@ -3,7 +3,7 @@ import Foundation
 class Vehicle:ObservableObject{
     var id:UUID
     @Published var type:String
-    @Published var clicks:Int = 0
+    @Published var clicks:Double = 0
     @Published var clicksToComplete:Int
     @Published var percentComplete:Int = 0
     @Published var baseRevenue:Double
@@ -21,11 +21,16 @@ class Vehicle:ObservableObject{
     
     func detail(){
         self.clicks += 1 //TODO use gamestate multipliers etc
+//        self.clicks += 1 + (1 * (Double(numWorkers) * 0.10)) //TODO separate player click vs worker click
         self.percentComplete = Int(round((Double(self.clicks) / Double(self.clicksToComplete)) * 100))
+    }
+    
+    func workerDetail(numWorkers: Int){
+        self.clicks += (Double(numWorkers) * 0.10)
     }
         
     func isCompleted() -> Bool{
-        return self.clicks == self.clicksToComplete
+        return self.clicks >= Double(self.clicksToComplete)
     }
     
 }
