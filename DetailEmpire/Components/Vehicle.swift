@@ -21,34 +21,16 @@ class Vehicle:ObservableObject{
     
     func detail(gameState: GameState, inventory: [InventoryItem]){
         detailWithClicks(clicks: 1.00, gameState: gameState, inventory: inventory)
-//
-//        self.clicks += 1 //TODO use gamestate multipliers etc
-////        self.clicks += 1 + (1 * (Double(numWorkers) * 0.10)) //TODO separate player click vs worker click
-//        self.percentComplete = Int(round((Double(self.clicks) / Double(self.clicksToComplete)) * 100))
-//        
-//        //
-//        if self.isCompleted(){
-//            gameState.money += self.baseRevenue
-//            gameState.xp += self.xp
-////            for item in inventory.inventoryItems{
-////                item.use()
-////                if item.usesRemaining == 0 {
-////                    detailDisabled = true
-////                }
-////            }
-//            if gameState.xp >= gameState.xpToNextLevel {
-//                gameState.level += 1
-//                gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * 2.8))
-//            }
-//        }
-        //
     }
     
     public func workerDetail(numWorkers: Int, gameState: GameState, inventory: [InventoryItem]){
         if numWorkers > 0 {
             detailWithClicks(clicks: (Double(numWorkers) * 0.10), gameState: gameState, inventory: inventory)
-//            self.clicks += (Double(numWorkers) * 0.10)
         }
+    }
+    
+    func isCompleted() -> Bool{
+        return self.clicks >= Double(self.clicksToComplete)
     }
     
     private func detailWithClicks(clicks: Double, gameState: GameState, inventory: [InventoryItem]){
@@ -70,10 +52,6 @@ class Vehicle:ObservableObject{
                 }
             }
         }
-    }
-        
-    func isCompleted() -> Bool{
-        return self.clicks >= Double(self.clicksToComplete)
     }
     
 }

@@ -5,23 +5,10 @@ struct StoreView: View {
     @EnvironmentObject var gameState: GameState
     @EnvironmentObject var inventory: InventoryItems
     @EnvironmentObject var storeItems: StoreItems
-    
-//    struct BlueButtonStyle: ButtonStyle {
-//        func makeBody(configuration: Self.Configuration) -> some View {
-//            configuration.label
-//                .foregroundColor(configuration.isPressed ? Color.blue : Color.white)
-//                .background(configuration.isPressed ? Color.white : Color.blue)
-//                .cornerRadius(4)
-//                .padding()
-//        }
-//    }
-    
+        
     //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
         //TODO separate items from iventory vs store buy
-//        for idx in 0..<storeItems.storeItems.count {
-//            storeItems.storeItems[idx].isSelected = false
-//        }
         List(storeItems.storeItems){
             item in
             

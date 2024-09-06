@@ -3,7 +3,6 @@ import SwiftUI
 struct GameView: View {
     
     @StateObject var gameState = GameState()
-//    @StateObject var inventory = InventoryItems()
     @StateObject var storeItems = StoreItems()
     @State private var selectedTab = 0
 
@@ -44,11 +43,10 @@ struct GameView: View {
                    }.tag(3)
            }
            .environmentObject(gameState)
-//           .environmentObject(inventory)
            .environmentObject(storeItems)
            .environmentObject(gameState.currentVehicle)
            .environmentObject(gameState.inventory)
-           .edgesIgnoringSafeArea(.all) // Important if you want NavigationViews to go under the status bar
+           .edgesIgnoringSafeArea(.all)
        }
 }
 
