@@ -1,9 +1,10 @@
 import Foundation
     
 enum EmployeeType:String, CaseIterable, Identifiable {
-    var id: Self {
-        return self
-    }
+//    var id: Self {
+//        return self
+//    }
+    var id : String { UUID().uuidString }
     case general = "General", manager = "Manager"//paint correct
 }
 

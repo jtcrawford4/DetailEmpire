@@ -3,7 +3,7 @@ import SwiftUI
 struct GameView: View {
     
     @StateObject var gameState = GameState()
-    @StateObject var inventory = InventoryItems()
+//    @StateObject var inventory = InventoryItems()
     @StateObject var storeItems = StoreItems()
     @State private var selectedTab = 0
 
@@ -22,27 +22,32 @@ struct GameView: View {
            .foregroundColor(.white)
            
            TabView(selection: $selectedTab) {
-               WorkView(gameState: gameState, inventory: inventory)
+               WorkView()
                    .tabItem {
                        Image(systemName: "car.2.fill")
                        Text("Work")
                    }.tag(0)
-               InventoryView(gameState: gameState, inventoryItems: inventory)
+               InventoryView()
                    .tabItem {
                        Image(systemName: "shippingbox")
                        Text("Inventory")
                    }.tag(1)
-               StoreView(gameState: gameState, inventory: inventory, storeItems: storeItems)
+               StoreView()
                    .tabItem {
                        Image(systemName: "dollarsign.circle.fill")
                        Text("Store")
                    }.tag(2)
-               EmployeeView(gameState: gameState)
+               EmployeeView()
                    .tabItem {
                        Image(systemName: "person.fill")
                        Text("Employee")
                    }.tag(3)
            }
+           .environmentObject(gameState)
+//           .environmentObject(inventory)
+           .environmentObject(storeItems)
+           .environmentObject(gameState.currentVehicle)
+           .environmentObject(gameState.inventory)
            .edgesIgnoringSafeArea(.all) // Important if you want NavigationViews to go under the status bar
        }
 }

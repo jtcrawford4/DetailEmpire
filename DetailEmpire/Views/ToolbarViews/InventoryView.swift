@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct InventoryView: View {
-    @ObservedObject var gameState = GameState()
-    @ObservedObject var inventoryItems = InventoryItems()
+    @EnvironmentObject var gameState: GameState
+    @EnvironmentObject var inventoryItems: InventoryItems
     @State private var showingItemInfo = false
     
     //TODO tab view, tools vs products (products, interior vs ext)
@@ -35,6 +35,7 @@ struct InventoryView: View {
                             Button(action: {
                                 item.refill()
                                 gameState.money -= item.price
+                                gameState.detailDisabled = gameState.inventory.isAnyItemEmpty()
                             }, label: {
                                 Image(systemName: "cart.badge.plus")
                             })

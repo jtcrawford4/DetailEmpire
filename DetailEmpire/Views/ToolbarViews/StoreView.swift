@@ -2,9 +2,9 @@ import SwiftUI
 
 struct StoreView: View {
     
-    @ObservedObject var gameState = GameState()
-    @ObservedObject var inventory = InventoryItems()
-    @ObservedObject var storeItems = StoreItems()
+    @EnvironmentObject var gameState: GameState
+    @EnvironmentObject var inventory: InventoryItems
+    @EnvironmentObject var storeItems: StoreItems
     
 //    struct BlueButtonStyle: ButtonStyle {
 //        func makeBody(configuration: Self.Configuration) -> some View {

@@ -18,7 +18,7 @@ class InventoryItems:ObservableObject{
         
     ]
     
-    func itemEmpty() -> Bool{
+    func isAnyItemEmpty() -> Bool{
         for item in self.inventoryItems {
             if item.usesRemaining == 0 {
                 return true
