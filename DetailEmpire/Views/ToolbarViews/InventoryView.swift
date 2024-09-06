@@ -56,10 +56,48 @@ struct InventoryView: View {
                     }       
                 }
             }
+//            .background(
+//                LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .bottomTrailing, endPoint: .topLeading)
+//            )
+            
+            
+            
+//            .background(
+//                MeshGradient (
+//                    width: 3, height: 3, points: [
+//                        .init(0, 0),
+//                        .init(0.5, 0),
+//                        .init(1, 0),
+//                        .init(0, 0.5),
+//                        .init(0.3, 0.5),
+//                        .init(1, 0.5),
+//                        .init(0, 1),
+//                        .init(0.5, 1),
+//                        .init(1, 1)
+//                    ],
+//                    colors: [ .red, .purple, .indigo, .orange, .cyan, .blue, .yellow, .green, .mint ]
+//                )
+//            )
+//            .background(
+//                LinearGradient(stops: [
+//                    .init(color: .white, location: 0.45),
+//                    .init(color: .black, location: 0.55),
+//                ], startPoint: .topLeading, endPoint: .bottomTrailing)
+                
+//                LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
+//            )
+
+            
         }
     }
 }
 
 #Preview {
-    InventoryView()
+    @StateObject var gameState = GameState()
+    @StateObject var storeItems = StoreItems()
+    return InventoryView()
+        .environmentObject(gameState)
+        .environmentObject(StoreItems())
+        .environmentObject(gameState.currentVehicle)
+        .environmentObject(gameState.inventory)
 }

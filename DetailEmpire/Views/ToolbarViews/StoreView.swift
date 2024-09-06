@@ -57,5 +57,11 @@ struct StoreView: View {
 }
 
 #Preview {
-    StoreView()
+    @StateObject var gameState = GameState()
+    @StateObject var storeItems = StoreItems()
+    return StoreView()
+        .environmentObject(gameState)
+        .environmentObject(storeItems)
+        .environmentObject(gameState.currentVehicle)
+        .environmentObject(gameState.inventory)
 }

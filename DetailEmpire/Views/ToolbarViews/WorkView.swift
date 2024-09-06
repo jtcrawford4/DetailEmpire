@@ -35,5 +35,11 @@ struct WorkView: View {
 }
 
 #Preview {
-    WorkView()
+    @StateObject var gameState = GameState()
+    @StateObject var storeItems = StoreItems()
+    return WorkView()
+        .environmentObject(gameState)
+        .environmentObject(StoreItems())
+        .environmentObject(gameState.currentVehicle)
+        .environmentObject(gameState.inventory)
 }

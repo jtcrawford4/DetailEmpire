@@ -6,6 +6,9 @@ struct EmployeeView: View {
 //    var employeeTypes = EmployeeType.allCases
     
     var body: some View {
+        
+        @State var employeeTypes = EmployeeType.allCases
+        
         VStack{
             Text("Employees")
                 .padding(.vertical, 10)
@@ -14,9 +17,10 @@ struct EmployeeView: View {
             Text("hired: \(gameState.employees.count)")
             HStack{
                 
-                let hireCost = getDefaultEmployeeHireCost(type: EmployeeType.general)
+//                let hireCost = Employee.getDefaultEmployeeHireCost(type: EmployeeType.general)
+                let hireCost = 1.00
                 @State var insufficientFunds = hireCost > gameState.money
-                
+//                
                 Button("Hire", action:{
 //                    gameState.numEmployee += 1
                     gameState.money -= hireCost
@@ -28,13 +32,17 @@ struct EmployeeView: View {
                 .cornerRadius(6)
                 .disabled(insufficientFunds)
                 
-//                List(EmployeeType.allCases){ type in
-//                    let hireCost = getDefaultEmployeeHireCost(type: type)
+                
+                
+                
+//                List (selection: employeeTypes) { type in
+////                    let hireCost = Employee.getDefaultEmployeeHireCost(type: type)
+//                    let hireCost = 1.00
 //                    @State var insufficientFunds = hireCost > gameState.money
 //                    
 //                    HStack{
 //                        VStack(alignment: .leading) {
-//                            Text(type.rawValue)
+//                            Text(type.id)
 //                                .font(.headline)
 //                        }
 //                        Spacer()
