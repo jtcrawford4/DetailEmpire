@@ -12,6 +12,7 @@ struct WorkView: View {
 
         VStack{
             //debugging
+            Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
             Text("\(vehicle.type)")
             Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
             Text("\(vehicle.percentComplete)%")

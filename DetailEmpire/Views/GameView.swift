@@ -7,12 +7,22 @@ struct GameView: View {
     @State private var selectedTab = 0
 
        var body: some View {
-           HStack{
-               Text("Level \(gameState.level)")
-               Spacer()
-               Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
-               Spacer()
-               Text("$\(gameState.money, specifier: "%.2f")")
+           
+           @State var currentXp = gameState.xp
+           @State var xpToNextLevel = gameState.xpToNextLevel
+           
+           HStack(spacing: 150){
+               VStack(){
+                   Text("Level \(gameState.level)")
+                   ProgressView(value: Float(Double(currentXp)/Double(xpToNextLevel)))
+                       .progressViewStyle(.linear)
+                       .tint(.pink)
+                       .background(.white)
+                       .padding(.horizontal, 30)
+               }
+               VStack{
+                   Text("$\(gameState.money, specifier: "%.2f")")
+               }
            }
            .font(.caption)
            .padding([.leading,.trailing], 50)
@@ -47,6 +57,7 @@ struct GameView: View {
            .environmentObject(gameState.currentVehicle)
            .environmentObject(gameState.inventory)
            .edgesIgnoringSafeArea(.all)
+           .background(.cyan)
        }
 }
 
