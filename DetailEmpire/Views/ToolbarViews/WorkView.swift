@@ -16,11 +16,19 @@ struct WorkView: View {
             Text("\(vehicle.type)")
             Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
             Text("\(vehicle.percentComplete)%")
+//            Image("icons8-car-cleaning-50")
             ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
                 .progressViewStyle(.linear)
                 .padding(.horizontal, 150)
                 .padding(.vertical, 20)
             //
+//            if vehicle.getVehicleImageName() != "" {
+//                Image(vehicle.getVehicleImageName())
+//            }else{
+//                .background(
+//                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .bottomTrailing, endPoint: .topLeading)
+//                )
+//            }
             Button(action: {
                 vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
             }, label: {

@@ -55,10 +55,10 @@
 		E141A8772C816F68002FCE23 /* EmployeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeView.swift; sourceTree = "<group>"; };
 		E141A8792C816FAE002FCE23 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		E141A87B2C8170A3002FCE23 /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
-		E141A87D2C81718B002FCE23 /* InventoryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItems.swift; sourceTree = "<group>"; };
-		E1A6766A2C82902200494BEC /* StoreItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItems.swift; sourceTree = "<group>"; };
+		E141A87D2C81718B002FCE23 /* InventoryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InventoryItems.swift; path = ../Components/InventoryItems.swift; sourceTree = "<group>"; };
+		E1A6766A2C82902200494BEC /* StoreItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoreItems.swift; path = ../Components/StoreItems.swift; sourceTree = "<group>"; };
 		E1A6766C2C82940500494BEC /* notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
-		E1A6766F2C82AA1900494BEC /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicles.swift; sourceTree = "<group>"; };
+		E1A6766F2C82AA1900494BEC /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Vehicles.swift; path = ../Components/Vehicles.swift; sourceTree = "<group>"; };
 		E1A676712C82B80E00494BEC /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		E1DA29A02C80E85200AD84A6 /* DetailEmpire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DetailEmpire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DA29A32C80E85200AD84A6 /* DetailEmpireApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEmpireApp.swift; sourceTree = "<group>"; };
@@ -183,6 +183,9 @@
 		E1DA29CE2C80E89200AD84A6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E141A87D2C81718B002FCE23 /* InventoryItems.swift */,
+				E1A6766A2C82902200494BEC /* StoreItems.swift */,
+				E1A6766F2C82AA1900494BEC /* Vehicles.swift */,
 				E141A8702C81690B002FCE23 /* GameState.swift */,
 			);
 			path = Models;
@@ -199,9 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				E141A87B2C8170A3002FCE23 /* InventoryItem.swift */,
-				E141A87D2C81718B002FCE23 /* InventoryItems.swift */,
-				E1A6766A2C82902200494BEC /* StoreItems.swift */,
-				E1A6766F2C82AA1900494BEC /* Vehicles.swift */,
 				E1A676712C82B80E00494BEC /* Vehicle.swift */,
 				E11B276B2C869887000C8D0D /* Employee.swift */,
 			);
