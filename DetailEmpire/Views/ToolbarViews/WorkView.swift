@@ -12,19 +12,33 @@ struct WorkView: View {
         @State var detailDisabled = gameState.detailDisabled || vehicle.isCompleted()
 
         VStack{
-            
-            
-            //
+            //Building Stats
             VStack{
                 HStack{
-                    Image(systemName: "sparkle")
-                        .padding(15)
-                    Text("\(building.name)")
-                        .font(.title)
+                    Image(systemName: "house.fill")
+                        .padding(10)
+                        .font(.system(size: 40))
+//                        .border(.cyan, width: 2)
+                        .foregroundColor(.white)
+                        .background(.orange)
+                        .cornerRadius(8)
+//                        .frame(alignment: .leading)
+//                    Spacer()
+                    VStack{
+                        Text("\(building.name)")
+                            .font(.title)
+                        Divider()
+                            .frame(width: 15, height: 2)
+                            .cornerRadius(4)
+                            .background(.orange)
+                            .padding(.vertical, -10)
+                    }
                 }
                 .padding(.top, 10)
-                HStack{
+//                .frame(alignment: .leading)
+                VStack{
                     Text("desc")
+//                    Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
                 }
                 HStack{
                     VStack{
@@ -40,7 +54,8 @@ struct WorkView: View {
                     }
                 }
 //                .padding(.top, 15)
-                .padding(30)
+                .padding([.leading,.trailing], 30)
+                .padding(.vertical, 10)
             }
             .background(.white)
             .cornerRadius(8)
@@ -48,32 +63,80 @@ struct WorkView: View {
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding(.bottom, 10)
             
+            //Vehicles
             VStack{
                 HStack{
                     VStack{
-                        Text("Vehicles")
-                        Text("\(vehicle.type)")
-//                        ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
-//                            .progressViewStyle(.linear)
-//                            .padding(.horizontal, 150)
+                        Text("Current Vehicles")
+                            .font(.caption2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.gray)
+                        Divider()
+                            .frame(width: 15, height: 2)
+                            .cornerRadius(4)
+                            .background(.purple)
+                            .padding(.vertical, -4)
+                            .padding(.horizontal, -45)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(4)
+                HStack{
+                    VStack{
+                        Text("\(vehicle.type.uppercased())")
+                            .font(.headline)
+                            .padding(.trailing, 10)
+//                        Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
+//                        Text("\(vehicle.percentComplete)%")
+                        ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
+                            .progressViewStyle(.linear)
+                            .padding(.horizontal, 4)
+                            .padding(.trailing, 20)
+                            .tint(.purple)
+//                            .controlSize(.small)
+//                            .scaleEffect(0.5)
+//                            .padding(.horizontal, 40)
 //                            .padding(.vertical, 20)
                     }
-                    .padding(.leading, 4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+//                    .padding(.leading, 0)
+//                    .padding(.trailing, 50)
+//                    Spacer()
+//                    .frame(maxWidth: .infinity, alignment: .leading)
+//                    VStack{
+//                        VehicleStatView(headline: "Type", value: "\(vehicle.type)", color: .black)
+//                    }
+                    HStack{
+                        VStack{
+                            VehicleStatView(headline: "XP", value: "+\(vehicle.xp)", color: .green)
+                        }
+                        .padding(.trailing, 10)
+                        VStack{
+                            VehicleStatView(headline: "Earnings", value: "+$\(vehicle.baseRevenue)", color: .green)
+                        }
+//                        .padding(.trailing, 10)
+//                        VStack{
+//                            VehicleStatView(headline: "Bonus", value: "$0", color: .orange)
+//                        }
+                    }
+                    Spacer()
                     Spacer()
                     VStack{
                         Button(action: {
                             vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
                         }, label: {
                             Text("Detail")
+                                .fontWeight(.bold)
+                                .font(.subheadline)
                         })
                         .foregroundColor(.white)
-                        .padding()
-                        .background(detailDisabled ? .gray : .black)
-            //            .border(.white, width: 3).cornerRadius(8)
+                        .padding(10)
+                        .background(detailDisabled ? .gray : .green)
                         .cornerRadius(8)
                         .disabled(detailDisabled)
+                        .padding([.vertical,.trailing], 6)
                     }
+                    Spacer()
                 }
                     
             }
@@ -82,7 +145,6 @@ struct WorkView: View {
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding([.leading,.trailing], 10)
-            
             //
             
             
@@ -90,15 +152,15 @@ struct WorkView: View {
             //debugging
 //            Text("Building: \(building.name)")
 //            Text("Vehicle slots: \(building.vehicleSlots)")
-            Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
-            Text("\(vehicle.type)")
-            Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
-            Text("\(vehicle.percentComplete)%")
+//            Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
+//            Text("\(vehicle.type)")
+//            Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
+//            Text("\(vehicle.percentComplete)%")
 //            Image("icons8-car-cleaning-50")
-            ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
-                .progressViewStyle(.linear)
-                .padding(.horizontal, 150)
-                .padding(.vertical, 20)
+//            ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
+//                .progressViewStyle(.linear)
+//                .padding(.horizontal, 150)
+//                .padding(.vertical, 20)
             //
 //            if vehicle.getVehicleImageName() != "" {
 //                Image(vehicle.getVehicleImageName())
@@ -107,17 +169,17 @@ struct WorkView: View {
 //                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .bottomTrailing, endPoint: .topLeading)
 //                )
 //            }
-            Button(action: {
-                vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
-            }, label: {
-                Text("Detail")
-            })
-            .foregroundColor(.white)
-            .padding()
-            .background(detailDisabled ? .gray : .black)
-//            .border(.white, width: 3).cornerRadius(8)
-            .cornerRadius(8)
-            .disabled(detailDisabled)
+//            Button(action: {
+//                vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
+//            }, label: {
+//                Text("Detail")
+//            })
+//            .foregroundColor(.white)
+//            .padding()
+//            .background(detailDisabled ? .gray : .black)
+////            .border(.white, width: 3).cornerRadius(8)
+//            .cornerRadius(8)
+//            .disabled(detailDisabled)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.vertical)
@@ -156,7 +218,7 @@ struct BuildingStatView:View {
                 .cornerRadius(4)
                 .background(color)
             Text("\(value)")
-                .font(.subheadline)
+                .font(.callout)
                 .fontWeight(.bold)
                 .padding(.bottom, -20)
             Gauge(value: 0.5) {}
@@ -167,6 +229,41 @@ struct BuildingStatView:View {
                 .gaugeStyle(.accessoryCircular)
                 .tint(color)
                 .scaleEffect(0.5)
+        }
+    }
+}
+
+struct VehicleStatView:View {
+    
+    var headline: String
+    var value: String
+    var color: Color
+//    var image: String
+    
+    var body: some View {
+        VStack{
+            Text("\(headline)")
+                .font(.caption2)
+                .fontWeight(.bold)
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+            Divider()
+                .frame(width: 15, height: 2)
+                .cornerRadius(4)
+                .background(.black)
+            Text("\(value)")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(color)
+//            Gauge(value: 0.5) {}
+//                currentValueLabel: {
+//                    Image(systemName: "\(image)")
+//                        .foregroundColor(color)
+//                }
+//                .gaugeStyle(.accessoryCircular)
+//                .tint(color)
+//                .scaleEffect(0.5)
         }
     }
 }

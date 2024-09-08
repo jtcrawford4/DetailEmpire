@@ -13,6 +13,8 @@ struct GameView: View {
 
        var body: some View {
            
+           @State var inventoryEmpty = gameState.inventory.isAnyItemEmpty()
+           
            HStack(spacing: 100){
                HStack{
                    Text("\(gameState.level)")
@@ -64,7 +66,9 @@ struct GameView: View {
                    .tabItem {
                        Image(systemName: "shippingbox")
                        Text("Inventory")
-                   }.tag(1)
+                   }
+                    .tag(1)
+                    .badge(inventoryEmpty ? "!" : nil)
                StoreView()
                    .tabItem {
                        Image(systemName: "dollarsign.circle.fill")

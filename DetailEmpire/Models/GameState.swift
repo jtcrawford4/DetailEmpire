@@ -35,7 +35,7 @@ class GameState: ObservableObject{
     func tick(){
         let vehicle = self.currentBuilding.vehicles[0]
         vehicle.isCompleted() ? self.currentBuilding.vehicles = [Vehicles().getVehicle()] : nil
-        vehicle.workerDetail(numWorkers: employees.count, gameState: self, inventory: self.inventory.inventoryItems)
+        vehicle.workerDetail(numWorkers: self.currentBuilding.employees.count, gameState: self, inventory: self.inventory.inventoryItems)
     }
     
 }

@@ -14,7 +14,7 @@ struct EmployeeView: View {
                 .padding(.vertical, 10)
                 .font(.headline)
             //debug
-            Text("hired: \(gameState.employees.count)")
+            Text("hired: \(gameState.currentBuilding.employees.count)")
             HStack{
                 
 //                let hireCost = Employee.getDefaultEmployeeHireCost(type: EmployeeType.general)
@@ -24,7 +24,8 @@ struct EmployeeView: View {
                 Button("Hire", action:{
 //                    gameState.numEmployee += 1
                     gameState.money -= hireCost
-                    gameState.employees.append(Employee(payPerVehicle: 1.00, hirePrice: hireCost, type: EmployeeType.general))
+//                    gameState.employees.append(Employee(payPerVehicle: 1.00, hirePrice: hireCost, type: EmployeeType.general))
+                    gameState.currentBuilding.employees.append(Employee(payPerVehicle: 1.00, hirePrice: hireCost, type: EmployeeType.general))
                 })
                 .buttonStyle(.bordered)
                 .foregroundColor(.white)
