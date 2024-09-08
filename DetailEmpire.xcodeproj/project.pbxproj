@@ -18,9 +18,11 @@
 		E141A87A2C816FAE002FCE23 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A8792C816FAE002FCE23 /* StoreView.swift */; };
 		E141A87C2C8170A3002FCE23 /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87B2C8170A3002FCE23 /* InventoryItem.swift */; };
 		E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87D2C81718B002FCE23 /* InventoryItems.swift */; };
+		E18975442C8E362C0019C062 /* StoreProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18975432C8E362C0019C062 /* StoreProductView.swift */; };
 		E1A6766B2C82902200494BEC /* StoreItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766A2C82902200494BEC /* StoreItems.swift */; };
 		E1A676702C82AA1900494BEC /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766F2C82AA1900494BEC /* Vehicles.swift */; };
 		E1A676722C82B80E00494BEC /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A676712C82B80E00494BEC /* Vehicle.swift */; };
+		E1D9C17B2C8E4FC800872DE7 /* StoreEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D9C17A2C8E4FC800872DE7 /* StoreEquipmentView.swift */; };
 		E1DA29A42C80E85200AD84A6 /* DetailEmpireApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA29A32C80E85200AD84A6 /* DetailEmpireApp.swift */; };
 		E1DA29A62C80E85200AD84A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA29A52C80E85200AD84A6 /* ContentView.swift */; };
 		E1DA29A82C80E85300AD84A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1DA29A72C80E85300AD84A6 /* Assets.xcassets */; };
@@ -60,10 +62,12 @@
 		E141A8792C816FAE002FCE23 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		E141A87B2C8170A3002FCE23 /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		E141A87D2C81718B002FCE23 /* InventoryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InventoryItems.swift; path = ../Components/InventoryItems.swift; sourceTree = "<group>"; };
+		E18975432C8E362C0019C062 /* StoreProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProductView.swift; sourceTree = "<group>"; };
 		E1A6766A2C82902200494BEC /* StoreItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoreItems.swift; path = ../Components/StoreItems.swift; sourceTree = "<group>"; };
 		E1A6766C2C82940500494BEC /* notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		E1A6766F2C82AA1900494BEC /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Vehicles.swift; path = ../Components/Vehicles.swift; sourceTree = "<group>"; };
 		E1A676712C82B80E00494BEC /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		E1D9C17A2C8E4FC800872DE7 /* StoreEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreEquipmentView.swift; sourceTree = "<group>"; };
 		E1DA29A02C80E85200AD84A6 /* DetailEmpire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DetailEmpire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DA29A32C80E85200AD84A6 /* DetailEmpireApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEmpireApp.swift; sourceTree = "<group>"; };
 		E1DA29A52C80E85200AD84A6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -105,12 +109,22 @@
 		E141A8722C816E5B002FCE23 /* ToolbarViews */ = {
 			isa = PBXGroup;
 			children = (
+				E18975422C8E36170019C062 /* StoreViews */,
 				E141A8732C816E75002FCE23 /* InventoryView.swift */,
 				E141A8752C816F25002FCE23 /* WorkView.swift */,
 				E141A8772C816F68002FCE23 /* EmployeeView.swift */,
 				E141A8792C816FAE002FCE23 /* StoreView.swift */,
 			);
 			path = ToolbarViews;
+			sourceTree = "<group>";
+		};
+		E18975422C8E36170019C062 /* StoreViews */ = {
+			isa = PBXGroup;
+			children = (
+				E18975432C8E362C0019C062 /* StoreProductView.swift */,
+				E1D9C17A2C8E4FC800872DE7 /* StoreEquipmentView.swift */,
+			);
+			path = StoreViews;
 			sourceTree = "<group>";
 		};
 		E1DA29972C80E85200AD84A6 = {
@@ -355,9 +369,11 @@
 				E1A676722C82B80E00494BEC /* Vehicle.swift in Sources */,
 				E141A8742C816E75002FCE23 /* InventoryView.swift in Sources */,
 				E141A86F2C81675A002FCE23 /* GameView.swift in Sources */,
+				E1D9C17B2C8E4FC800872DE7 /* StoreEquipmentView.swift in Sources */,
 				E141A87A2C816FAE002FCE23 /* StoreView.swift in Sources */,
 				E1DA29A42C80E85200AD84A6 /* DetailEmpireApp.swift in Sources */,
 				E1A6766B2C82902200494BEC /* StoreItems.swift in Sources */,
+				E18975442C8E362C0019C062 /* StoreProductView.swift in Sources */,
 				E11B276C2C869887000C8D0D /* Employee.swift in Sources */,
 				E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */,
 				E11369E62C8BD9F700342E97 /* Building.swift in Sources */,

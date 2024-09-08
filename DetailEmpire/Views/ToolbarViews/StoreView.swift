@@ -5,88 +5,63 @@ struct StoreView: View {
     @EnvironmentObject var gameState: GameState
     @EnvironmentObject var inventory: InventoryItems
     @EnvironmentObject var storeItems: StoreItems
+    @State private var selectedTab = 0
         
-    //TODO tab view, tools vs products (products, interior vs ext)
     var body: some View {
-        //TODO separate items from iventory vs store buy
+        
+//        @State var productToggled = true
+//        @State var equipmentToggled = true
         
         VStack{
-            Text("Store - add category tabs")
-            ScrollView{
-                ForEach(storeItems.storeItems){ item in
-                    
-                    @State var insufficientFunds = item.price > gameState.money
-                    
-                    HStack{
-                        VStack{
-                            ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .green, imageColor: .white)
-                        }
-                        .padding(.trailing, 10)
-                        VStack(alignment: .leading){
-                            Text("\(item.name)")
-                                .font(.headline)
-                            Text("\(item.desc)")
-                                .font(.caption2)
-                        }
-                        Spacer()
-                        VStack{
-                            //info icon to show detail view/usages/unlock/etc
-                            if item.purchased || item.startingItem {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 20, weight: .bold))
-                                    .foregroundColor(.green)
-                            }else{
-                                if gameState.level >= item.levelUnlocked{
-                                    Button(action: {
-                                        gameState.money -= item.price
-                                        item.purchased = true
-                                        inventory.addItem(item: item)
-                                    }) {
-                                        VStack{
-                                            Text("Purchase")
-                                                .font(.caption2)
-                                                .fontWeight(.bold)
-                                            HStack {
-                                                Image(systemName: "dollarsign.circle")
-                                                Text("\(item.price, specifier: "%.2f")")
-                                                    .fontWeight(.bold)
-                                                    .foregroundColor(.white)
-                                            }
-                                        }
-                                    }
-                                    .background(insufficientFunds ? .gray : .green)
-//                                        .background(Color.green.opacity(0.5))
-                                    .foregroundColor(.white)
-                                    .disabled(insufficientFunds)
-                                    .font(.subheadline)
-                                    .cornerRadius(8)
-                                }else{
-                                    Text("Required level")
-                                        .font(.caption)
-                                        .foregroundColor(.red)
-                                    Text("\(item.levelUnlocked)")
-                                        .font(.headline)
-                                        .foregroundColor(.red)
-                                }
-                            }
-                        }
-                        .buttonStyle(.bordered)
-                        .cornerRadius(5)
-//                        .padding(.trailing, 15)
-                    }
-                    .padding(.horizontal, 10)
-//                    .cornerRadius(8)
-                    .frame(height : 60)
-                    .background(.white)
-                    .cornerRadius(8)
-                    .clipped()
-                    .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
-//                    .padding(.bottom, )
-                }
+            Text("Store - add current metrics here")
+            
+            HStack(spacing: 0){
+                ToggleButton(selectedButton: $selectedTab, tag: 0, text: "Products")
+                ToggleButton(selectedButton: $selectedTab, tag: 1, text: "Equipment")
+                ToggleButton(selectedButton: $selectedTab, tag: 2, text: "Buildings")
+//                Button(action: {selectedTab = 0}, label: {
+//                    Text("Products")
+//                })
+//                .padding(10)
+//                .background(selectedTab == 0 ? .cyan : .blue)
+//                .foregroundColor(.white)
+//                .tag(0)
             }
-            .contentMargins(.horizontal, 10, for: .scrollContent)
-//            .contentMargins(.vertical, 10, for: .scrollContent)
-//            .cornerRadius(8)
+            .padding(.bottom, 40)
+            .clipped()
+            .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 6)
+            
+            switch(selectedTab){
+            case 0:
+                StoreProductView()
+            case 1:
+                StoreEquipmentView()
+            default:
+                StoreProductView() //TODO
+            }
+        }
+    }
+}
+
+struct ToggleButton: View{
+    
+    @Binding var selectedButton: Int
+    var tag: Int
+    var text: String
+    
+    var body: some View{
+        VStack{
+            Button(action: {
+                selectedButton = tag
+            }, label: {
+                Text(text)
+                    .font(.caption)
+                    .fontWeight(.bold)
+            })
+            .padding(10)
+            .background(selectedButton == tag ? .cyan : .blue)
+            .foregroundColor(.white)
+            .tag(tag)
         }
     }
 }

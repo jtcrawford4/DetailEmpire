@@ -14,11 +14,10 @@ class InventoryItem:Identifiable, ObservableObject{
     var startingItem:Bool
     var itemMultiplier:Double?
     var clickMultiplier:Double?
-    var isEquipment:Bool
+    var type: InventoryType
     //color background for category?
-//    just have a category enum?
     
-    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, itemMultiplier: Double? = nil, clickMultiplier: Double? = nil, isEquipment: Bool) {
+    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, itemMultiplier: Double? = nil, clickMultiplier: Double? = nil, type: InventoryType) {
         self.id = id
         self.price = price
         self.name = name
@@ -32,7 +31,12 @@ class InventoryItem:Identifiable, ObservableObject{
         self.startingItem = startingItem
         self.itemMultiplier = itemMultiplier
         self.clickMultiplier = clickMultiplier
-        self.isEquipment = isEquipment
+        self.type = type
+    }
+    
+    enum InventoryType: Identifiable{
+        var id : UUID {return UUID()}
+        case product, equipment, unassigned
     }
     
     func purchaseFromStore(item:InventoryItem){
