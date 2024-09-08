@@ -5,6 +5,11 @@ struct GameView: View {
     @StateObject var gameState = GameState()
     @StateObject var storeItems = StoreItems()
     @State private var selectedTab = 0
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.systemBlue
+        UITabBar.appearance().unselectedItemTintColor = UIColor.black
+    }
 
        var body: some View {
            
@@ -16,17 +21,20 @@ struct GameView: View {
                        .foregroundColor(.white)
                    ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                        .progressViewStyle(.linear)
+//                       .progressViewStyle(BarProgressStyle(height: 20.0))
                        .tint(.pink)
                        .background(Color.black.opacity(0.5))
-                       .foregroundColor(.white)
                        .cornerRadius(8)
                        .fontWeight(.bold)
+//                       .frame(maxWidth: .infinity, alignment: .center)
+                       .scaleEffect(x: 1, y: 1.25, anchor: .center)
                }
                VStack{
                    Button(action: {}, label:{
                        HStack {
                            Image(systemName: "dollarsign.circle")
                                .font(.system(size: 18))
+                               .foregroundColor(.mint)
                            Spacer()
                            Text("\(gameState.money, specifier: "%.2f")")
                                .fontWeight(.bold)
@@ -74,10 +82,54 @@ struct GameView: View {
            .environmentObject(gameState.inventory)
            .environmentObject(gameState.currentBuilding)
            .edgesIgnoringSafeArea(.all)
-           .background(.cyan)
+           .tint(.white)
+//           .tabViewStyle(PageTabViewStyle())
+//           .tint(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), startPoint: .bottomTrailing, endPoint: .topLeading))
        }
 }
 
+
 #Preview {
     GameView()
+}
+
+struct BarProgressStyle: ProgressViewStyle {
+
+    var color: Color = .purple
+    var height: Double = 20.0
+    var labelFontStyle: Font = .body
+
+    func makeBody(configuration: Configuration) -> some View {
+
+        let progress = configuration.fractionCompleted ?? 0.0
+
+        GeometryReader { geometry in
+
+            VStack(alignment: .leading) {
+
+                configuration.label
+                    .font(labelFontStyle)
+
+                RoundedRectangle(cornerRadius: 8)
+//                    .fill(Color(uiColor: .systemGray5))
+                    .frame(height: height)
+                    .frame(width: geometry.size.width)
+                    .overlay(alignment: .leading) {
+                        RoundedRectangle(cornerRadius: 10.0)
+                            .fill(color)
+                            .frame(width: geometry.size.width * progress)
+                            .overlay {
+                                if let currentValueLabel = configuration.currentValueLabel {
+
+                                    currentValueLabel
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                    }
+
+            }
+
+        }
+    }
 }
