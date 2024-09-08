@@ -10,7 +10,7 @@ class GameState: ObservableObject{
     @Published var employees:[Employee]
     @Published var employeeSpeedMultiplier = 0.00
     @Published var employeeMoneyMultiplier = 0.00
-    @Published var currentVehicle: Vehicle
+    @Published var currentBuilding: Building
     @Published var inventory: InventoryItems
     @Published var detailDisabled: Bool
     //options
@@ -26,15 +26,16 @@ class GameState: ObservableObject{
         self.money = 0
         self.vehicleDetailMultipliers = 0.00
         self.employees = []
-        self.currentVehicle = Vehicles().getVehicle()
+        self.currentBuilding = Buildings().getStartBuilding()
         self.inventory = InventoryItems()
         self.detailDisabled = false
         self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: {_ in self.tick()})
     }
     
     func tick(){
-        self.currentVehicle.isCompleted() ? self.currentVehicle = Vehicles().getVehicle() : nil
-        self.currentVehicle.workerDetail(numWorkers: employees.count, gameState: self, inventory: self.inventory.inventoryItems)
+        let vehicle = self.currentBuilding.vehicles[0]
+        vehicle.isCompleted() ? self.currentBuilding.vehicles = [Vehicles().getVehicle()] : nil
+        vehicle.workerDetail(numWorkers: employees.count, gameState: self, inventory: self.inventory.inventoryItems)
     }
     
 }

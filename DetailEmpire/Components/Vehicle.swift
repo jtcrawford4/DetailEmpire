@@ -33,14 +33,14 @@ class Vehicle:ObservableObject{
         return self.clicks >= Double(self.clicksToComplete)
     }
     
-    func getVehicleImageName() -> String {
-        switch(self.type){
-        case "Sedan":
-            return "icons8-car-50"
-        default:
-            return ""
-        }
-    }
+//    func getVehicleImageName() -> String {
+//        switch(self.type){
+//        case "Sedan":
+//            return "icons8-car-50"
+//        default:
+//            return ""
+//        }
+//    }
     
     private func detailWithClicks(clicks: Double, gameState: GameState, inventory: [InventoryItem]){
         if(!gameState.detailDisabled){

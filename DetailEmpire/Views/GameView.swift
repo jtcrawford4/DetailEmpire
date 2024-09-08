@@ -8,25 +8,41 @@ struct GameView: View {
 
        var body: some View {
            
-           @State var currentXp = gameState.xp
-           @State var xpToNextLevel = gameState.xpToNextLevel
-           
-           HStack(spacing: 150){
-               VStack(){
-                   Text("Level \(gameState.level)")
-                   ProgressView(value: Float(Double(currentXp)/Double(xpToNextLevel)))
+           HStack(spacing: 100){
+               HStack{
+                   Text("\(gameState.level)")
+                       .font(.callout)
+                       .fontWeight(.bold)
+                       .foregroundColor(.white)
+                   ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                        .progressViewStyle(.linear)
                        .tint(.pink)
-                       .background(.white)
-                       .padding(.horizontal, 30)
+                       .background(Color.black.opacity(0.5))
+                       .foregroundColor(.white)
+                       .cornerRadius(8)
+                       .fontWeight(.bold)
                }
                VStack{
-                   Text("$\(gameState.money, specifier: "%.2f")")
+                   Button(action: {}, label:{
+                       HStack {
+                           Image(systemName: "dollarsign.circle")
+                               .font(.system(size: 18))
+                           Spacer()
+                           Text("\(gameState.money, specifier: "%.2f")")
+                               .fontWeight(.bold)
+                               .foregroundColor(.white)
+                       }
+                       .font(.callout)
+                       .padding([.vertical, .leading], 4)
+                       .padding(.trailing, 10)
+                   })
+                   .background(Color.black.opacity(0.5))
+                   .cornerRadius(8)
                }
            }
            .font(.caption)
-           .padding([.leading,.trailing], 50)
            .padding(.bottom, 10)
+           .padding([.leading, .trailing], 10)
            .background(.blue)
            .foregroundColor(.white)
            
@@ -54,8 +70,9 @@ struct GameView: View {
            }
            .environmentObject(gameState)
            .environmentObject(storeItems)
-           .environmentObject(gameState.currentVehicle)
+           .environmentObject(gameState.currentBuilding.vehicles[0])
            .environmentObject(gameState.inventory)
+           .environmentObject(gameState.currentBuilding)
            .edgesIgnoringSafeArea(.all)
            .background(.cyan)
        }

@@ -5,13 +5,16 @@ struct WorkView: View {
     @EnvironmentObject var gameState: GameState
     @EnvironmentObject var vehicle: Vehicle
     @EnvironmentObject var inventory: InventoryItems
+    @EnvironmentObject var building: Building
     
     var body: some View {
         
-        @State var detailDisabled = gameState.detailDisabled
+        @State var detailDisabled = gameState.detailDisabled || vehicle.isCompleted()
 
         VStack{
             //debugging
+            Text("Building: \(building.name)")
+            Text("Vehicle slots: \(building.vehicleSlots)")
             Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
             Text("\(vehicle.type)")
             Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
@@ -36,9 +39,9 @@ struct WorkView: View {
             })
             .foregroundColor(.white)
             .padding()
-            .background(detailDisabled || vehicle.isCompleted() ? .gray : .blue)
+            .background(detailDisabled ? .gray : .blue)
             .cornerRadius(8)
-            .disabled(detailDisabled || vehicle.isCompleted())
+            .disabled(detailDisabled)
         }
     }
 }
@@ -49,6 +52,7 @@ struct WorkView: View {
     return WorkView()
         .environmentObject(gameState)
         .environmentObject(StoreItems())
-        .environmentObject(gameState.currentVehicle)
+        .environmentObject(gameState.currentBuilding.vehicles[0])
         .environmentObject(gameState.inventory)
+        .environmentObject(gameState.currentBuilding)
 }
