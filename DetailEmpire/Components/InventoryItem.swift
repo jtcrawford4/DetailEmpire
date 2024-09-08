@@ -15,6 +15,8 @@ class InventoryItem:Identifiable, ObservableObject{
     var itemMultiplier:Double?
     var clickMultiplier:Double?
     var isEquipment:Bool
+    //color background for category?
+//    just have a category enum?
     
     init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, itemMultiplier: Double? = nil, clickMultiplier: Double? = nil, isEquipment: Bool) {
         self.id = id
