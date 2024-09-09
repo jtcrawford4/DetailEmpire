@@ -81,6 +81,10 @@ struct InventoryView: View {
                 }
                 //            .frame(width: .infinity)
             }
+            .background(LinearGradient(colors: [.orange, .cyan],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing))
+
         }
             
         //TODO separate items from iventory vs store buy

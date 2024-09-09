@@ -62,6 +62,7 @@ struct WorkView: View {
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding(.bottom, 10)
+            .padding(.top, -250)
             
             //Vehicles
             VStack{
@@ -86,33 +87,20 @@ struct WorkView: View {
                         Text("\(vehicle.type.uppercased())")
                             .font(.headline)
                             .padding(.trailing, 10)
-//                        Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
-//                        Text("\(vehicle.percentComplete)%")
                         ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
                             .progressViewStyle(.linear)
                             .padding(.horizontal, 4)
                             .padding(.trailing, 20)
                             .tint(.purple)
-//                            .controlSize(.small)
-//                            .scaleEffect(0.5)
-//                            .padding(.horizontal, 40)
-//                            .padding(.vertical, 20)
                     }
                     Spacer()
-//                    .padding(.leading, 0)
-//                    .padding(.trailing, 50)
-//                    Spacer()
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    VStack{
-//                        VehicleStatView(headline: "Type", value: "\(vehicle.type)", color: .black)
-//                    }
                     HStack{
                         VStack{
-                            VehicleStatView(headline: "XP", value: "+\(vehicle.xp)", color: .green)
+                            VehicleStatView(headline: "XP", value: "\(vehicle.xp)", color: .green)
                         }
                         .padding(.trailing, 10)
                         VStack{
-                            VehicleStatView(headline: "Earnings", value: "+$\(vehicle.baseRevenue)", color: .green)
+                            VehicleStatView(headline: "Earnings", value: "$\(Formatting().formatPrice(num: vehicle.baseRevenue))", color: .green)
                         }
 //                        .padding(.trailing, 10)
 //                        VStack{
@@ -145,41 +133,6 @@ struct WorkView: View {
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding([.leading,.trailing], 10)
-            //
-            
-            
-            
-            //debugging
-//            Text("Building: \(building.name)")
-//            Text("Vehicle slots: \(building.vehicleSlots)")
-//            Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
-//            Text("\(vehicle.type)")
-//            Text("Remaining: \(Double(vehicle.clicksToComplete) - vehicle.clicks, specifier: "%.2f")")
-//            Text("\(vehicle.percentComplete)%")
-//            Image("icons8-car-cleaning-50")
-//            ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
-//                .progressViewStyle(.linear)
-//                .padding(.horizontal, 150)
-//                .padding(.vertical, 20)
-            //
-//            if vehicle.getVehicleImageName() != "" {
-//                Image(vehicle.getVehicleImageName())
-//            }else{
-//                .background(
-//                    LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .bottomTrailing, endPoint: .topLeading)
-//                )
-//            }
-//            Button(action: {
-//                vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
-//            }, label: {
-//                Text("Detail")
-//            })
-//            .foregroundColor(.white)
-//            .padding()
-//            .background(detailDisabled ? .gray : .black)
-////            .border(.white, width: 3).cornerRadius(8)
-//            .cornerRadius(8)
-//            .disabled(detailDisabled)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.vertical)

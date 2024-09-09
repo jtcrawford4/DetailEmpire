@@ -21,6 +21,7 @@
 		E17E8AF82C8E782E00225291 /* StoreBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */; };
 		E17E8AFB2C8E91AE00225291 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */; };
 		E17E8AFD2C8E91E600225291 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFC2C8E91E600225291 /* Formatting.swift */; };
+		E17E8B002C8E982C00225291 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFF2C8E982C00225291 /* Components.swift */; };
 		E18975442C8E362C0019C062 /* StoreProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18975432C8E362C0019C062 /* StoreProductView.swift */; };
 		E1A6766B2C82902200494BEC /* StoreItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766A2C82902200494BEC /* StoreItems.swift */; };
 		E1A676702C82AA1900494BEC /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766F2C82AA1900494BEC /* Vehicles.swift */; };
@@ -68,6 +69,7 @@
 		E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBuildingView.swift; sourceTree = "<group>"; };
 		E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
 		E17E8AFC2C8E91E600225291 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		E17E8AFF2C8E982C00225291 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		E18975432C8E362C0019C062 /* StoreProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProductView.swift; sourceTree = "<group>"; };
 		E1A6766A2C82902200494BEC /* StoreItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoreItems.swift; path = ../Components/StoreItems.swift; sourceTree = "<group>"; };
 		E1A6766C2C82940500494BEC /* notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		E17E8AFE2C8E938B00225291 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				E17E8AFF2C8E982C00225291 /* Components.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				E141A8762C816F25002FCE23 /* WorkView.swift in Sources */,
 				E141A87C2C8170A3002FCE23 /* InventoryItem.swift in Sources */,
 				E1A676722C82B80E00494BEC /* Vehicle.swift in Sources */,
+				E17E8B002C8E982C00225291 /* Components.swift in Sources */,
 				E141A8742C816E75002FCE23 /* InventoryView.swift in Sources */,
 				E141A86F2C81675A002FCE23 /* GameView.swift in Sources */,
 				E1D9C17B2C8E4FC800872DE7 /* StoreEquipmentView.swift in Sources */,

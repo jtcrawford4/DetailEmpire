@@ -62,10 +62,17 @@ struct EmployeeView: View {
 //                    }
 //                }
             }
-        }
+        } 
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.vertical)
+        .background(LinearGradient(colors: [.green, .cyan],
+             startPoint: .topLeading,
+             endPoint: .bottomTrailing))
     }
 }
 
 #Preview {
-    EmployeeView()
+    @StateObject var gameState = GameState()
+    return EmployeeView()
+        .environmentObject(gameState)
 }

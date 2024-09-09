@@ -36,10 +36,6 @@ struct StoreView: View {
         .background(LinearGradient(colors: [.pink, .cyan],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing))
-        
-        //           let gradient = LinearGradient(colors: [.orange, .green],
-        //                                             startPoint: .topLeading,
-        //                                             endPoint: .bottomTrailing)
     }
 }
 

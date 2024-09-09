@@ -52,7 +52,6 @@ struct StoreEquipmentView: View {
                                         }
                                     }
                                     .background(insufficientFunds ? .gray : .green)
-                                    //                                        .background(Color.green.opacity(0.5))
                                     .foregroundColor(.white)
                                     .disabled(insufficientFunds)
                                     .font(.subheadline)
