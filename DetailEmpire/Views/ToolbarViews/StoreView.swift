@@ -9,9 +9,6 @@ struct StoreView: View {
         
     var body: some View {
         
-//        @State var productToggled = true
-//        @State var equipmentToggled = true
-        
         VStack{
             Text("Store - add current metrics here")
             
@@ -19,27 +16,30 @@ struct StoreView: View {
                 ToggleButton(selectedButton: $selectedTab, tag: 0, text: "Products")
                 ToggleButton(selectedButton: $selectedTab, tag: 1, text: "Equipment")
                 ToggleButton(selectedButton: $selectedTab, tag: 2, text: "Buildings")
-//                Button(action: {selectedTab = 0}, label: {
-//                    Text("Products")
-//                })
-//                .padding(10)
-//                .background(selectedTab == 0 ? .cyan : .blue)
-//                .foregroundColor(.white)
-//                .tag(0)
             }
             .padding(.bottom, 40)
-            .clipped()
-            .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 6)
+//            .clipped()
+//            .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 6)
+//            .background(.pink.opacity(0.5))
             
             switch(selectedTab){
             case 0:
                 StoreProductView()
             case 1:
                 StoreEquipmentView()
+            case 2:
+                StoreBuildingView()
             default:
-                StoreProductView() //TODO
+                StoreProductView()
             }
         }
+        .background(LinearGradient(colors: [.pink, .cyan],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing))
+        
+        //           let gradient = LinearGradient(colors: [.orange, .green],
+        //                                             startPoint: .topLeading,
+        //                                             endPoint: .bottomTrailing)
     }
 }
 
@@ -50,6 +50,8 @@ struct ToggleButton: View{
     var text: String
     
     var body: some View{
+        
+        @State var isSelected = selectedButton == tag
         VStack{
             Button(action: {
                 selectedButton = tag
@@ -57,11 +59,19 @@ struct ToggleButton: View{
                 Text(text)
                     .font(.caption)
                     .fontWeight(.bold)
+                    .foregroundColor(isSelected ? .white : .black)
             })
             .padding(10)
-            .background(selectedButton == tag ? .cyan : .blue)
+//            .background(isSelected ? .yellow : .pink.opacity(0.5))
             .foregroundColor(.white)
             .tag(tag)
+            if isSelected {
+                Divider()
+                    .frame(width: 75, height: 2)
+                    .cornerRadius(4)
+                    .background(.white)
+                    .padding(.vertical, -10)
+            }
         }
     }
 }
@@ -101,9 +111,11 @@ struct ImageOnCircle: View {
 #Preview {
     @StateObject var gameState = GameState()
     @StateObject var storeItems = StoreItems()
+    @StateObject var buildings = Buildings()
     return StoreView()
         .environmentObject(gameState)
         .environmentObject(storeItems)
         .environmentObject(gameState.currentBuilding.vehicles[0])
         .environmentObject(gameState.inventory)
+        .environmentObject(buildings)
 }

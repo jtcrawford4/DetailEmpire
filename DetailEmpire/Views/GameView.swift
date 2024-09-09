@@ -4,10 +4,11 @@ struct GameView: View {
     
     @StateObject var gameState = GameState()
     @StateObject var storeItems = StoreItems()
+    @StateObject var buildings = Buildings()
     @State private var selectedTab = 0
     
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.systemBlue
+//        UITabBar.appearance().backgroundColor = UIColor.systemBlue
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
     }
 
@@ -28,7 +29,6 @@ struct GameView: View {
                        .background(Color.black.opacity(0.5))
                        .cornerRadius(8)
                        .fontWeight(.bold)
-//                       .frame(maxWidth: .infinity, alignment: .center)
                        .scaleEffect(x: 1, y: 1.25, anchor: .center)
                }
                VStack{
@@ -57,6 +57,16 @@ struct GameView: View {
            .foregroundColor(.white)
            
            TabView(selection: $selectedTab) {
+//               ZStack {
+//                   gradient
+//                       .opacity(0.25)
+//                       .ignoresSafeArea()
+//                   VStack {
+//                       Text("Background colors can be seen behind the TabView")
+//                           .padding()
+//                   }
+//                   .font(.title2)
+//               }
                WorkView()
                    .tabItem {
                        Image(systemName: "car.2.fill")
@@ -85,6 +95,7 @@ struct GameView: View {
            .environmentObject(gameState.currentBuilding.vehicles[0])
            .environmentObject(gameState.inventory)
            .environmentObject(gameState.currentBuilding)
+           .environmentObject(buildings)
            .edgesIgnoringSafeArea(.all)
            .tint(.white)
 //           .tabViewStyle(PageTabViewStyle())

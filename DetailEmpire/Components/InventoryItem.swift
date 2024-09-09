@@ -53,5 +53,5 @@ class InventoryItem:Identifiable, ObservableObject{
     func refill(){
         self.usesRemaining = self.usesPerContainer
     }
-
+    
 }

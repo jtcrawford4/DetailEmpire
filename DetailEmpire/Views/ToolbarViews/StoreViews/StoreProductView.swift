@@ -7,7 +7,6 @@ struct StoreProductView: View {
     @EnvironmentObject var storeItems: StoreItems
     
     var body: some View {
-        Text("store product view")
         
         ScrollView{
             ForEach(storeItems.storeItems){ item in
