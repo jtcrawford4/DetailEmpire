@@ -20,8 +20,10 @@ struct StoreEquipmentView: View {
                         }
                         .padding(.trailing, 10)
                         VStack(alignment: .leading){
-                            Text("\(item.name)")
-                                .font(.headline)
+                            Text("\(item.name.uppercased())")
+//                                .font(.headline)
+                                .font(Font.custom("Oswald-Light", size: 20))
+//                                .fontWeight(.bold)
                             Text("\(item.desc)")
                                 .font(.caption2)
                         }
@@ -42,6 +44,7 @@ struct StoreEquipmentView: View {
                                         VStack{
                                             Text("Purchase")
                                                 .font(.caption2)
+//                                                .font(Font.custom("Oswald-Light", size: 12))
                                                 .fontWeight(.bold)
                                             HStack {
                                                 Image(systemName: "dollarsign.circle")

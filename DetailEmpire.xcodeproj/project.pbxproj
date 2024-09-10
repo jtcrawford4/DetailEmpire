@@ -26,6 +26,7 @@
 		E1A6766B2C82902200494BEC /* StoreItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766A2C82902200494BEC /* StoreItems.swift */; };
 		E1A676702C82AA1900494BEC /* Vehicles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A6766F2C82AA1900494BEC /* Vehicles.swift */; };
 		E1A676722C82B80E00494BEC /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A676712C82B80E00494BEC /* Vehicle.swift */; };
+		E1D8051A2C8FEBB20090A8AB /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1D805192C8FEBB20090A8AB /* Oswald-Light.ttf */; };
 		E1D9C17B2C8E4FC800872DE7 /* StoreEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D9C17A2C8E4FC800872DE7 /* StoreEquipmentView.swift */; };
 		E1DA29A42C80E85200AD84A6 /* DetailEmpireApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA29A32C80E85200AD84A6 /* DetailEmpireApp.swift */; };
 		E1DA29A62C80E85200AD84A6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DA29A52C80E85200AD84A6 /* ContentView.swift */; };
@@ -75,6 +76,8 @@
 		E1A6766C2C82940500494BEC /* notes.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = notes.md; sourceTree = "<group>"; };
 		E1A6766F2C82AA1900494BEC /* Vehicles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Vehicles.swift; path = ../Components/Vehicles.swift; sourceTree = "<group>"; };
 		E1A676712C82B80E00494BEC /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
+		E1D805192C8FEBB20090A8AB /* Oswald-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Light.ttf"; sourceTree = "<group>"; };
+		E1D8051B2C8FED760090A8AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E1D9C17A2C8E4FC800872DE7 /* StoreEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreEquipmentView.swift; sourceTree = "<group>"; };
 		E1DA29A02C80E85200AD84A6 /* DetailEmpire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DetailEmpire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DA29A32C80E85200AD84A6 /* DetailEmpireApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEmpireApp.swift; sourceTree = "<group>"; };
@@ -152,6 +155,14 @@
 			path = StoreViews;
 			sourceTree = "<group>";
 		};
+		E1D805182C8FEB7D0090A8AB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E1D805192C8FEBB20090A8AB /* Oswald-Light.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		E1DA29972C80E85200AD84A6 = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +186,8 @@
 		E1DA29A22C80E85200AD84A6 /* DetailEmpire */ = {
 			isa = PBXGroup;
 			children = (
+				E1D8051B2C8FED760090A8AB /* Info.plist */,
+				E1D805182C8FEB7D0090A8AB /* Fonts */,
 				E17E8AF92C8E919900225291 /* Extensions */,
 				E1DA29D22C8149B900AD84A6 /* Components */,
 				E1DA29CF2C80E89800AD84A6 /* Utils */,
@@ -360,6 +373,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1D8051A2C8FEBB20090A8AB /* Oswald-Light.ttf in Resources */,
 				E1DA29AB2C80E85300AD84A6 /* Preview Assets.xcassets in Resources */,
 				E1DA29A82C80E85300AD84A6 /* Assets.xcassets in Resources */,
 			);
@@ -575,16 +589,18 @@
 				DEVELOPMENT_TEAM = VRTN3V5Q68;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DetailEmpire/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jcb.DetailEmpire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -604,16 +620,18 @@
 				DEVELOPMENT_TEAM = VRTN3V5Q68;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DetailEmpire/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jcb.DetailEmpire;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

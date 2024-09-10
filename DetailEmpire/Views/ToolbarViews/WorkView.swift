@@ -25,8 +25,9 @@ struct WorkView: View {
 //                        .frame(alignment: .leading)
 //                    Spacer()
                     VStack{
-                        Text("\(building.name)")
-                            .font(.title)
+                        Text("\(building.name.uppercased())")
+//                            .font(.title)
+                            .font(Font.custom("Oswald-Light", size: 28))
                         Divider()
                             .frame(width: 15, height: 2)
                             .cornerRadius(4)

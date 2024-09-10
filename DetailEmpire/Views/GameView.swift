@@ -58,7 +58,7 @@ struct GameView: View {
             .padding(.bottom, 10)
             .padding([.leading, .trailing], 10)
 //            .frame(height: 60)
-            .background(.blue)
+            .background(.gray.opacity(0.8))
         }
         TabView(selection: $selectedTab) {
             WorkView()
