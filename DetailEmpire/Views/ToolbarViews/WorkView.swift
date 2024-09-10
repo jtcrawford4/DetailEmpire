@@ -61,8 +61,8 @@ struct WorkView: View {
             .cornerRadius(8)
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
+            .padding(.top, 60)
             .padding(.bottom, 10)
-            .padding(.top, -250)
             
             //Vehicles
             VStack{
@@ -96,19 +96,18 @@ struct WorkView: View {
                     Spacer()
                     HStack{
                         VStack{
-                            VehicleStatView(headline: "XP", value: "\(vehicle.xp)", color: .green)
+                            VehicleStatView(image: "arrowtriangle.up.circle", value: "\(vehicle.xp)", color: .green)
                         }
                         .padding(.trailing, 10)
                         VStack{
-                            VehicleStatView(headline: "Earnings", value: "$\(Formatting().formatPrice(num: vehicle.baseRevenue))", color: .green)
+                            VehicleStatView(image: "dollarsign.circle", value: "$\(Formatting().formatPrice(num: vehicle.baseRevenue))", color: .green)
                         }
 //                        .padding(.trailing, 10)
 //                        VStack{
 //                            VehicleStatView(headline: "Bonus", value: "$0", color: .orange)
 //                        }
                     }
-                    Spacer()
-                    Spacer()
+                    Spacer(minLength: 40)
                     VStack{
                         Button(action: {
                             vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
@@ -133,6 +132,7 @@ struct WorkView: View {
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding([.leading,.trailing], 10)
+            Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.vertical)
@@ -188,19 +188,19 @@ struct BuildingStatView:View {
 
 struct VehicleStatView:View {
     
-    var headline: String
+    var image: String
     var value: String
     var color: Color
 //    var image: String
     
     var body: some View {
         VStack{
-            Text("\(headline)")
-                .font(.caption2)
-                .fontWeight(.bold)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+            Image(systemName: image)
+//                .font(.caption2)
+//                .fontWeight(.bold)
+//                .foregroundColor(.gray)
+//                .multilineTextAlignment(.center)
+//                .fixedSize(horizontal: false, vertical: true)
             Divider()
                 .frame(width: 15, height: 2)
                 .cornerRadius(4)

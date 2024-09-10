@@ -13,6 +13,14 @@ struct StoreView: View {
             Text("Store - add current metrics here")
             
             HStack(spacing: 0){
+//                ControlGroup{
+//                    Button(action: {}, label: {Text("test1")})
+//                    Button(action: {}, label: {Text("test2")})
+//                    Button(action: {}, label: {Text("test3")})
+//                }
+//                .cornerRadius(8)
+//                .background(.white)
+                
                 ToggleButton(selectedButton: $selectedTab, tag: 0, text: "Products")
                 ToggleButton(selectedButton: $selectedTab, tag: 1, text: "Equipment")
                 ToggleButton(selectedButton: $selectedTab, tag: 2, text: "Buildings")

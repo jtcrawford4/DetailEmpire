@@ -26,6 +26,7 @@ struct GameView: View {
                     //TODO circle level progress?
                     ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                         .progressViewStyle(.linear)
+                        .font(.callout)
                     //                       .progressViewStyle(BarProgressStyle(height: 20.0))
                         .tint(.pink)
                         .background(Color.black.opacity(0.5))
@@ -54,23 +55,12 @@ struct GameView: View {
                     .cornerRadius(8)
                 }
             }
-            .font(.caption)
             .padding(.bottom, 10)
             .padding([.leading, .trailing], 10)
-            .frame(height: 60)
+//            .frame(height: 60)
             .background(.blue)
         }
         TabView(selection: $selectedTab) {
-            //               ZStack {
-            //                   gradient
-            //                       .opacity(0.25)
-            //                       .ignoresSafeArea()
-            //                   VStack {
-            //                       Text("Background colors can be seen behind the TabView")
-            //                           .padding()
-            //                   }
-            //                   .font(.title2)
-            //               }
             WorkView()
                 .tabItem {
                     Image(systemName: "car.2.fill")
@@ -93,6 +83,18 @@ struct GameView: View {
                     Image(systemName: "person.fill")
                     Text("Employee")
                 }.tag(3)
+//            }
+//            .toolbar {
+//                ToolbarItem(placement: .bottomBar) {
+//                    HStack {
+//                        Text("This is a toolbar")
+//                           .bold()
+//                        Spacer()
+//                        Image(systemName: "play.fill")
+//                        Image(systemName: "forward.fill")
+//                    }
+//                }
+//            }
         }
         .environmentObject(gameState)
         .environmentObject(storeItems)
@@ -100,7 +102,7 @@ struct GameView: View {
         .environmentObject(gameState.inventory)
         .environmentObject(gameState.currentBuilding)
         .environmentObject(buildings)
-//        .edgesIgnoringSafeArea(.all)
+        .padding(.top, -10)
         .tint(.white)
     }
 }
