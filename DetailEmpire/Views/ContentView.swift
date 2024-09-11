@@ -13,20 +13,20 @@ struct ContentView: View {
         .padding()
         Spacer()
         VStack {
-            Button("Continue", action: self.test)
+            Button("CONTINUE", action: self.test)
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.blue)
                 .disabled(true)
                 .cornerRadius(8)
-            Button("New Game", action: self.openNewGame)
+            Button("NEW GAME", action: self.openNewGame)
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.blue)
                 .cornerRadius(8)
-            Button("Options", action: self.openOptions)
+            Button("OPTIONS", action: self.openOptions)
                 .foregroundColor(.white)
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -34,6 +34,8 @@ struct ContentView: View {
                 .cornerRadius(8)
         }
         .padding(100)
+        .font(Font.custom("Oswald-Light", size: 22))
+        .fontWeight(.semibold)
 //        .onAppear(perform: {
 //            for family in UIFont.familyNames.sorted() {
 //                let names = UIFont.fontNames(forFamilyName: family)
