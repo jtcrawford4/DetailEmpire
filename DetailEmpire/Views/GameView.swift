@@ -10,6 +10,7 @@ struct GameView: View {
     init() {
 //        UITabBar.appearance().backgroundColor = UIColor.systemBlue
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
+//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Oswald-Light", size: 10)!], for: .selected)
     }
 
     var body: some View {
@@ -69,6 +70,7 @@ struct GameView: View {
                 .tabItem {
                     Image(systemName: "car.2.fill")
                     Text("Work")
+                        .font(Font.custom("Oswald-Light", size: 10))
                 }.tag(0)
             InventoryView()
                 .tabItem {

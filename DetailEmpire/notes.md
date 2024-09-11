@@ -2,6 +2,7 @@
 
 //TODO
     - consolidate inventory/store item into UseableItem with enum for type
+    - fontAwesome icons
     
 //utils
     - MoneyText, always formatted for 2 decimals
