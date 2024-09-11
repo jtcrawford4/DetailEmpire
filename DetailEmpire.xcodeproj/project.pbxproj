@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10BDC2E2C911F71000D0A3E /* Oswald-Variable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E10BDC2D2C911F71000D0A3E /* Oswald-Variable.ttf */; };
 		E11369E62C8BD9F700342E97 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11369E52C8BD9F700342E97 /* Building.swift */; };
 		E11369E82C8BDDAD00342E97 /* Buildings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11369E72C8BDDAD00342E97 /* Buildings.swift */; };
 		E11B276C2C869887000C8D0D /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11B276B2C869887000C8D0D /* Employee.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E10BDC2D2C911F71000D0A3E /* Oswald-Variable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Variable.ttf"; sourceTree = "<group>"; };
 		E11369E52C8BD9F700342E97 /* Building.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		E11369E72C8BDDAD00342E97 /* Buildings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildings.swift; sourceTree = "<group>"; };
 		E11B276B2C869887000C8D0D /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		E1D805182C8FEB7D0090A8AB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E10BDC2D2C911F71000D0A3E /* Oswald-Variable.ttf */,
 				E1D805192C8FEBB20090A8AB /* Oswald-Light.ttf */,
 			);
 			path = Fonts;
@@ -374,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1D8051A2C8FEBB20090A8AB /* Oswald-Light.ttf in Resources */,
+				E10BDC2E2C911F71000D0A3E /* Oswald-Variable.ttf in Resources */,
 				E1DA29AB2C80E85300AD84A6 /* Preview Assets.xcassets in Resources */,
 				E1DA29A82C80E85300AD84A6 /* Assets.xcassets in Resources */,
 			);

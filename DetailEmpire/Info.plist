@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Oswald-Light.ttf</string>
+		<string>Oswald-Variable.ttf</string>
 	</array>
 </dict>
 </plist>

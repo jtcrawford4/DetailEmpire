@@ -18,14 +18,15 @@ struct StoreEquipmentView: View {
                         VStack{
                             ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .green, imageColor: .white)
                         }
-                        .padding(.trailing, 10)
+                        .padding(.trailing, 6)
                         VStack(alignment: .leading){
                             Text("\(item.name.uppercased())")
 //                                .font(.headline)
-                                .font(Font.custom("Oswald-Light", size: 20))
-//                                .fontWeight(.bold)
+                                .font(Font.custom("Oswald-Light", size: 18))
+                                .fontWeight(.semibold)
                             Text("\(item.desc)")
-                                .font(.caption2)
+                                .font(Font.custom("Oswald-Light", size: 12))
+                                .foregroundColor(.secondary)
                         }
                         Spacer()
                         VStack{
