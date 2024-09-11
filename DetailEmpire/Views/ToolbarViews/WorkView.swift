@@ -18,12 +18,10 @@ struct WorkView: View {
                     Image(systemName: "house.fill")
                         .padding(10)
                         .font(.system(size: 40))
-//                        .border(.cyan, width: 2)
                         .foregroundColor(.white)
                         .background(.orange)
                         .cornerRadius(8)
-//                        .frame(alignment: .leading)
-//                    Spacer()
+                        .frame(alignment: .leading)
                     VStack{
                         Text("\(building.name.uppercased())")
 //                            .font(.title)
@@ -32,29 +30,30 @@ struct WorkView: View {
                             .frame(width: 15, height: 2)
                             .cornerRadius(4)
                             .background(.orange)
-                            .padding(.vertical, -10)
+                            .padding(.vertical, -20)
+                            .padding(.horizontal, -73)
                     }
+                    Spacer()
                 }
-                .padding(.top, 10)
-//                .frame(alignment: .leading)
-                VStack{
-                    Text("desc")
-//                    Text("XP: \(gameState.xp)/\(gameState.xpToNextLevel)")
-                }
+                .padding([.horizontal,.top], 10)
+//                VStack{
+//                    Text("desc")
+//                }
                 HStack{
                     VStack{
-                        BuildingStatView(headline: "Parking Spaces", value: building.vehicleSlots, color: .purple, image: "car.fill")
+                        BuildingStatView(headline: "PARKING SPACES", value: building.vehicleSlots, color: .purple, image: "car.fill")
                             .padding(.trailing, 10)
                     }
+                    Spacer()
                     VStack{
-                        BuildingStatView(headline: "Max Employees", value: building.workerSlots, color: .pink, image: "person.fill")
+                        BuildingStatView(headline: "MAX EMPLOYEES", value: building.workerSlots, color: .pink, image: "person.fill")
                             .padding(.trailing, 10)
                     }
+                    Spacer()
                     VStack{
-                        BuildingStatView(headline: "Current Employees", value: building.employees.count, color: .cyan, image: "person.fill")
+                        BuildingStatView(headline: "CURRENT EMPLOYEES", value: building.employees.count, color: .cyan, image: "person.fill")
                     }
                 }
-//                .padding(.top, 15)
                 .padding([.leading,.trailing], 30)
                 .padding(.vertical, 10)
             }
@@ -63,22 +62,23 @@ struct WorkView: View {
             .clipped()
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding(.top, 60)
-            .padding(.bottom, 10)
+            .padding([.bottom, .horizontal], 10)
             
             //Vehicles
             VStack{
                 HStack{
                     VStack{
-                        Text("Current Vehicles")
-                            .font(.caption2)
-                            .fontWeight(.bold)
+                        Text("CURRENT VEHICLES")
+                            .font(Font.custom("Oswald-Light", size: 10))
+//                            .font(.caption2)
+                            .fontWeight(.regular)
                             .foregroundColor(.gray)
                         Divider()
                             .frame(width: 15, height: 2)
                             .cornerRadius(4)
                             .background(.purple)
                             .padding(.vertical, -4)
-                            .padding(.horizontal, -45)
+                            .padding(.horizontal, -35)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -86,13 +86,17 @@ struct WorkView: View {
                 HStack{
                     VStack{
                         Text("\(vehicle.type.uppercased())")
-                            .font(.headline)
-                            .padding(.trailing, 10)
+                            .font(Font.custom("Oswald-Light", size: 20))
+                            .fontWeight(.semibold)
+                            .padding(.vertical, -2)
+//                            .font(.headline)
+//                            .padding(.trailing, 10)
                         ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
                             .progressViewStyle(.linear)
                             .padding(.horizontal, 4)
                             .padding(.trailing, 20)
-                            .tint(.purple)
+                            .tint(.green.opacity(0.5))
+//                            .tint(LinearGradient(gradient: Gradient(colors: [.white, .mint]), startPoint: .leading, endPoint: .trailing))
                     }
                     Spacer()
                     HStack{
@@ -113,13 +117,14 @@ struct WorkView: View {
                         Button(action: {
                             vehicle.detail(gameState: gameState, inventory: inventory.inventoryItems)
                         }, label: {
-                            Text("Detail")
+                            Text("DETAIL")
+                                .font(Font.custom("Oswald-Light", size: 14))
                                 .fontWeight(.bold)
-                                .font(.subheadline)
+//                                .font(.subheadline)
                         })
-                        .foregroundColor(.white)
+                        .foregroundColor(detailDisabled ? .gray : .white)
                         .padding(10)
-                        .background(detailDisabled ? .gray : .green)
+                        .background(LinearGradient(gradient: Gradient(colors: detailDisabled ? [.gray, .black.opacity(0.80)] : [.green, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing))
                         .cornerRadius(8)
                         .disabled(detailDisabled)
                         .padding([.vertical,.trailing], 6)
@@ -162,17 +167,17 @@ struct BuildingStatView:View {
     var body: some View {
         VStack{
             Text("\(headline)")
-                .font(.caption2)
-                .fontWeight(.bold)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+                .font(Font.custom("Oswald-Light", size: 10))
+//                .font(.caption2)
+                .fontWeight(.semibold)
+                .foregroundColor(.secondary)
             Divider()
                 .frame(width: 15, height: 2)
                 .cornerRadius(4)
                 .background(color)
             Text("\(value)")
-                .font(.callout)
+                .font(Font.custom("Oswald-Light", size: 16))
+//                .font(.callout)
                 .fontWeight(.bold)
                 .padding(.bottom, -20)
             Gauge(value: 0.5) {}
@@ -182,7 +187,7 @@ struct BuildingStatView:View {
                 }
                 .gaugeStyle(.accessoryCircular)
                 .tint(color)
-                .scaleEffect(0.5)
+                .scaleEffect(0.4)
         }
     }
 }
@@ -192,24 +197,22 @@ struct VehicleStatView:View {
     var image: String
     var value: String
     var color: Color
-//    var image: String
     
     var body: some View {
         VStack{
             Image(systemName: image)
-//                .font(.caption2)
-//                .fontWeight(.bold)
-//                .foregroundColor(.gray)
-//                .multilineTextAlignment(.center)
-//                .fixedSize(horizontal: false, vertical: true)
+                .font(.system(size: 18))
             Divider()
                 .frame(width: 15, height: 2)
                 .cornerRadius(4)
                 .background(.black)
+                .padding(.bottom, -30)
             Text("\(value)")
-                .font(.caption)
-                .fontWeight(.bold)
+                .font(Font.custom("Oswald-Light", size: 14))
+//                .font(.caption)
+                .fontWeight(.semibold)
                 .foregroundColor(color)
+                .padding(.bottom, 5)
 //            Gauge(value: 0.5) {}
 //                currentValueLabel: {
 //                    Image(systemName: "\(image)")

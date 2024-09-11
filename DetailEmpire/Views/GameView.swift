@@ -20,18 +20,20 @@ struct GameView: View {
             HStack(){
                 HStack{
                     Text("\(gameState.level)")
-                        .font(.callout)
-                        .fontWeight(.bold)
+                        .font(Font.custom("Oswald-Light", size: 28))
+//                        .font(.callout)
+                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                     //TODO circle level progress?
                     ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                         .progressViewStyle(.linear)
-                        .font(.callout)
+                        .font(Font.custom("Oswald-Light", size: 14))
+//                        .font(.callout)
                     //                       .progressViewStyle(BarProgressStyle(height: 20.0))
                         .tint(.pink)
                         .background(Color.black.opacity(0.5))
                         .cornerRadius(8)
-                        .fontWeight(.bold)
+                        .fontWeight(.semibold)
                         .scaleEffect(x: 1, y: 1, anchor: .center)
                         .foregroundColor(.white)
                 }
@@ -41,10 +43,11 @@ struct GameView: View {
                         HStack {
                             Image(systemName: "dollarsign.circle")
                                 .font(.system(size: 18))
-                                .foregroundColor(.mint)
+                                .foregroundColor(.white)
                             Spacer()
                             Text("\(gameState.money, specifier: "%.2f")")
-                                .fontWeight(.bold)
+                                .font(Font.custom("Oswald-Light", size: 14))
+                                .fontWeight(.semibold)
                                 .foregroundColor(.white)
                         }
                         .font(.callout)
@@ -56,9 +59,10 @@ struct GameView: View {
                 }
             }
             .padding(.bottom, 10)
-            .padding([.leading, .trailing], 10)
+            .padding([.leading, .trailing], 20)
 //            .frame(height: 60)
-            .background(.gray.opacity(0.8))
+            .background(.black)
+//            .background(LinearGradient(gradient: Gradient(colors: [.mint, .pink.opacity(0.4), .mint]), startPoint: .bottomLeading, endPoint: .topTrailing))
         }
         TabView(selection: $selectedTab) {
             WorkView()

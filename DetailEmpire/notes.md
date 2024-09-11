@@ -6,6 +6,12 @@
 //utils
     - MoneyText, always formatted for 2 decimals
     - contants file for multipliers, xpToNextLevel multiplication
+    
+//building
+    - rent?
+    - price buy vs own
+    - property taxes
+    - electric/water bill
 
 //items
     - capacity

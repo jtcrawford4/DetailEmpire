@@ -60,19 +60,23 @@ struct ToggleButton: View{
             Button(action: {
                 selectedButton = tag
             }, label: {
-                Text(text)
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(isSelected ? .white : .black)
+                Text(text).textCase(.uppercase)
+                    .font(Font.custom("Oswald-Light", size: 14))
+//                    .font(.caption)
+                    .fontWeight(.semibold)
+//                    .foregroundColor(isSelected ? .white : .black)
             })
             .padding(10)
 //            .background(isSelected ? .yellow : .pink.opacity(0.5))
+//            .foregroundColor(isSelected ? .black : .white)
+            .foregroundColor(isSelected ? .white : .black)
             .foregroundColor(.white)
             .tag(tag)
             if isSelected {
                 Divider()
                     .frame(width: 75, height: 2)
                     .cornerRadius(4)
+//                    .background(.black)
                     .background(.white)
                     .padding(.vertical, -10)
             }

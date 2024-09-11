@@ -7,13 +7,13 @@ class Formatting {
         var millionNum = num/1000000
         if num >= 1000 && num < 1000000{
             if(floor(thousandNum) == thousandNum){
-                return("\(Int(thousandNum))k")
+                return("\(Int(thousandNum))K")
             }
-            return("\(thousandNum.roundToPlaces(places: 1))k")
+            return("\(thousandNum.roundToPlaces(places: 1))K")
         }
         if num > 1000000{
             if(floor(millionNum) == millionNum){
-                return("\(Int(thousandNum))k")
+                return("\(Int(thousandNum))K")
             }
             return ("\(millionNum.roundToPlaces(places: 1))M")
         }
