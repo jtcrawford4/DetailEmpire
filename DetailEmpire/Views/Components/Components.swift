@@ -51,7 +51,6 @@ struct inventoryItemListing: View{
         
         @State var lowProduct = item.usesRemaining < 5 && item.usesRemaining != -1
         @State var outOfProduct = item.usesRemaining == 0
-        let colors:[Color] = [.white,.black]
         let outOfProductColors:[Color] = [.red,.white]
         let lowProductColors:[Color] = [.yellow,.white]
         let normalColors:[Color] = [.white,.white]

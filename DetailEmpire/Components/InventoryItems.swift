@@ -5,12 +5,12 @@ class InventoryItems:ObservableObject{
         InventoryItem(price:0,
                       name:"Bucket", desc:"A bucket", levelUnlocked: 0, usesPerVehicle: -1, usesRemaining: -1, icon: "bubble.middle.bottom",
                       purchased: false, startingItem: true, type: InventoryItem.InventoryType.equipment),
-        InventoryItem(price:0,
-                      name:"Test Product", desc:"Test Low", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 1, icon: "bubble.middle.bottom",
-                      purchased: false, startingItem: true, type: InventoryItem.InventoryType.product),
-        InventoryItem(price:0,
-                      name:"Test Product2", desc:"Test empty", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 0, icon: "bubble.middle.bottom",
-                      purchased: false, startingItem: true, type: InventoryItem.InventoryType.product),
+//        InventoryItem(price:0,
+//                      name:"Test Product", desc:"Test Low", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 1, icon: "bubble.middle.bottom",
+//                      purchased: false, startingItem: true, type: InventoryItem.InventoryType.product),
+//        InventoryItem(price:0,
+//                      name:"Test Product2", desc:"Test empty", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 0, icon: "bubble.middle.bottom",
+//                      purchased: false, startingItem: true, type: InventoryItem.InventoryType.product),
         InventoryItem(price:11.99,
                       name:"Basic Car Soap", desc:"It's soap", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 10, icon: "sparkles",
                       purchased: false, startingItem: true, type: InventoryItem.InventoryType.product),
@@ -21,6 +21,7 @@ class InventoryItems:ObservableObject{
                       name:"Glass Cleaner", desc:"Invisible glass", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 15, icon: "sparkles",
                       purchased: false, startingItem: true, type: InventoryItem.InventoryType.product)
         //brushes
+        //wax -> sealant -> ceramic -> ppf
         
     ]
     

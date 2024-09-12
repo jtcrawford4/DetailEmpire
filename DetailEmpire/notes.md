@@ -3,10 +3,15 @@
 //TODO
     - consolidate inventory/store item into UseableItem with enum for type
     - fontAwesome icons
+    - xp set to 0 when level changes
     
 //utils
     - MoneyText, always formatted for 2 decimals
     - contants file for multipliers, xpToNextLevel multiplication
+    
+//vehicle
+    - unlock additional services that generate revenue
+    - each vehicle has random chance of wanting 1 or more services
     
 //building
     - rent?

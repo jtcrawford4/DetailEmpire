@@ -9,7 +9,9 @@ struct WorkView: View {
     
     var body: some View {
         
-        @State var detailDisabled = gameState.detailDisabled || vehicle.isCompleted()
+//        @State var detailDisabled = gameState.detailDisabled || vehicle.isCompleted()
+//        @State var detailDisabled = gameState.detailDisabled
+        @State var detailDisabled = gameState.detailDisabled || inventory.isAnyItemEmpty() || vehicle.isCompleted()
 
         VStack{
             //Building Stats
@@ -70,7 +72,6 @@ struct WorkView: View {
                     VStack{
                         Text("CURRENT VEHICLES")
                             .font(Font.custom("Oswald-Light", size: 10))
-//                            .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(.gray)
                         Divider()
@@ -89,8 +90,6 @@ struct WorkView: View {
                             .font(Font.custom("Oswald-Light", size: 20))
                             .fontWeight(.semibold)
                             .padding(.vertical, -2)
-//                            .font(.headline)
-//                            .padding(.trailing, 10)
                         ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
                             .progressViewStyle(.linear)
                             .padding(.horizontal, 4)
@@ -120,7 +119,6 @@ struct WorkView: View {
                             Text("DETAIL")
                                 .font(Font.custom("Oswald-Light", size: 14))
                                 .fontWeight(.bold)
-//                                .font(.subheadline)
                         })
                         .foregroundColor(detailDisabled ? .gray : .white)
                         .padding(10)
@@ -131,7 +129,6 @@ struct WorkView: View {
                     }
                     Spacer()
                 }
-                    
             }
             .background(.white)
             .cornerRadius(8)
@@ -168,7 +165,6 @@ struct BuildingStatView:View {
         VStack{
             Text("\(headline)")
                 .font(Font.custom("Oswald-Light", size: 10))
-//                .font(.caption2)
                 .fontWeight(.semibold)
                 .foregroundColor(.secondary)
             Divider()
@@ -177,7 +173,6 @@ struct BuildingStatView:View {
                 .background(color)
             Text("\(value)")
                 .font(Font.custom("Oswald-Light", size: 16))
-//                .font(.callout)
                 .fontWeight(.bold)
                 .padding(.bottom, -20)
             Gauge(value: 0.5) {}
@@ -193,11 +188,9 @@ struct BuildingStatView:View {
 }
 
 struct VehicleStatView:View {
-    
     var image: String
     var value: String
     var color: Color
-    
     var body: some View {
         VStack{
             Image(systemName: image)
@@ -209,18 +202,9 @@ struct VehicleStatView:View {
                 .padding(.bottom, -30)
             Text("\(value)")
                 .font(Font.custom("Oswald-Light", size: 14))
-//                .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(color)
                 .padding(.bottom, 5)
-//            Gauge(value: 0.5) {}
-//                currentValueLabel: {
-//                    Image(systemName: "\(image)")
-//                        .foregroundColor(color)
-//                }
-//                .gaugeStyle(.accessoryCircular)
-//                .tint(color)
-//                .scaleEffect(0.5)
         }
     }
 }
