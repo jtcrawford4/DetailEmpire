@@ -49,15 +49,17 @@ class Vehicle:ObservableObject{
             if self.isCompleted(){
                 for item in inventory {
                     item.use()
-                    if item.usesRemaining == 0 {
-                        gameState.detailDisabled = true
-                    }
+//                    if item.usesRemaining == 0 {
+//                        gameState.detailDisabled = true
+//                    }
                 }
                 gameState.money += self.baseRevenue
                 gameState.xp += self.xp
                 if gameState.xp >= gameState.xpToNextLevel {
                     gameState.level += 1
                     gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * 2.8))
+                    gameState.totalXp += gameState.xp
+                    gameState.xp = 0
                 }
             }
         }

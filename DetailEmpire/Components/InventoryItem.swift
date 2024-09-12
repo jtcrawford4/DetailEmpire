@@ -45,7 +45,7 @@ class InventoryItem:Identifiable, ObservableObject{
     }
     
     func use(){
-        if self.usesPerVehicle != -1 {
+        if self.usesPerVehicle != -1 && self.usesRemaining != 0 {
             self.usesRemaining -= self.usesPerVehicle
         }
     }

@@ -3,6 +3,7 @@ import Foundation
 class GameState: ObservableObject{
     @Published var level = 1
     @Published var xp = 0
+    @Published var totalXp = 0
     @Published var money = 0.00
     @Published var xpToNextLevel = 500
     @Published var vehicleDetailMultipliers = 0.00
@@ -35,7 +36,7 @@ class GameState: ObservableObject{
     func tick(){
         let vehicle = self.currentBuilding.vehicles[0]
         vehicle.isCompleted() ? self.currentBuilding.vehicles = [Vehicles().getVehicle()] : nil
-//        self.detailDisabled = vehicle.isCompleted() && !self.inventory.isAnyItemEmpty()
+        self.detailDisabled = vehicle.isCompleted() && !self.inventory.isAnyItemEmpty()
         if(!self.detailDisabled && !self.inventory.isAnyItemEmpty() && !self.currentBuilding.vehicles[0].isCompleted()) {
             vehicle.workerDetail(numWorkers: self.currentBuilding.employees.count, gameState: self, inventory: self.inventory.inventoryItems)
         }
