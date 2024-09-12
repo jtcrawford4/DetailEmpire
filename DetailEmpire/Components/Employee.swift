@@ -14,7 +14,7 @@ class Employee: Identifiable, ObservableObject {
         self.payOwed = 0.00
     }
     
-    func getDefaultEmployeeHireCost(type:EmployeeType) -> Double {
+   static func getDefaultEmployeeHireCost(type:EmployeeType) -> Double {
         switch(type){
         case .general:
             return 199.99
@@ -23,9 +23,18 @@ class Employee: Identifiable, ObservableObject {
         }
     }
     
-    func getNextEmployeeHireCost(employees: [Employee]) -> Double {
-        return 1.00 //TODO by type
+    static func getNextEmployeeHireCost(employees: [Employee], type: EmployeeType) -> Double {
+        let numEmployees = employees.count
+        let costMultiplier = 1.25
+        let defaultCost = getDefaultEmployeeHireCost(type: type)
+        if numEmployees == 0 {
+            return defaultCost
+        } else {
+            return defaultCost * (Double(numEmployees) * costMultiplier)
+        }
     }
+    
+    //TODO next manager cost
     
     func trainEmployee(){
         //TODO

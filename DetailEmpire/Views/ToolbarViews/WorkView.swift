@@ -26,7 +26,6 @@ struct WorkView: View {
                         .frame(alignment: .leading)
                     VStack{
                         Text("\(building.name.uppercased())")
-//                            .font(.title)
                             .font(Font.custom("Oswald-Light", size: 28))
                         Divider()
                             .frame(width: 15, height: 2)
@@ -104,7 +103,7 @@ struct WorkView: View {
                         }
                         .padding(.trailing, 10)
                         VStack{
-                            VehicleStatView(image: "dollarsign.circle", value: "$\(Formatting().formatPrice(num: vehicle.baseRevenue))", color: .green)
+                            VehicleStatView(image: "dollarsign.circle", value: "$\(Formatting.formatPrice(num: vehicle.baseRevenue))", color: .green)
                         }
 //                        .padding(.trailing, 10)
 //                        VStack{

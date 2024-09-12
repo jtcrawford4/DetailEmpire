@@ -2,7 +2,7 @@ import Foundation
 
 class Formatting {
     
-    func formatPrice(num: Double) -> String{
+    static func formatPrice(num: Double) -> String{
         var thousandNum = num/1000
         var millionNum = num/1000000
         if num >= 1000 && num < 1000000{

@@ -72,7 +72,7 @@ struct StoreBuildingView: View {
                                         HStack {
                                             Image(systemName: "dollarsign.circle")
                                                 .font(.system(size: 16))
-                                            Text("\(Formatting().formatPrice(num: building.price))")
+                                            Text("\(Formatting.formatPrice(num: building.price))")
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.white)
                                         }

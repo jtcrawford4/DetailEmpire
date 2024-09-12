@@ -47,6 +47,7 @@
     - each garage can accept up to so many employees? x general employee, x specialist, x manager
     - unlock to have more employees?
     - go on strike if not paid?
+    - change 'general' to 'worker'
         
         
 //Snippets
