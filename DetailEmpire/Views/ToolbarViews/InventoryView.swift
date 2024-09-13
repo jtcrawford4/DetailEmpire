@@ -21,7 +21,7 @@ struct InventoryView: View {
             case 0:
                 ScrollView{
                     ForEach($inventoryItems.inventoryItems){ $item in
-                        if item.type == InventoryItem.InventoryType.product {
+                        if item.type == InventoryType.product {
                             inventoryItemListing(item: $item)
                         }
                     }
@@ -30,7 +30,7 @@ struct InventoryView: View {
             case 1:
                 ScrollView{
                     ForEach($inventoryItems.inventoryItems){ $item in
-                        if item.type == InventoryItem.InventoryType.equipment {
+                        if item.type == InventoryType.equipment {
                             inventoryItemListing(item: $item)
                         }
                     }
@@ -39,7 +39,7 @@ struct InventoryView: View {
             default:
                 ScrollView{
                     ForEach($inventoryItems.inventoryItems){ $item in
-                        if item.type == InventoryItem.InventoryType.product {
+                        if item.type == InventoryType.product {
                             inventoryItemListing(item: $item)
                         }
                     }

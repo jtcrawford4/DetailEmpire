@@ -32,6 +32,7 @@
     - equipment degrades, works slower after a threshold i.e. 20% works half as well, etc
     - classifieds section for buying used equipment
     - have multiple polishers for multiple bays/employees, etc
+    - classifieds section for buying used equipment?
 
 //Eventually
     finance

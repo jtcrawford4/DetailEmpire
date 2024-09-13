@@ -50,6 +50,10 @@ class Vehicle:ObservableObject{
             if self.isCompleted(){
                 for item in inventory {
                     item.use()
+                    if item.type == InventoryType.equipment {
+//                        item.equipmentCondition = InventoryItem.getEquipementCondition(item: item)
+                        item.setEquipementCondition()
+                    }
 //                    if item.usesRemaining == 0 {
 //                        gameState.detailDisabled = true
 //                    }

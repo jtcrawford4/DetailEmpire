@@ -10,7 +10,7 @@ struct StoreEquipmentView: View {
         
         ScrollView{
             ForEach($storeItems.storeItems){ $item in
-                if item.type == InventoryItem.InventoryType.equipment {
+                if item.type == InventoryType.equipment {
                     storeInventoryItemListing(item: $item)
                 }
             }

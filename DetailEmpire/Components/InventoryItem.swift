@@ -15,7 +15,9 @@ class InventoryItem:Identifiable, ObservableObject{
     var itemMultiplier:Double?
     var clickMultiplier:Double?
     var type: InventoryType
+    @Published var equipmentCondition:Int = 100
     //color background for category?
+    //special ability. different class? link by id?
     
     init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, itemMultiplier: Double? = nil, clickMultiplier: Double? = nil, type: InventoryType) {
         self.id = id
@@ -34,11 +36,6 @@ class InventoryItem:Identifiable, ObservableObject{
         self.type = type
     }
     
-    enum InventoryType: Identifiable{
-        var id : UUID {return UUID()}
-        case product, equipment, unassigned
-    }
-    
     func purchaseFromStore(item:InventoryItem){
 //        gameState.money -= self.price
         
@@ -54,4 +51,16 @@ class InventoryItem:Identifiable, ObservableObject{
         self.usesRemaining = self.usesPerContainer
     }
     
+    func setEquipementCondition(){
+        if self.type == InventoryType.equipment && self.usesPerVehicle != -1 {
+            let percent = Int(((Double(self.usesRemaining) / Double(self.usesPerContainer)) * 100).rounded())
+            self.equipmentCondition = percent > 0 ? percent : 0
+        }
+    }
+    
+}
+
+enum InventoryType: Identifiable{
+    var id : UUID {return UUID()}
+    case product, equipment, unassigned
 }

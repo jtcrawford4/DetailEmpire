@@ -49,17 +49,21 @@ struct inventoryItemListing: View{
     
     var body: some View {
         
-        @State var lowProduct = item.usesRemaining < 5 && item.usesRemaining != -1
-        @State var outOfProduct = item.usesRemaining == 0
-        let outOfProductColors:[Color] = [.red,.white]
-        let lowProductColors:[Color] = [.yellow,.white]
+        let isEquipment = item.type == InventoryType.equipment
+//        @State var equipmentStatus = item.getEquipementCondition()
+//        @State var equipmentStatus = 3
+//        @State var equipmentCondition = InventoryItem.getEquipementCondition(item: item)
+        @State var lowStock = (item.usesRemaining < 5 && item.usesRemaining != -1) || (isEquipment && item.equipmentCondition < 20 && item.usesRemaining != -1)
+        @State var outOfStock = item.usesRemaining == 0 || (isEquipment && item.equipmentCondition == 0)
+        let lowStockColors:[Color] = [.yellow,.white]
+        let outOfStockColors:[Color] = [.red,.white]
         let normalColors:[Color] = [.white,.white]
         
         HStack{
             VStack{
-                if lowProduct && !outOfProduct {
+                if lowStock && !outOfStock {
                     ImageOnCircle(icon: "exclamationmark.triangle", radius: 20, circleColor: .clear, imageColor: .orange)
-                }else if outOfProduct{
+                }else if outOfStock{
                     ImageOnCircle(icon: "exclamationmark.octagon", radius: 20, circleColor: .clear, imageColor: .red)
                 }else{
                     ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .green, imageColor: .white)
@@ -83,12 +87,26 @@ struct inventoryItemListing: View{
                             item.refill()
                             gameState.money -= item.price
                             gameState.detailDisabled = gameState.inventory.isAnyItemEmpty()
+                            if isEquipment {
+                                item.equipmentCondition = 100
+                            }
                         }, label: {
                             VStack{
-                                Text("REFILL")
+                                Text("\((isEquipment ? "REPLACE" : "REFILL"))")
                                     .font(Font.custom("Oswald-Light", size: 12))
                                     .fontWeight(.semibold)
-                                Image(systemName: "cart.badge.plus")
+                                if isEquipment {
+                                    HStack {
+                                        Image(systemName: "dollarsign.circle")
+                                            .font(.system(size: 16))
+                                        Text("\(item.price, specifier: "%.2f")")
+                                            .font(Font.custom("Oswald-Light", size: 14))
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                    }
+                                } else {
+                                    Image(systemName: "cart.badge.plus")
+                                }
                             }
                         })
                         .padding([.leading,.trailing], 25)
@@ -98,14 +116,14 @@ struct inventoryItemListing: View{
                         .disabled(gameState.money < item.price)
                         .cornerRadius(8)
                     }else{
-                        Text("USES REMAINING")
+                        Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
                             .font(Font.custom("Oswald-Light", size: 12))
-                        Text("\(item.usesRemaining)")
+                        Text("\(isEquipment ? item.equipmentCondition : item.usesRemaining)")
                             .font(Font.custom("Oswald-Light", size: 16))
                             .fontWeight(.semibold)
                     }
                 }else{
-                    Text("USES REMAINING")
+                    Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
                         .font(Font.custom("Oswald-Light", size: 12))
                     Image(systemName: "infinity")
                         .font(.system(size:16))
@@ -117,7 +135,7 @@ struct inventoryItemListing: View{
         }
         .padding(.horizontal, 10)
         .frame(height : 60)
-        .background(LinearGradient(colors: outOfProduct ? outOfProductColors : (lowProduct ? lowProductColors : normalColors),
+        .background(LinearGradient(colors: outOfStock ? outOfStockColors : (lowStock ? lowStockColors : normalColors),
                                    startPoint: .trailing,
                                    endPoint: .leading))
         .cornerRadius(8)

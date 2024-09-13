@@ -12,7 +12,7 @@ class GameState: ObservableObject{
     @Published var inventory: InventoryItems
     @Published var detailDisabled: Bool
     @Published var employees:[Employee]
-    @Published var workerDetailSpeed = 0.30
+    @Published var workerDetailSpeed = 0.45
 //    @Published var workerCostMultiplier = 
     @Published var workerSpeedMultiplier = 0.00
     @Published var workerMoneyMultiplier = 0.00
