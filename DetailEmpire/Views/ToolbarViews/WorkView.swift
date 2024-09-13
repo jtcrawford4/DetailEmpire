@@ -93,7 +93,7 @@ struct WorkView: View {
                             .progressViewStyle(.linear)
                             .padding(.horizontal, 4)
                             .padding(.trailing, 20)
-                            .tint(.green.opacity(0.5))
+                            .tint(.green.opacity(0.75))
 //                            .tint(LinearGradient(gradient: Gradient(colors: [.white, .mint]), startPoint: .leading, endPoint: .trailing))
                     }
                     Spacer()

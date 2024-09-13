@@ -25,7 +25,8 @@ class Vehicle:ObservableObject{
     
     public func workerDetail(numWorkers: Int, gameState: GameState, inventory: [InventoryItem]){
         if numWorkers > 0 && !gameState.detailDisabled {
-            detailWithClicks(clicks: (Double(numWorkers) * 0.10), gameState: gameState, inventory: inventory)
+            let clicks = Double(numWorkers) * gameState.workerDetailSpeed * (gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1)
+            detailWithClicks(clicks: clicks, gameState: gameState, inventory: inventory)
         }
     }
     

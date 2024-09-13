@@ -17,15 +17,15 @@ class Employee: Identifiable, ObservableObject {
    static func getDefaultEmployeeHireCost(type:EmployeeType) -> Double {
         switch(type){
         case .general:
-            return 199.99
+            return 1099.99
         case .manager:
-            return 999.99
+            return 12999.99
         }
     }
     
     static func getNextEmployeeHireCost(employees: [Employee], type: EmployeeType) -> Double {
         let numEmployees = employees.count
-        let costMultiplier = 1.25
+        let costMultiplier = 3.25
         let defaultCost = getDefaultEmployeeHireCost(type: type)
         if numEmployees == 0 {
             return defaultCost
@@ -40,9 +40,18 @@ class Employee: Identifiable, ObservableObject {
         //TODO
     }
     
+    static func getEmployeeDesc(type: EmployeeType) -> String {
+        switch(type){
+        case .general:
+            return "Details vehicles automatically"
+        case .manager:
+            return "Handles employee payroll" //workmans comp? insurance?
+        }
+    }
+    
 }
 
 enum EmployeeType:String, CaseIterable, Identifiable {
     var id: String { return self.rawValue }
-    case general = "General", manager = "Manager"//paint correct
+    case general = "General", manager = "Manager"//paint correct? //shop manager - handle rent/lease/property tax
 }

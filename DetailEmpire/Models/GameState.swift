@@ -8,12 +8,14 @@ class GameState: ObservableObject{
     @Published var xpToNextLevel = 500
     @Published var vehicleDetailMultipliers = 0.00
     @Published var clickMulitplier = 0.00
-    @Published var employees:[Employee]
-    @Published var employeeSpeedMultiplier = 0.00
-    @Published var employeeMoneyMultiplier = 0.00
     @Published var currentBuilding: Building
     @Published var inventory: InventoryItems
     @Published var detailDisabled: Bool
+    @Published var employees:[Employee]
+    @Published var workerDetailSpeed = 0.30
+//    @Published var workerCostMultiplier = 
+    @Published var workerSpeedMultiplier = 0.00
+    @Published var workerMoneyMultiplier = 0.00
     //options
     //metrics
 //    @Published var vehcilesDetailed = 0
