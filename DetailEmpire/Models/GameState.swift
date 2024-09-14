@@ -46,4 +46,18 @@ class GameState: ObservableObject{
         }
     }
     
+    func getInventorySpeedMultiplierPercentage() -> Int {
+        if self.inventoryItemSpeedMultiplier > 0 {
+            return Int(((self.inventoryItemSpeedMultiplier - 1) * 100).rounded())
+        }
+        return 0
+    }
+    
+    func getWorkerSpeedMultiplierPercentage() -> Int {
+        if self.workerSpeedMultiplier > 0 {
+            return Int(((self.workerSpeedMultiplier - 1) * 100).rounded())
+        }
+        return 0
+    }
+    
 }

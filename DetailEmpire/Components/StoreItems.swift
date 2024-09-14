@@ -12,11 +12,16 @@ class StoreItems:ObservableObject{
                       desc:"Increase efficiency by 2%",
                       levelUnlocked: 1, usesPerVehicle: 1, usesRemaining: 100, icon: "lasso.sparkles", purchased: false, startingItem: false, 
                       speedMultiplier: 1.02, moneyMultiplier: 0, type: InventoryType.equipment),
-        InventoryItem(price:349.99,
+        InventoryItem(price:129.99,
+                      name:"Basic Shop Vac",
+                      desc:"Increase efficiency by 2%",
+                      levelUnlocked: 3, usesPerVehicle: 1, usesRemaining: 150, icon: "lasso.sparkles", purchased: false, startingItem: false,
+                      speedMultiplier: 1.02, moneyMultiplier: 0, type: InventoryType.equipment), //TODO replace hand held vac when purchased. verify previous multiplier removed if applicable
+        InventoryItem(price:449.99,
                       name:"Rupes Polisher",
                       desc:"Spins real fast",
                       levelUnlocked: 15, usesPerVehicle: 1, usesRemaining: 450, icon: "lasso.sparkles", purchased: false, startingItem: false, 
-                      speedMultiplier: 0.15, moneyMultiplier: 0, type: InventoryType.equipment)
+                      speedMultiplier: 1.15, moneyMultiplier: 0, type: InventoryType.equipment) //TODO replace basic polisher when purchased
     ]
 }
 

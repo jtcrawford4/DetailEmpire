@@ -37,9 +37,9 @@ struct WorkView: View {
                     Spacer()
                 }
                 .padding([.horizontal,.top], 10)
-                VStack{
-                    Text("speed \(gameState.inventoryItemSpeedMultiplier)")
-                    Text("worker speed \(gameState.workerSpeedMultiplier)")
+                VStack(alignment: .leading){
+                    Text("(debug) inventory speed: \(gameState.getInventorySpeedMultiplierPercentage())%")
+                    Text("(debug) worker speed: \(gameState.getWorkerSpeedMultiplierPercentage())%")
                 }
                 HStack{
                     VStack{

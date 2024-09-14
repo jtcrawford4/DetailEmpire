@@ -45,9 +45,8 @@ class Vehicle:ObservableObject{
     
     private func detailWithClicks(clicks: Double, gameState: GameState, inventory: [InventoryItem]){
         if(!gameState.detailDisabled){
-            let workerSpeedMultiplier = gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1
             let inventorySpeedMultiplier = gameState.inventoryItemSpeedMultiplier > 0 ? gameState.inventoryItemSpeedMultiplier : 1
-            self.clicks += clicks * workerSpeedMultiplier * inventorySpeedMultiplier
+            self.clicks += clicks * inventorySpeedMultiplier
             self.percentComplete = Int(round((Double(self.clicks) / Double(self.clicksToComplete)) * 100))
             if self.isCompleted(){
                 let workerMoneyMultiplier = gameState.workerMoneyMultiplier > 0 ? gameState.workerMoneyMultiplier : 1

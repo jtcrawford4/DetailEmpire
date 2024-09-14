@@ -53,5 +53,5 @@ class Employee: Identifiable, ObservableObject {
 
 enum EmployeeType:String, CaseIterable, Identifiable {
     var id: String { return self.rawValue }
-    case general = "General", manager = "Manager"//paint correct? //shop manager - handle rent/lease/property tax
+    case general = "General", manager = "Manager"//paint correct? //shop manager - handle rent/lease/property tax, inventory manager - automatically restock inventory
 }

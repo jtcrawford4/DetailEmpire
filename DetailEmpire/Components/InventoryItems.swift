@@ -28,6 +28,9 @@ class InventoryItems:ObservableObject{
                       purchased: false, startingItem: true, speedMultiplier: 0, moneyMultiplier: 0, type: InventoryType.product),
         InventoryItem(price:6.99,
                       name:"Glass Cleaner", desc:"Invisible glass", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 15, icon: "sparkles",
+                      purchased: false, startingItem: true, speedMultiplier: 0, moneyMultiplier: 0, type: InventoryType.product),
+        InventoryItem(price:12.99,
+                      name:"Paste Wax", desc:"Wax on, wax off", levelUnlocked: 0, usesPerVehicle: 1, usesRemaining: 8, icon: "sparkles",
                       purchased: false, startingItem: true, speedMultiplier: 0, moneyMultiplier: 0, type: InventoryType.product)
         //brushes
         //wax -> sealant -> ceramic -> ppf

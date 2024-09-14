@@ -33,6 +33,7 @@
     - classifieds section for buying used equipment
     - have multiple polishers for multiple bays/employees, etc
     - classifieds section for buying used equipment?
+    - implement items that take longer to detail but have xp and money bonus
 
 //Eventually
     finance
