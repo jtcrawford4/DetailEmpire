@@ -37,9 +37,10 @@ struct WorkView: View {
                     Spacer()
                 }
                 .padding([.horizontal,.top], 10)
-//                VStack{
-//                    Text("desc")
-//                }
+                VStack{
+                    Text("speed \(gameState.inventoryItemSpeedMultiplier)")
+                    Text("worker speed \(gameState.workerSpeedMultiplier)")
+                }
                 HStack{
                     VStack{
                         BuildingStatView(headline: "PARKING SPACES", value: building.vehicleSlots, color: .purple, image: "car.fill")

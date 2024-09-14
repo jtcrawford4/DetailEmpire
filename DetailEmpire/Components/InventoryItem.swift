@@ -12,14 +12,14 @@ class InventoryItem:Identifiable, ObservableObject{
     var icon:String
     @Published var purchased:Bool
     var startingItem:Bool
-    var itemMultiplier:Double?
-    var clickMultiplier:Double?
+    var speedMultiplier:Double
+    var moneyMultiplier:Double
     var type: InventoryType
     @Published var equipmentCondition:Int = 100
     //color background for category?
     //special ability. different class? link by id?
     
-    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, itemMultiplier: Double? = nil, clickMultiplier: Double? = nil, type: InventoryType) {
+    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, speedMultiplier: Double, moneyMultiplier: Double, type: InventoryType) {
         self.id = id
         self.price = price
         self.name = name
@@ -31,8 +31,8 @@ class InventoryItem:Identifiable, ObservableObject{
         self.icon = icon
         self.purchased = purchased
         self.startingItem = startingItem
-        self.itemMultiplier = itemMultiplier
-        self.clickMultiplier = clickMultiplier
+        self.speedMultiplier = speedMultiplier
+        self.moneyMultiplier = moneyMultiplier
         self.type = type
     }
     

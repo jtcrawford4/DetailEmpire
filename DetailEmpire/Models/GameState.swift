@@ -10,6 +10,8 @@ class GameState: ObservableObject{
     @Published var clickMulitplier = 0.00
     @Published var currentBuilding: Building
     @Published var inventory: InventoryItems
+    @Published var inventoryItemSpeedMultiplier = 0.00
+    @Published var inventoryItemMoneyMultiplier = 0.00
     @Published var detailDisabled: Bool
     @Published var employees:[Employee]
     @Published var workerDetailSpeed = 0.45

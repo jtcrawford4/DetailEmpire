@@ -50,14 +50,11 @@ struct inventoryItemListing: View{
     var body: some View {
         
         let isEquipment = item.type == InventoryType.equipment
-//        @State var equipmentStatus = item.getEquipementCondition()
-//        @State var equipmentStatus = 3
-//        @State var equipmentCondition = InventoryItem.getEquipementCondition(item: item)
-        @State var lowStock = (item.usesRemaining < 5 && item.usesRemaining != -1) || (isEquipment && item.equipmentCondition < 20 && item.usesRemaining != -1)
-        @State var outOfStock = item.usesRemaining == 0 || (isEquipment && item.equipmentCondition == 0)
         let lowStockColors:[Color] = [.yellow,.white]
         let outOfStockColors:[Color] = [.red,.white]
         let normalColors:[Color] = [.white,.white]
+        @State var lowStock = (item.usesRemaining < 5 && item.usesRemaining != -1) || (isEquipment && item.equipmentCondition < 20 && item.usesRemaining != -1)
+        @State var outOfStock = item.usesRemaining == 0 || (isEquipment && item.equipmentCondition == 0)
         
         HStack{
             VStack{
@@ -118,9 +115,10 @@ struct inventoryItemListing: View{
                     }else{
                         Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
                             .font(Font.custom("Oswald-Light", size: 12))
-                        Text("\(isEquipment ? item.equipmentCondition : item.usesRemaining)")
+                        Text("\(isEquipment ? item.equipmentCondition : item.usesRemaining)\(isEquipment ? "%" : "")")
                             .font(Font.custom("Oswald-Light", size: 16))
                             .fontWeight(.semibold)
+                        //TODO color based on condition
                     }
                 }else{
                     Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
@@ -180,6 +178,8 @@ struct storeInventoryItemListing: View{
                             gameState.money -= item.price
                             item.purchased = true
                             inventory.addItem(item: item)
+                            gameState.inventoryItemMoneyMultiplier += item.moneyMultiplier
+                            gameState.inventoryItemSpeedMultiplier += item.speedMultiplier
                         }) {
                             VStack{
                                 Text("PURCHASE")

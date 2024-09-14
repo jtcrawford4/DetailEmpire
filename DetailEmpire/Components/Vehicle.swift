@@ -45,21 +45,21 @@ class Vehicle:ObservableObject{
     
     private func detailWithClicks(clicks: Double, gameState: GameState, inventory: [InventoryItem]){
         if(!gameState.detailDisabled){
-            self.clicks += clicks
+            let workerSpeedMultiplier = gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1
+            let inventorySpeedMultiplier = gameState.inventoryItemSpeedMultiplier > 0 ? gameState.inventoryItemSpeedMultiplier : 1
+            self.clicks += clicks * workerSpeedMultiplier * inventorySpeedMultiplier
             self.percentComplete = Int(round((Double(self.clicks) / Double(self.clicksToComplete)) * 100))
             if self.isCompleted(){
+                let workerMoneyMultiplier = gameState.workerMoneyMultiplier > 0 ? gameState.workerMoneyMultiplier : 1
+                let inventoryItemMoneyMultiplier = gameState.inventoryItemMoneyMultiplier > 0 ? gameState.inventoryItemMoneyMultiplier : 1
                 for item in inventory {
                     item.use()
                     if item.type == InventoryType.equipment {
-//                        item.equipmentCondition = InventoryItem.getEquipementCondition(item: item)
                         item.setEquipementCondition()
                     }
-//                    if item.usesRemaining == 0 {
-//                        gameState.detailDisabled = true
-//                    }
                 }
-                gameState.money += self.baseRevenue
-                gameState.xp += self.xp
+                gameState.money += self.baseRevenue * workerMoneyMultiplier * inventoryItemMoneyMultiplier
+                gameState.xp += self.xp //TODO xp multiplier
                 if gameState.xp >= gameState.xpToNextLevel {
                     gameState.level += 1
                     gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * 2.8))
