@@ -2,14 +2,15 @@ import Foundation
 
 class Employee: Identifiable, ObservableObject {
     var uuid:UUID = UUID()
-    var payPerVehicle: Double
-    var hirePrice: Double
+    var payPerVehiclePercentage: Double
+//    var hirePrice: Double
     var payOwed: Double
     var type:EmployeeType
+//    var metaData: EmployeeMetaData
     
-    init(payPerVehicle: Double, hirePrice: Double, type:EmployeeType) {
-        self.payPerVehicle = payPerVehicle
-        self.hirePrice = hirePrice
+    init(payPerVehiclePercentage: Double, /*hirePrice: Double,*/ type:EmployeeType) {
+        self.payPerVehiclePercentage = payPerVehiclePercentage
+//        self.hirePrice = hirePrice
         self.type = type
         self.payOwed = 0.00
     }
@@ -43,6 +44,16 @@ class Employee: Identifiable, ObservableObject {
     
     func trainEmployee(){
         //TODO
+    }
+    
+    //TODO these stats need to go somewhere else so they can be modified more easily - gamestate?
+    static func getEmployeePayPerVehiclePercentageByType(type: EmployeeType) -> Double{
+        switch(type){
+        case .detailer:
+            return 7.00
+        case .generalManager, .inventoryManager, .shopManager:
+            return 12.00
+        }
     }
     
     static func getEmployeeDesc(type: EmployeeType) -> String {

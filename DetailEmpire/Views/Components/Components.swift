@@ -261,6 +261,12 @@ struct employeeListingView: View{
                 .font(Font.custom("Oswald-Light", size: 12))
                 .foregroundColor(.black.opacity(0.75))
                 .multilineTextAlignment(.center)
+            if(buildingHasCapacity){
+                Text("PAY PER VEHICLE: \(Employee.getEmployeePayPerVehiclePercentageByType(type: type), specifier: "%.0f")%")
+                    .font(Font.custom("Oswald-Light", size: 10))
+                    .foregroundColor(.black)
+                    .fontWeight(.semibold)
+            }
             Image(systemName: "person.fill")
                 .font(.system(size: 60))
                 .foregroundColor(!buildingHasCapacity ? .gray.opacity(0.5) : bgColor[0])
@@ -270,7 +276,7 @@ struct employeeListingView: View{
                 if buildingHasCapacity {
                     Button(action: {
                         gameState.money -= hirePrice
-                        gameState.currentBuilding.employees.append(Employee(payPerVehicle: 1.00, hirePrice: 2.00, type: type))
+                        gameState.currentBuilding.employees.append(Employee(payPerVehiclePercentage: Employee.getEmployeePayPerVehiclePercentageByType(type: type), type: type))
                     }) {
                         VStack{
                             Text("HIRE")

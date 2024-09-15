@@ -12,6 +12,9 @@ struct EmployeeView: View {
         VStack{
             VStack{
                 Text("employee metrics here")
+                if gameState.currentBuilding.employees.count > 0 {
+                    Text("(debug) pay owed [0]: \(gameState.currentBuilding.employees[0].payOwed)")
+                }
             }
             VStack{
                 HStack{

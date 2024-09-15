@@ -51,13 +51,17 @@ class Vehicle:ObservableObject{
             if self.isCompleted(){
                 let workerMoneyMultiplier = gameState.workerMoneyMultiplier > 0 ? gameState.workerMoneyMultiplier : 1
                 let inventoryItemMoneyMultiplier = gameState.inventoryItemMoneyMultiplier > 0 ? gameState.inventoryItemMoneyMultiplier : 1
+                let totalRevenue = self.baseRevenue * workerMoneyMultiplier * inventoryItemMoneyMultiplier
                 for item in inventory {
                     item.use()
                     if item.type == InventoryType.equipment {
                         item.setEquipementCondition()
                     }
                 }
-                gameState.money += self.baseRevenue * workerMoneyMultiplier * inventoryItemMoneyMultiplier
+                gameState.money += totalRevenue
+                for employee in gameState.currentBuilding.employees {
+                    employee.payOwed += (totalRevenue * employee.payPerVehiclePercentage) / 100
+                }
                 gameState.xp += self.xp //TODO xp multiplier
                 if gameState.xp >= gameState.xpToNextLevel {
                     gameState.level += 1
