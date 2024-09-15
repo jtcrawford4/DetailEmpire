@@ -16,10 +16,15 @@ class Employee: Identifiable, ObservableObject {
     
    static func getDefaultEmployeeHireCost(type:EmployeeType) -> Double {
         switch(type){
-        case .general:
+        case .detailer:
             return 1099.99
-        case .manager:
+        case .generalManager:
             return 12999.99
+        case .inventoryManager:
+            return 25999.99
+        case .shopManager:
+            return 25999.99
+            
         }
     }
     
@@ -42,10 +47,14 @@ class Employee: Identifiable, ObservableObject {
     
     static func getEmployeeDesc(type: EmployeeType) -> String {
         switch(type){
-        case .general:
-            return "Details vehicles automatically"
-        case .manager:
+        case .detailer:
+            return "Detail vehicles automatically"
+        case .generalManager:
             return "Handles employee payroll" //workmans comp? insurance?
+        case .inventoryManager:
+            return "Automatically restock inventory"
+        case.shopManager:
+            return "Handle property expenses"
         }
     }
     
@@ -53,5 +62,8 @@ class Employee: Identifiable, ObservableObject {
 
 enum EmployeeType:String, CaseIterable, Identifiable {
     var id: String { return self.rawValue }
-    case general = "General", manager = "Manager"//paint correct? //shop manager - handle rent/lease/property tax, inventory manager - automatically restock inventory
+    case detailer = "Detailer",
+        generalManager = "General Manager",
+        inventoryManager = "Inventory Manager",
+        shopManager = "Shop Manager"
 }
