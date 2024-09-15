@@ -51,7 +51,10 @@
     - change 'general' to 'worker'
     - upgrades for shady business practices, pay less, pay under table, creative accounting etc
         - if any used, random chance of being busted by law, fined by agency, employee strike, employee quit
-        
+    - if payroll has been ignored
+        - efficiency immediately takes place (gamestate penalty variable)
+        - long enough then go on strike
+        - long enough still and employees quit (employee hire cost does not change, built in penalty)
         
 //Snippets
 

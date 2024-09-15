@@ -24,8 +24,12 @@ class Vehicle:ObservableObject{
     }
     
     public func workerDetail(numWorkers: Int, gameState: GameState, inventory: [InventoryItem]){
-        if numWorkers > 0 && !gameState.detailDisabled {
-            let clicks = Double(numWorkers) * gameState.workerDetailSpeed * (gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1)
+        if numWorkers > 0 && !gameState.detailDisabled && !gameState.workersOnStrike {
+            var clicks = Double(numWorkers) * gameState.workerDetailSpeed * (gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1)
+            if gameState.payrollDue {
+                clicks *= gameState.payrollEfficiencyPenalty
+                gameState.workersOnStrike = gameState.vehiclesSincePayroll >= gameState.payrollStrikeThreshold
+            }
             detailWithClicks(clicks: clicks, gameState: gameState, inventory: inventory)
         }
     }
@@ -62,9 +66,11 @@ class Vehicle:ObservableObject{
                 gameState.money += totalRevenue
                 if employees.count > 0 {
                     gameState.vehiclesSincePayroll += 1
-                    gameState.payrollDue = gameState.vehiclesPerPayroll <= gameState.vehiclesSincePayroll
-                    for employee in employees {
-                        employee.payOwed += (totalRevenue * employee.payPerVehiclePercentage) / 100
+                    if !gameState.workersOnStrike {
+                        gameState.payrollDue = gameState.vehiclesPerPayroll <= gameState.vehiclesSincePayroll
+                        for employee in employees {
+                            employee.payOwed += (totalRevenue * employee.payPerVehiclePercentage) / 100
+                        }
                     }
                 }
                 gameState.xp += self.xp //TODO xp multiplier

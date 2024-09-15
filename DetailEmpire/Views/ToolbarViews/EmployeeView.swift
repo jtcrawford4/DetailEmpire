@@ -12,6 +12,8 @@ struct EmployeeView: View {
 //        @State var payrollDue = true
         @State var payrollOwed = gameState.getPayrollOwed()
         @State var insufficientFunds = payrollOwed > gameState.money
+        @State var workersOnStrike = gameState.workersOnStrike
+//        @State var workersOnStrike = true
         
         VStack{
             //TODO
@@ -24,7 +26,7 @@ struct EmployeeView: View {
                         VStack{
                             Text("PAYROLL DUE")
                                 .font(Font.custom("Oswald-Light", size: 20))
-                                .fontWeight(.regular)
+//                                .fontWeight(.regular)
                                 .foregroundColor(.pink)
                             Divider()
                                 .background(.red)
@@ -40,6 +42,12 @@ struct EmployeeView: View {
                         Divider()
                             .background(.white)
                         activeStatView(label: "TOTAL", value: gameState.getPayrollOwed(), isPercent: false, color: .pink)
+                        if workersOnStrike {
+                            Text("WORKERS ON STRIKE")
+                                .font(Font.custom("Oswald-Light", size: 20))
+                                .fontWeight(.semibold)
+                                .foregroundColor(.pink)
+                        }
                         Button(action: {
                             gameState.money -= payrollOwed
                             gameState.payrollDue = false

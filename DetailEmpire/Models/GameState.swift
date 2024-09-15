@@ -16,8 +16,12 @@ class GameState: ObservableObject{
     @Published var employees:[Employee]
     //Payroll
         @Published var payrollDue = false
+        @Published var workersOnStrike = false
         @Published var vehiclesPerPayroll = 2//7
+        @Published var payrollStrikeThreshold = 4//21
+//        @Published var payrollEmployeeQuitThreshold = 6//42
         @Published var vehiclesSincePayroll = 0
+        @Published var payrollEfficiencyPenalty = 0.50 //when payroll missed, detailers are only half efficient
     @Published var workerDetailSpeed = 0.45
 //    @Published var workerCostMultiplier = 
     @Published var workerSpeedMultiplier = 0.00
@@ -81,6 +85,7 @@ class GameState: ObservableObject{
             for emp in self.currentBuilding.employees {
                 emp.payOwed = 0.00
             }
+            self.workersOnStrike = false
         }
     }
     
