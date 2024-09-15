@@ -60,4 +60,15 @@ class GameState: ObservableObject{
         return 0
     }
     
+    func getPayrollOwed() -> Double {
+        if self.currentBuilding.employees.count > 0 {
+            var total = 0.00
+            for emp in self.currentBuilding.employees {
+                total += emp.payOwed
+            }
+            return total
+        }
+        return 0
+    }
+    
 }

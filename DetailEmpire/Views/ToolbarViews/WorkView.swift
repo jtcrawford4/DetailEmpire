@@ -9,8 +9,6 @@ struct WorkView: View {
     
     var body: some View {
         
-//        @State var detailDisabled = gameState.detailDisabled || vehicle.isCompleted()
-//        @State var detailDisabled = gameState.detailDisabled
         @State var detailDisabled = gameState.detailDisabled || inventory.isAnyItemEmpty() || vehicle.isCompleted()
 
         VStack{
@@ -37,10 +35,6 @@ struct WorkView: View {
                     Spacer()
                 }
                 .padding([.horizontal,.top], 10)
-                VStack(alignment: .leading){
-                    Text("(debug) inventory speed: \(gameState.getInventorySpeedMultiplierPercentage())%")
-                    Text("(debug) worker speed: \(gameState.getWorkerSpeedMultiplierPercentage())%")
-                }
                 HStack{
                     VStack{
                         BuildingStatView(headline: "PARKING SPACES", value: building.vehicleSlots, color: .purple, image: "car.fill")
@@ -65,6 +59,47 @@ struct WorkView: View {
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding(.top, 60)
             .padding([.bottom, .horizontal], 10)
+            
+            //Active Boosts
+            VStack{
+                HStack{
+                    VStack{
+                        Text("STATS")
+                            .font(Font.custom("Oswald-Light", size: 10))
+                            .fontWeight(.regular)
+                            .foregroundColor(.yellow)
+                        Divider()
+                            .frame(width: 15, height: 2)
+                            .cornerRadius(4)
+                            .background(.yellow)
+                            .padding(.vertical, -4)
+                            .padding(.horizontal, -10)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(4)
+                VStack(alignment: .leading){
+                    activeStatView(label: "EFFICIENCY BOOST", value: Double(gameState.getInventorySpeedMultiplierPercentage()), isPercent: true, color: .green)
+                    activeStatView(label: "WORKER SPEED", value: Double(gameState.getWorkerSpeedMultiplierPercentage()), isPercent: true, color: .green)
+                    Divider()
+                        .background(.white)
+                    activeStatView(label: "PAYROLL OWED", value: gameState.getPayrollOwed(), isPercent: false, color: .yellow)
+                }
+                .padding(.horizontal, 50)
+                .padding(.bottom, 6)
+            }
+//            .background(.black.opacity(0.60))
+            .background(LinearGradient(colors: [.pink.opacity(0.2), .black.opacity(0.6)], startPoint: .top, endPoint: .bottom))
+            .cornerRadius(8)
+            //rounded border
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(.white, lineWidth: 2)
+            )
+            .padding([.horizontal, .bottom], 10)
+//            .padding(.bottom, 4)
+            .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
+            .brightness(0.2)
             
             //Vehicles
             VStack{
@@ -95,7 +130,6 @@ struct WorkView: View {
                             .padding(.horizontal, 4)
                             .padding(.trailing, 20)
                             .tint(.green.opacity(0.75))
-//                            .tint(LinearGradient(gradient: Gradient(colors: [.white, .mint]), startPoint: .leading, endPoint: .trailing))
                     }
                     Spacer()
                     HStack{
@@ -126,6 +160,7 @@ struct WorkView: View {
                         .cornerRadius(8)
                         .disabled(detailDisabled)
                         .padding([.vertical,.trailing], 6)
+                        .shadow(color: Color.black.opacity(0.6), radius: 0, x: 0, y: 2)
                     }
                     Spacer()
                 }
@@ -152,6 +187,26 @@ struct WorkView: View {
         .environmentObject(gameState.currentBuilding.vehicles[0])
         .environmentObject(gameState.inventory)
         .environmentObject(gameState.currentBuilding)
+}
+
+struct activeStatView: View{
+    
+    var label: String
+    var value: Double
+    var isPercent: Bool
+    var color: Color
+    
+    var body: some View{
+        HStack{
+            Text("\(label)")
+                .foregroundColor(.white)
+            Spacer()
+            Text("\(isPercent ? "" : "$")\(value, specifier: (isPercent ? "%.0f" : "%.2f"))\(isPercent ? "%" : "")")
+                .foregroundColor(color)
+        }
+        .font(Font.custom("Oswald-Light", size: 12))
+        .fontWeight(.regular)
+    }
 }
 
 struct BuildingStatView:View {

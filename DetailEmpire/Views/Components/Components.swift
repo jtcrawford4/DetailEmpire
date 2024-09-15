@@ -1,45 +1,43 @@
 import SwiftUI
 
-struct BarProgressStyle: ProgressViewStyle {
-
-    var color: Color = .purple
-    var height: Double = 20.0
-    var labelFontStyle: Font = .body
-
-    func makeBody(configuration: Configuration) -> some View {
-
-        let progress = configuration.fractionCompleted ?? 0.0
-
-        GeometryReader { geometry in
-
-            VStack(alignment: .leading) {
-
-                configuration.label
-                    .font(labelFontStyle)
-
-                RoundedRectangle(cornerRadius: 8)
-//                    .fill(Color(uiColor: .systemGray5))
-                    .frame(height: height)
-                    .frame(width: geometry.size.width)
-                    .overlay(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10.0)
-                            .fill(color)
-                            .frame(width: geometry.size.width * progress)
-                            .overlay {
-                                if let currentValueLabel = configuration.currentValueLabel {
-
-                                    currentValueLabel
-                                        .font(.headline)
-                                        .foregroundColor(.white)
-                                }
-                            }
-                    }
-
-            }
-
-        }
-    }
-}
+//struct BarProgressStyle: ProgressViewStyle {
+//
+//    var color: Color = .purple
+//    var height: Double = 20.0
+//    var labelFontStyle: Font = .body
+//
+//    func makeBody(configuration: Configuration) -> some View {
+//
+//        let progress = configuration.fractionCompleted ?? 0.0
+//
+//        GeometryReader { geometry in
+//
+//            VStack(alignment: .leading) {
+//                configuration.label
+//                    .font(labelFontStyle)
+//
+//                RoundedRectangle(cornerRadius: 8)
+//                    .frame(height: height)
+//                    .frame(width: geometry.size.width)
+//                    .overlay(alignment: .leading) {
+//                        RoundedRectangle(cornerRadius: 10.0)
+//                            .fill(color)
+//                            .frame(width: geometry.size.width * progress)
+//                            .overlay {
+//                                if let currentValueLabel = configuration.currentValueLabel {
+//
+//                                    currentValueLabel
+//                                        .font(.headline)
+//                                        .foregroundColor(.white)
+//                                }
+//                            }
+//                    }
+//
+//            }
+//
+//        }
+//    }
+//}
 
 struct inventoryItemListing: View{
     
@@ -251,6 +249,7 @@ struct employeeListingView: View{
 //                    @State var insufficientFunds = false
 //                    @State var buildingHasCapacity = false
         let bgColor = getEmployeeTypeBackgroundColors(type: type)
+        let employeePayPercentage = Employee.getEmployeePayPerVehiclePercentageByType(type: type)
         
         VStack{
             Text("\(type.rawValue)").textCase(.uppercase)
@@ -262,7 +261,7 @@ struct employeeListingView: View{
                 .foregroundColor(.black.opacity(0.75))
                 .multilineTextAlignment(.center)
             if(buildingHasCapacity){
-                Text("PAY PER VEHICLE: \(Employee.getEmployeePayPerVehiclePercentageByType(type: type), specifier: "%.0f")%")
+                Text("PAY PER VEHICLE: \(employeePayPercentage, specifier: "%.0f")%")
                     .font(Font.custom("Oswald-Light", size: 10))
                     .foregroundColor(.black)
                     .fontWeight(.semibold)
@@ -276,7 +275,7 @@ struct employeeListingView: View{
                 if buildingHasCapacity {
                     Button(action: {
                         gameState.money -= hirePrice
-                        gameState.currentBuilding.employees.append(Employee(payPerVehiclePercentage: Employee.getEmployeePayPerVehiclePercentageByType(type: type), type: type))
+                        gameState.currentBuilding.employees.append(Employee(payPerVehiclePercentage: employeePayPercentage, type: type))
                     }) {
                         VStack{
                             Text("HIRE")
@@ -315,7 +314,6 @@ struct employeeListingView: View{
         .padding(.horizontal, 10)
         .frame(maxWidth: 150, maxHeight: 200)
         .background(LinearGradient(gradient: Gradient(colors: !buildingHasCapacity ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
-//        .background(LinearGradient(gradient: Gradient(colors: !buildingHasCapacity ? [.gray, .black.opacity(0.5)] : type == EmployeeType.generalManager ? [.cyan, .blue] : [.yellow, .orange]), startPoint: .topLeading, endPoint: .bottomTrailing))
         .cornerRadius(8)
         .clipped()
         .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
@@ -338,13 +336,9 @@ struct ToggleButton: View{
             }, label: {
                 Text(text).textCase(.uppercase)
                     .font(Font.custom("Oswald-Light", size: 14))
-//                    .font(.caption)
                     .fontWeight(.semibold)
-//                    .foregroundColor(isSelected ? .white : .black)
             })
             .padding(10)
-//            .background(isSelected ? .yellow : .pink.opacity(0.5))
-//            .foregroundColor(isSelected ? .black : .white)
             .foregroundColor(isSelected ? .white : .black)
             .foregroundColor(.white)
             .tag(tag)
@@ -352,7 +346,6 @@ struct ToggleButton: View{
                 Divider()
                     .frame(width: 75, height: 2)
                     .cornerRadius(4)
-//                    .background(.black)
                     .background(.white)
                     .padding(.vertical, -10)
             }
