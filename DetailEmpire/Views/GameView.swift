@@ -16,20 +16,19 @@ struct GameView: View {
     var body: some View {
         
         @State var inventoryEmpty = gameState.inventory.isAnyItemEmpty()
+        @State var payrollDue = gameState.payrollDue
         
         VStack {
             HStack(){
                 HStack{
                     Text("\(gameState.level)")
                         .font(Font.custom("Oswald-Light", size: 28))
-//                        .font(.callout)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                     //TODO circle level progress?
                     ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                         .progressViewStyle(.linear)
                         .font(Font.custom("Oswald-Light", size: 14))
-//                        .font(.callout)
                     //                       .progressViewStyle(BarProgressStyle(height: 20.0))
                         .tint(.pink)
                         .background(Color.black.opacity(0.5))
@@ -61,9 +60,7 @@ struct GameView: View {
             }
             .padding(.bottom, 10)
             .padding([.leading, .trailing], 20)
-//            .frame(height: 60)
             .background(.black)
-//            .background(LinearGradient(gradient: Gradient(colors: [.mint, .pink.opacity(0.4), .mint]), startPoint: .bottomLeading, endPoint: .topTrailing))
         }
         TabView(selection: $selectedTab) {
             WorkView()
@@ -71,7 +68,8 @@ struct GameView: View {
                     Image(systemName: "car.2.fill")
                     Text("Work")
                         .font(Font.custom("Oswald-Light", size: 10))
-                }.tag(0)
+                }
+                .tag(0)
             InventoryView()
                 .tabItem {
                     Image(systemName: "shippingbox")
@@ -83,24 +81,15 @@ struct GameView: View {
                 .tabItem {
                     Image(systemName: "dollarsign.circle.fill")
                     Text("Store")
-                }.tag(2)
+                }
+                .tag(2)
             EmployeeView()
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Employee")
-                }.tag(3)
-//            }
-//            .toolbar {
-//                ToolbarItem(placement: .bottomBar) {
-//                    HStack {
-//                        Text("This is a toolbar")
-//                           .bold()
-//                        Spacer()
-//                        Image(systemName: "play.fill")
-//                        Image(systemName: "forward.fill")
-//                    }
-//                }
-//            }
+                }
+                .tag(3)
+                .badge(payrollDue ? "!" : nil)
         }
         .environmentObject(gameState)
         .environmentObject(storeItems)

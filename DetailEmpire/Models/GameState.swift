@@ -14,6 +14,10 @@ class GameState: ObservableObject{
     @Published var inventoryItemMoneyMultiplier = 0.00
     @Published var detailDisabled: Bool
     @Published var employees:[Employee]
+    //Payroll
+        @Published var payrollDue = false
+        @Published var vehiclesPerPayroll = 2//7
+        @Published var vehiclesSincePayroll = 0
     @Published var workerDetailSpeed = 0.45
 //    @Published var workerCostMultiplier = 
     @Published var workerSpeedMultiplier = 0.00
@@ -28,7 +32,7 @@ class GameState: ObservableObject{
     init(){
         self.level = 1
         self.xp = 0
-        self.money = 0
+        self.money = 1000000
         self.vehicleDetailMultipliers = 0.00
         self.employees = []
         self.currentBuilding = Buildings().getStartBuilding()
@@ -65,6 +69,29 @@ class GameState: ObservableObject{
             var total = 0.00
             for emp in self.currentBuilding.employees {
                 total += emp.payOwed
+            }
+            return total
+        }
+        return 0
+    }
+    
+    //TODO should be in employees class?
+    func resetPayrollOwed(){
+        if self.currentBuilding.employees.count > 0 {
+            for emp in self.currentBuilding.employees {
+                emp.payOwed = 0.00
+            }
+        }
+    }
+    
+    //TODO should be in employees class?
+    func getPayrollOwedByEmployeeType(type: EmployeeType) -> Double {
+        if self.currentBuilding.employees.count > 0 {
+            var total = 0.00
+            for emp in self.currentBuilding.employees {
+                if emp.type == type {
+                    total += emp.payOwed
+                }
             }
             return total
         }

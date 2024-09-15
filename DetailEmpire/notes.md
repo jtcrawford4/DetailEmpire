@@ -3,7 +3,6 @@
 //TODO
     - consolidate inventory/store item into UseableItem with enum for type
     - fontAwesome icons
-    - xp set to 0 when level changes
     
 //utils
     - MoneyText, always formatted for 2 decimals
@@ -50,6 +49,8 @@
     - unlock to have more employees?
     - go on strike if not paid?
     - change 'general' to 'worker'
+    - upgrades for shady business practices, pay less, pay under table, creative accounting etc
+        - if any used, random chance of being busted by law, fined by agency, employee strike, employee quit
         
         
 //Snippets

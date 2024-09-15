@@ -83,6 +83,7 @@ struct WorkView: View {
                     activeStatView(label: "WORKER SPEED", value: Double(gameState.getWorkerSpeedMultiplierPercentage()), isPercent: true, color: .green)
                     Divider()
                         .background(.white)
+                    activeStatView(label: "VEHCILES BEFORE PAYROLL", value: Double(gameState.vehiclesPerPayroll) - Double(gameState.vehiclesSincePayroll), isPercent: false, color: .white)
                     activeStatView(label: "PAYROLL OWED", value: gameState.getPayrollOwed(), isPercent: false, color: .yellow)
                 }
                 .padding(.horizontal, 50)
