@@ -79,28 +79,41 @@ struct WorkView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(4)
                 VStack(alignment: .leading){
-                    activeStatView(label: "EFFICIENCY BOOST", value: Double(gameState.getInventorySpeedMultiplierPercentage()), isPercent: true, color: .green)
-                    activeStatView(label: "WORKER SPEED", value: Double(gameState.getWorkerSpeedMultiplierPercentage()), isPercent: true, color: .green)
+                    let vehiclesBeforePayroll = Double(gameState.vehiclesPerPayroll) - Double(gameState.vehiclesSincePayroll)
+                    
+                    activeStatView(label: "EFFICIENCY BOOST", value: Double(gameState.getInventorySpeedMultiplierPercentage()), modifier: "%", color: .green)
+                    activeStatView(label: "WORKER SPEED", value: Double(gameState.getWorkerSpeedMultiplierPercentage()), modifier: "%", color: .green)
                     Divider()
                         .background(.white)
-                    activeStatView(label: "VEHCILES BEFORE PAYROLL", value: Double(gameState.vehiclesPerPayroll) - Double(gameState.vehiclesSincePayroll), isPercent: false, color: .white)
-                    activeStatView(label: "PAYROLL OWED", value: gameState.getPayrollOwed(), isPercent: false, color: .yellow)
+                    activeStatView(label: "VEHCILES BEFORE PAYROLL", value: vehiclesBeforePayroll >= 0 ? vehiclesBeforePayroll : 0, modifier: nil, color: .white)
+                    activeStatView(label: "PAYROLL OWED", value: gameState.getPayrollOwed(), modifier: "$", color: .yellow)
                 }
                 .padding(.horizontal, 50)
                 .padding(.bottom, 6)
             }
-//            .background(.black.opacity(0.60))
             .background(LinearGradient(colors: [.pink.opacity(0.2), .black.opacity(0.6)], startPoint: .top, endPoint: .bottom))
             .cornerRadius(8)
-            //rounded border
             .overlay(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(.white, lineWidth: 2)
             )
             .padding([.horizontal, .bottom], 10)
-//            .padding(.bottom, 4)
             .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .brightness(0.2)
+            
+            if gameState.workersOnStrike {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Text("WORKERS ON STRIKE!")
+                            .font(Font.custom("Oswald-Light", size: 16))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Spacer()
+                    }
+                }
+                .background(.red)
+            }
             
             //Vehicles
             VStack{
@@ -112,7 +125,6 @@ struct WorkView: View {
                             .foregroundColor(.gray)
                         Divider()
                             .frame(width: 15, height: 2)
-                            .cornerRadius(4)
                             .background(.purple)
                             .padding(.vertical, -4)
                             .padding(.horizontal, -35)
@@ -128,8 +140,7 @@ struct WorkView: View {
                             .padding(.vertical, -2)
                         ProgressView(value: Float(Double(vehicle.percentComplete) / 100))
                             .progressViewStyle(.linear)
-                            .padding(.horizontal, 4)
-                            .padding(.trailing, 20)
+                            .padding(.horizontal, 16)
                             .tint(.green.opacity(0.75))
                     }
                     Spacer()
@@ -137,14 +148,17 @@ struct WorkView: View {
                         VStack{
                             VehicleStatView(image: "arrowtriangle.up.circle", value: "\(vehicle.xp)", color: .green)
                         }
-                        .padding(.trailing, 10)
+                        Spacer()
                         VStack{
                             VehicleStatView(image: "dollarsign.circle", value: "$\(Formatting.formatPrice(num: vehicle.baseRevenue))", color: .green)
                         }
-//                        .padding(.trailing, 10)
-//                        VStack{
-//                            VehicleStatView(headline: "Bonus", value: "$0", color: .orange)
-//                        }
+                        Spacer()
+                        VStack{
+                            let workerMoneyMultiplier = gameState.workerMoneyMultiplier > 0 ? gameState.workerMoneyMultiplier : 1
+                            let inventoryItemMoneyMultiplier = gameState.inventoryItemMoneyMultiplier > 0 ? gameState.inventoryItemMoneyMultiplier : 1
+                            let totalBonus = (vehicle.baseRevenue * workerMoneyMultiplier * inventoryItemMoneyMultiplier) - vehicle.baseRevenue
+                            VehicleStatView(image: "plus.circle", value: "$\(Formatting.formatPrice(num: totalBonus))", color: .green)
+                        }
                     }
                     Spacer(minLength: 40)
                     VStack{
@@ -194,15 +208,19 @@ struct activeStatView: View{
     
     var label: String
     var value: Double
-    var isPercent: Bool
+    var modifier: String?
     var color: Color
     
     var body: some View{
+        
+        let isDollar = modifier != nil && modifier == "$"
+        let isPercent = modifier != nil && modifier == "%"
+        
         HStack{
             Text("\(label)")
                 .foregroundColor(.white)
             Spacer()
-            Text("\(isPercent ? "" : "$")\(value, specifier: (isPercent ? "%.0f" : "%.2f"))\(isPercent ? "%" : "")")
+            Text("\(isDollar ? "$" : "")\(value, specifier: (isPercent || modifier == nil ? "%.0f" : "%.2f"))\(isPercent ? "%" : "")")
                 .foregroundColor(color)
         }
         .font(Font.custom("Oswald-Light", size: 12))

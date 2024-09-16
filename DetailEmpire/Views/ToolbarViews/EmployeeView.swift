@@ -37,11 +37,11 @@ struct EmployeeView: View {
                     .padding(4)
                     VStack(alignment: .center){
                         ForEach(EmployeeType.allCases){ emp in
-                            activeStatView(label: "\(emp.rawValue)", value: gameState.getPayrollOwedByEmployeeType(type: emp),  isPercent: false, color: .pink)
+                            activeStatView(label: "\(emp.rawValue)", value: gameState.getPayrollOwedByEmployeeType(type: emp),  modifier: "$", color: .pink)
                         }
                         Divider()
                             .background(.white)
-                        activeStatView(label: "TOTAL", value: gameState.getPayrollOwed(), isPercent: false, color: .pink)
+                        activeStatView(label: "TOTAL", value: gameState.getPayrollOwed(), modifier: "$", color: .pink)
                         if workersOnStrike {
                             Text("WORKERS ON STRIKE")
                                 .font(Font.custom("Oswald-Light", size: 20))
