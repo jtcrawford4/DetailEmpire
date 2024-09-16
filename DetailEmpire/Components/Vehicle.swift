@@ -24,13 +24,18 @@ class Vehicle:ObservableObject{
     }
     
     public func workerDetail(numWorkers: Int, gameState: GameState, inventory: [InventoryItem]){
-        if numWorkers > 0 && !gameState.detailDisabled && !gameState.workersOnStrike {
+        if numWorkers > 0 && !gameState.detailDisabled {
             var clicks = Double(numWorkers) * gameState.workerDetailSpeed * (gameState.workerSpeedMultiplier > 0 ? gameState.workerSpeedMultiplier : 1)
             if gameState.payrollDue {
                 clicks *= gameState.payrollEfficiencyPenalty
                 gameState.workersOnStrike = gameState.vehiclesSincePayroll >= gameState.payrollStrikeThreshold
             }
-            detailWithClicks(clicks: clicks, gameState: gameState, inventory: inventory)
+            if !gameState.workersOnStrike {
+                detailWithClicks(clicks: clicks, gameState: gameState, inventory: inventory)
+            }
+            if gameState.vehiclesSincePayroll >= gameState.payrollEmployeeQuitThreshold {
+                gameState.resetWorkers()
+            }
         }
     }
     

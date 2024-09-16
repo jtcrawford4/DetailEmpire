@@ -17,9 +17,9 @@ class GameState: ObservableObject{
     //Payroll
         @Published var payrollDue = false
         @Published var workersOnStrike = false
-        @Published var vehiclesPerPayroll = 7//2
-        @Published var payrollStrikeThreshold = 21//4
-//        @Published var payrollEmployeeQuitThreshold = 6//42
+        @Published var vehiclesPerPayroll = 2//7
+        @Published var payrollStrikeThreshold = 4//21
+        @Published var payrollEmployeeQuitThreshold = 6//42
         @Published var vehiclesSincePayroll = 0
         @Published var payrollEfficiencyPenalty = 0.50 //when payroll missed, detailers are only half efficient
     @Published var workerDetailSpeed = 0.45
@@ -101,6 +101,13 @@ class GameState: ObservableObject{
             return total
         }
         return 0
+    }
+    
+    func resetWorkers(){
+        self.currentBuilding.employees = []
+        self.workersOnStrike = false
+        self.payrollDue = false
+        self.vehiclesSincePayroll = 0
     }
     
 }
