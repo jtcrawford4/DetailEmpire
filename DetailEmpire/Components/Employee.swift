@@ -30,13 +30,18 @@ class Employee: Identifiable, ObservableObject {
     }
     
     static func getNextEmployeeHireCost(employees: [Employee], type: EmployeeType) -> Double {
-        let numEmployees = employees.count
+        var numEmployeesOfType = 0
+        for emp in employees {
+            if emp.type == type {
+                numEmployeesOfType += 1
+            }
+        }
         let costMultiplier = 3.25
         let defaultCost = getDefaultEmployeeHireCost(type: type)
-        if numEmployees == 0 {
+        if numEmployeesOfType == 0 {
             return defaultCost
         } else {
-            return defaultCost * (Double(numEmployees) * costMultiplier)
+            return defaultCost * (Double(numEmployeesOfType) * costMultiplier)
         }
     }
     

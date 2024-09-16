@@ -13,13 +13,15 @@ class GameState: ObservableObject{
     @Published var inventoryItemSpeedMultiplier = 0.00
     @Published var inventoryItemMoneyMultiplier = 0.00
     @Published var detailDisabled: Bool
-    @Published var employees:[Employee]
+    //Employee
+        @Published var employees:[Employee]
+        @Published var numDetailEmployees = 0
     //Payroll
         @Published var payrollDue = false
         @Published var workersOnStrike = false
-        @Published var vehiclesPerPayroll = 2//7
-        @Published var payrollStrikeThreshold = 4//21
-        @Published var payrollEmployeeQuitThreshold = 6//42
+        @Published var vehiclesPerPayroll = 7
+        @Published var payrollStrikeThreshold = 21
+        @Published var payrollEmployeeQuitThreshold = 42
         @Published var vehiclesSincePayroll = 0
         @Published var payrollEfficiencyPenalty = 0.50 //when payroll missed, detailers are only half efficient
     @Published var workerDetailSpeed = 0.45
@@ -108,6 +110,7 @@ class GameState: ObservableObject{
         self.workersOnStrike = false
         self.payrollDue = false
         self.vehiclesSincePayroll = 0
+        self.numDetailEmployees = 0
     }
     
 }

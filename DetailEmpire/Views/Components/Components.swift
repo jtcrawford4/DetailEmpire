@@ -246,10 +246,13 @@ struct employeeListingView: View{
         let desc = Employee.getEmployeeDesc(type: type)
         @State var insufficientFunds = hirePrice > gameState.money
         @State var buildingHasCapacity = gameState.currentBuilding.employees.count < gameState.currentBuilding.workerSlots
+        @State var numDetailEmployees = gameState.numDetailEmployees
 //                    @State var insufficientFunds = false
 //                    @State var buildingHasCapacity = false
+//        @State var numDetailEmployees = 1
         let bgColor = getEmployeeTypeBackgroundColors(type: type)
         let employeePayPercentage = Employee.getEmployeePayPerVehiclePercentageByType(type: type)
+        let isGeneralManagerWIthoutDetailEmployees = type == EmployeeType.generalManager && numDetailEmployees == 0
         
         VStack{
             Text("\(type.rawValue)").textCase(.uppercase)
@@ -268,14 +271,17 @@ struct employeeListingView: View{
             }
             Image(systemName: "person.fill")
                 .font(.system(size: 60))
-                .foregroundColor(!buildingHasCapacity ? .gray.opacity(0.5) : bgColor[0])
+                .foregroundColor(!buildingHasCapacity || isGeneralManagerWIthoutDetailEmployees ? .gray.opacity(0.5) : bgColor[0])
                 .padding(.top, 2)
                 .padding(.bottom, 6)
             VStack{
-                if buildingHasCapacity {
+                if buildingHasCapacity && !isGeneralManagerWIthoutDetailEmployees{
                     Button(action: {
                         gameState.money -= hirePrice
                         gameState.currentBuilding.employees.append(Employee(payPerVehiclePercentage: employeePayPercentage, type: type))
+                        if type == EmployeeType.detailer {
+                            gameState.numDetailEmployees += 1
+                        }
                     }) {
                         VStack{
                             Text("HIRE")
@@ -299,6 +305,18 @@ struct employeeListingView: View{
                     .foregroundColor(.white)
                     .disabled(insufficientFunds)
                     .shadow(color: Color.black.opacity(0.25), radius: 0, x: 0, y: 4)
+                }else if isGeneralManagerWIthoutDetailEmployees{
+                    Spacer()
+                    Text("NO DETAILERS TO MANAGE")
+                        .font(Font.custom("Oswald-Light", size: 12))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.red)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+//                    Text("\(gameState.currentBuilding.employees.count) / \(gameState.currentBuilding.workerSlots)")
+//                        .font(Font.custom("Oswald-Light", size: 18))
+//                        .fontWeight(.semibold)
+//                        .foregroundColor(.red)
                 }else{
                     Text("CAPACITY LIMIT")
                         .font(Font.custom("Oswald-Light", size: 14))
@@ -313,7 +331,7 @@ struct employeeListingView: View{
         }
         .padding(.horizontal, 10)
         .frame(maxWidth: 150, maxHeight: 200)
-        .background(LinearGradient(gradient: Gradient(colors: !buildingHasCapacity ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(gradient: Gradient(colors: !buildingHasCapacity || isGeneralManagerWIthoutDetailEmployees ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
         .cornerRadius(8)
         .clipped()
         .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
