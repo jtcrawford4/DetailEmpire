@@ -1,7 +1,7 @@
 import Foundation
 
 class GameState: ObservableObject{
-    @Published var level = 1
+    @Published var level = 25
     @Published var xp = 0
     @Published var totalXp = 0
     @Published var money = 0.00
@@ -16,6 +16,9 @@ class GameState: ObservableObject{
     //Employee
         @Published var employees:[Employee]
         @Published var numDetailEmployees = 0
+        @Published var generalManagerHired = false
+        @Published var inventoryMangerHired = false
+        @Published var shopManagerHired = false
     //Payroll
         @Published var payrollDue = false
         @Published var workersOnStrike = false
@@ -36,8 +39,8 @@ class GameState: ObservableObject{
     var timer:Timer?
     
     init(){
-        self.level = 1
-        self.xp = 0
+//        self.level = 1
+//        self.xp = 0
         self.money = 1000000
         self.vehicleDetailMultipliers = 0.00
         self.employees = []

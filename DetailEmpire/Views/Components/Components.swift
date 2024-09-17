@@ -244,15 +244,22 @@ struct employeeListingView: View{
         
         let hirePrice = Employee.getNextEmployeeHireCost(employees: gameState.currentBuilding.employees, type: type)
         let desc = Employee.getEmployeeDesc(type: type)
+        let bgColor = getEmployeeTypeBackgroundColors(type: type)
+        let employeePayPercentage = Employee.getEmployeePayPerVehiclePercentageByType(type: type)
         @State var insufficientFunds = hirePrice > gameState.money
         @State var buildingHasCapacity = gameState.currentBuilding.employees.count < gameState.currentBuilding.workerSlots
         @State var numDetailEmployees = gameState.numDetailEmployees
 //                    @State var insufficientFunds = false
-//                    @State var buildingHasCapacity = false
+//                    @State var buildingHasCapacity = true
 //        @State var numDetailEmployees = 1
-        let bgColor = getEmployeeTypeBackgroundColors(type: type)
-        let employeePayPercentage = Employee.getEmployeePayPerVehiclePercentageByType(type: type)
+        @State var generalManagerHired = gameState.generalManagerHired
+        @State var inventoryManagerHired = gameState.inventoryMangerHired
+        @State var shopManagerHired = gameState.shopManagerHired
         let isGeneralManagerWIthoutDetailEmployees = type == EmployeeType.generalManager && numDetailEmployees == 0
+        @State var managerAlreadyHired = (type == EmployeeType.generalManager && (isGeneralManagerWIthoutDetailEmployees || generalManagerHired))
+            || (type == EmployeeType.inventoryManager && inventoryManagerHired)
+            || (type == EmployeeType.shopManager && shopManagerHired)
+        @State var disableHire = !buildingHasCapacity || isGeneralManagerWIthoutDetailEmployees || managerAlreadyHired
         
         VStack{
             Text("\(type.rawValue)").textCase(.uppercase)
@@ -271,16 +278,23 @@ struct employeeListingView: View{
             }
             Image(systemName: "person.fill")
                 .font(.system(size: 60))
-                .foregroundColor(!buildingHasCapacity || isGeneralManagerWIthoutDetailEmployees ? .gray.opacity(0.5) : bgColor[0])
+                .foregroundColor(disableHire ? .gray.opacity(0.5) : bgColor[0])
                 .padding(.top, 2)
                 .padding(.bottom, 6)
             VStack{
-                if buildingHasCapacity && !isGeneralManagerWIthoutDetailEmployees{
+                if !disableHire {
                     Button(action: {
                         gameState.money -= hirePrice
                         gameState.currentBuilding.employees.append(Employee(payPerVehiclePercentage: employeePayPercentage, type: type))
-                        if type == EmployeeType.detailer {
-                            gameState.numDetailEmployees += 1
+                        switch (type) {
+                            case .generalManager:
+                                gameState.generalManagerHired = true
+                            case .inventoryManager:
+                                gameState.inventoryMangerHired = true
+                            case .shopManager:
+                                gameState.shopManagerHired = true
+                            case .detailer:
+                                gameState.numDetailEmployees += 1
                         }
                     }) {
                         VStack{
@@ -317,6 +331,11 @@ struct employeeListingView: View{
 //                        .font(Font.custom("Oswald-Light", size: 18))
 //                        .fontWeight(.semibold)
 //                        .foregroundColor(.red)
+                }else if managerAlreadyHired {
+                    Text("MANAGER HIRED")
+                        .font(Font.custom("Oswald-Light", size: 14))
+                        .foregroundColor(.white.opacity(0.8))
+                        .multilineTextAlignment(.center)
                 }else{
                     Text("CAPACITY LIMIT")
                         .font(Font.custom("Oswald-Light", size: 14))
@@ -331,7 +350,7 @@ struct employeeListingView: View{
         }
         .padding(.horizontal, 10)
         .frame(maxWidth: 150, maxHeight: 200)
-        .background(LinearGradient(gradient: Gradient(colors: !buildingHasCapacity || isGeneralManagerWIthoutDetailEmployees ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .background(LinearGradient(gradient: Gradient(colors: disableHire ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
         .cornerRadius(8)
         .clipped()
         .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
