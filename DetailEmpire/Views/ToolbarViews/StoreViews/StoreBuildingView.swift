@@ -61,9 +61,10 @@ struct StoreBuildingView: View {
                         }else{
                             if gameState.level >= building.unlockLevel{
                                 Button(action: {
-                                    gameState.money -= building.price
-                                    building.purchased = true
-                                    gameState.currentBuilding = building
+                                    building.buyBuilding(gameState: gameState)
+//                                    gameState.money -= building.price
+//                                    building.purchased = true
+//                                    gameState.currentBuilding = building
                                 }) {
                                     VStack{
                                         Text("PURCHASE")

@@ -27,4 +27,12 @@ class Building: Identifiable, ObservableObject{
         self.icon = icon
     }
     
+    func buyBuilding(gameState: GameState) {
+        gameState.money -= self.price
+        self.purchased = true
+        var emp = gameState.currentBuilding.employees
+        gameState.currentBuilding = self
+        gameState.currentBuilding.employees = emp
+    }
+    
 }
