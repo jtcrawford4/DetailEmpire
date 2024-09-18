@@ -381,7 +381,7 @@ struct ToggleButton: View{
             .tag(tag)
             if isSelected {
                 Divider()
-                    .frame(width: 75, height: 2)
+                    .frame(width: 45, height: 2)
                     .cornerRadius(4)
                     .background(.white)
                     .padding(.vertical, -10)

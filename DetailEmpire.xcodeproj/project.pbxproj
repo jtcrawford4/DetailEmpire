@@ -19,6 +19,9 @@
 		E141A87A2C816FAE002FCE23 /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A8792C816FAE002FCE23 /* StoreView.swift */; };
 		E141A87C2C8170A3002FCE23 /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87B2C8170A3002FCE23 /* InventoryItem.swift */; };
 		E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87D2C81718B002FCE23 /* InventoryItems.swift */; };
+		E1491B992C9B453400200720 /* EmployeeHireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B982C9B453400200720 /* EmployeeHireView.swift */; };
+		E1491B9B2C9B45F300200720 /* EmployeeUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */; };
+		E1491B9D2C9B45FF00200720 /* EmployeeFinanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */; };
 		E17E8AF82C8E782E00225291 /* StoreBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */; };
 		E17E8AFB2C8E91AE00225291 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */; };
 		E17E8AFD2C8E91E600225291 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFC2C8E91E600225291 /* Formatting.swift */; };
@@ -69,6 +72,9 @@
 		E141A8792C816FAE002FCE23 /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		E141A87B2C8170A3002FCE23 /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		E141A87D2C81718B002FCE23 /* InventoryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InventoryItems.swift; path = ../Components/InventoryItems.swift; sourceTree = "<group>"; };
+		E1491B982C9B453400200720 /* EmployeeHireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHireView.swift; sourceTree = "<group>"; };
+		E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeUpgradeView.swift; sourceTree = "<group>"; };
+		E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeFinanceView.swift; sourceTree = "<group>"; };
 		E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBuildingView.swift; sourceTree = "<group>"; };
 		E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
 		E17E8AFC2C8E91E600225291 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
@@ -122,6 +128,7 @@
 		E141A8722C816E5B002FCE23 /* ToolbarViews */ = {
 			isa = PBXGroup;
 			children = (
+				E1491B972C9B452600200720 /* EmployeeViews */,
 				E18975422C8E36170019C062 /* StoreViews */,
 				E141A8732C816E75002FCE23 /* InventoryView.swift */,
 				E141A8752C816F25002FCE23 /* WorkView.swift */,
@@ -129,6 +136,16 @@
 				E141A8792C816FAE002FCE23 /* StoreView.swift */,
 			);
 			path = ToolbarViews;
+			sourceTree = "<group>";
+		};
+		E1491B972C9B452600200720 /* EmployeeViews */ = {
+			isa = PBXGroup;
+			children = (
+				E1491B982C9B453400200720 /* EmployeeHireView.swift */,
+				E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */,
+				E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */,
+			);
+			path = EmployeeViews;
 			sourceTree = "<group>";
 		};
 		E17E8AF92C8E919900225291 /* Extensions */ = {
@@ -415,7 +432,9 @@
 				E141A87C2C8170A3002FCE23 /* InventoryItem.swift in Sources */,
 				E1A676722C82B80E00494BEC /* Vehicle.swift in Sources */,
 				E17E8B002C8E982C00225291 /* Components.swift in Sources */,
+				E1491B9D2C9B45FF00200720 /* EmployeeFinanceView.swift in Sources */,
 				E141A8742C816E75002FCE23 /* InventoryView.swift in Sources */,
+				E1491B992C9B453400200720 /* EmployeeHireView.swift in Sources */,
 				E141A86F2C81675A002FCE23 /* GameView.swift in Sources */,
 				E1D9C17B2C8E4FC800872DE7 /* StoreEquipmentView.swift in Sources */,
 				E17E8AF82C8E782E00225291 /* StoreBuildingView.swift in Sources */,
@@ -427,6 +446,7 @@
 				E11B276C2C869887000C8D0D /* Employee.swift in Sources */,
 				E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */,
 				E11369E62C8BD9F700342E97 /* Building.swift in Sources */,
+				E1491B9B2C9B45F300200720 /* EmployeeUpgradeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
