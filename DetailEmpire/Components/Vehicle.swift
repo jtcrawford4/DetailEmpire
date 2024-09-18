@@ -64,6 +64,10 @@ class Vehicle:ObservableObject{
                 let employees = gameState.currentBuilding.employees
                 for item in inventory {
                     item.use()
+                    if gameState.inventoryMangerHired && item.usesRemaining == 0 && gameState.money >= item.price{
+                        item.refill()
+                        print("auto refilled item: \(item.name)")
+                    }
                     if item.type == InventoryType.equipment {
                         item.setEquipementCondition()
                     }

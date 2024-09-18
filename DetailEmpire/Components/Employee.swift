@@ -56,7 +56,7 @@ class Employee: Identifiable, ObservableObject {
         switch(type){
         case .detailer:
             return 7.00
-        case .generalManager, .inventoryManager, .shopManager:
+        case .generalManager, .inventoryManager, .shopManager: //TODO change shop manager to accountant?
             return 12.00
         }
     }
@@ -69,7 +69,7 @@ class Employee: Identifiable, ObservableObject {
             return "Handles employee payroll" //workmans comp? insurance?
         case .inventoryManager:
             return "Automatically restock inventory"
-        case.shopManager:
+        case.shopManager: //TODO accountant
             return "Handle property expenses"
         }
     }

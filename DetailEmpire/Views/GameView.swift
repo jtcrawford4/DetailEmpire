@@ -21,6 +21,8 @@ struct GameView: View {
         VStack {
             HStack(){
                 HStack{
+                    //TODO include a ticker for notifications
+                        //payroll due, inventory manager purchased, etc
                     Text("\(gameState.level)")
                         .font(Font.custom("Oswald-Light", size: 28))
                         .fontWeight(.semibold)
