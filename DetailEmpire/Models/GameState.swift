@@ -9,16 +9,20 @@ class GameState: ObservableObject{
     @Published var vehicleDetailMultipliers = 0.00
     @Published var clickMulitplier = 0.00
     @Published var currentBuilding: Building
-    @Published var inventory: InventoryItems
-    @Published var inventoryItemSpeedMultiplier = 0.00
-    @Published var inventoryItemMoneyMultiplier = 0.00
-    @Published var detailDisabled = false
+    //Inventory
+        @Published var inventory: InventoryItems
+        @Published var inventoryItemSpeedMultiplier = 0.00
+        @Published var inventoryItemMoneyMultiplier = 0.00
+        @Published var detailDisabled = false
     //Employee
         @Published var employees:[Employee]
         @Published var numDetailEmployees = 0
         @Published var generalManagerHired = false
         @Published var inventoryMangerHired = false
         @Published var shopManagerHired = false
+        @Published var workerDetailSpeed = 0.45
+        @Published var workerSpeedMultiplier = 0.00
+        @Published var workerMoneyMultiplier = 0.00
     //Payroll
         @Published var payrollDue = false
         @Published var workersOnStrike = false
@@ -27,10 +31,7 @@ class GameState: ObservableObject{
         @Published var payrollEmployeeQuitThreshold = 42
         @Published var vehiclesSincePayroll = 0
         @Published var payrollEfficiencyPenalty = 0.50 //when payroll missed, detailers are only half efficient
-    @Published var workerDetailSpeed = 0.45
-//    @Published var workerCostMultiplier = 
-    @Published var workerSpeedMultiplier = 0.00
-    @Published var workerMoneyMultiplier = 0.00
+//    @Published var workerCostMultiplier =
     //options
     //metrics
 //    @Published var vehcilesDetailed = 0
@@ -57,7 +58,7 @@ class GameState: ObservableObject{
     
     func getInventorySpeedMultiplierPercentage() -> Int {
         if self.inventoryItemSpeedMultiplier > 0 {
-            return Int(((self.inventoryItemSpeedMultiplier - 1) * 100).rounded())
+            return Int(((self.inventoryItemSpeedMultiplier) * 100).rounded())
         }
         return 0
     }

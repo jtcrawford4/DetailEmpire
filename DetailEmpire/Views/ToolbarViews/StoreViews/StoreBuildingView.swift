@@ -7,6 +7,8 @@ struct StoreBuildingView: View {
     
     var body: some View {
         
+        //TODO only show next building available? dont allow down sizing?
+        
         ScrollView{
             ForEach(buildings.buildings){ building in
                 

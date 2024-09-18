@@ -27,10 +27,11 @@ class Building: Identifiable, ObservableObject{
         self.icon = icon
     }
     
+    //TODO if down sizing, fire workers
     func buyBuilding(gameState: GameState) {
         gameState.money -= self.price
         self.purchased = true
-        var emp = gameState.currentBuilding.employees
+        let emp = gameState.currentBuilding.employees
         gameState.currentBuilding = self
         gameState.currentBuilding.employees = emp
     }
