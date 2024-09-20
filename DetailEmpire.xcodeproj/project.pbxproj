@@ -20,7 +20,7 @@
 		E141A87C2C8170A3002FCE23 /* InventoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87B2C8170A3002FCE23 /* InventoryItem.swift */; };
 		E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E141A87D2C81718B002FCE23 /* InventoryItems.swift */; };
 		E1491B992C9B453400200720 /* EmployeeHireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B982C9B453400200720 /* EmployeeHireView.swift */; };
-		E1491B9B2C9B45F300200720 /* EmployeeUpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */; };
+		E1491B9B2C9B45F300200720 /* EmployeeTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9A2C9B45F300200720 /* EmployeeTrainingView.swift */; };
 		E1491B9D2C9B45FF00200720 /* EmployeeFinanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */; };
 		E17E8AF82C8E782E00225291 /* StoreBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */; };
 		E17E8AFB2C8E91AE00225291 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */; };
@@ -73,7 +73,7 @@
 		E141A87B2C8170A3002FCE23 /* InventoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryItem.swift; sourceTree = "<group>"; };
 		E141A87D2C81718B002FCE23 /* InventoryItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InventoryItems.swift; path = ../Components/InventoryItems.swift; sourceTree = "<group>"; };
 		E1491B982C9B453400200720 /* EmployeeHireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHireView.swift; sourceTree = "<group>"; };
-		E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeUpgradeView.swift; sourceTree = "<group>"; };
+		E1491B9A2C9B45F300200720 /* EmployeeTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTrainingView.swift; sourceTree = "<group>"; };
 		E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeFinanceView.swift; sourceTree = "<group>"; };
 		E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBuildingView.swift; sourceTree = "<group>"; };
 		E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				E1491B982C9B453400200720 /* EmployeeHireView.swift */,
-				E1491B9A2C9B45F300200720 /* EmployeeUpgradeView.swift */,
+				E1491B9A2C9B45F300200720 /* EmployeeTrainingView.swift */,
 				E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */,
 			);
 			path = EmployeeViews;
@@ -446,7 +446,7 @@
 				E11B276C2C869887000C8D0D /* Employee.swift in Sources */,
 				E141A87E2C81718B002FCE23 /* InventoryItems.swift in Sources */,
 				E11369E62C8BD9F700342E97 /* Building.swift in Sources */,
-				E1491B9B2C9B45F300200720 /* EmployeeUpgradeView.swift in Sources */,
+				E1491B9B2C9B45F300200720 /* EmployeeTrainingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

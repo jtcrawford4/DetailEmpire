@@ -62,5 +62,5 @@ class InventoryItem:Identifiable, ObservableObject{
 
 enum InventoryType: Identifiable{
     var id : UUID {return UUID()}
-    case product, equipment, unassigned
+    case product, equipment, employee, unassigned
 }

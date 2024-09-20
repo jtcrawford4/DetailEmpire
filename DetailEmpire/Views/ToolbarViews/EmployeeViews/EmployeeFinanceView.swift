@@ -8,20 +8,20 @@ struct EmployeeFinanceView: View {
         
         @State var payrollOwed = gameState.getPayrollOwed()
 //        @State var payrollDue = gameState.payrollDue
-        @State var payrollDue = true
+//        @State var payrollDue = true
         @State var workersOnStrike = gameState.workersOnStrike
         @State var insufficientFunds = payrollOwed > gameState.money
         
         ScrollView{
-            if payrollDue {
+//            if payrollDue {
                 VStack{
                     HStack{
                         VStack{
-                            Text("PAYROLL DUE")
+                            Text("PAYROLL")
                                 .font(Font.custom("Oswald-Light", size: 20))
-                                .foregroundColor(.pink)
+                                .foregroundColor(.mint)
                             Divider()
-                                .background(.red)
+                                .background(.white)
                                 .padding(.vertical, -10)
                         }
                     }
@@ -29,7 +29,7 @@ struct EmployeeFinanceView: View {
                     .padding(4)
                     VStack(alignment: .center){
                         ForEach(EmployeeType.allCases){ emp in
-                            activeStatView(label: "\(emp.rawValue)", value: gameState.getPayrollOwedByEmployeeType(type: emp),  modifier: "$", color: .pink)
+                            activeStatView(label: "\(emp.rawValue)".uppercased(), value: gameState.getPayrollOwedByEmployeeType(type: emp),  modifier: "$", color: .pink)
                         }
                         Divider()
                             .background(.white)
@@ -81,7 +81,7 @@ struct EmployeeFinanceView: View {
                 .padding([.horizontal, .bottom], 10)
                 .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
                 .brightness(0.2)
-            }
+//            }
         }
     }
 }

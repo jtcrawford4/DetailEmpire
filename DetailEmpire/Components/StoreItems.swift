@@ -21,7 +21,17 @@ class StoreItems:ObservableObject{
                       name:"Rupes Polisher",
                       desc:"Spins real fast",
                       levelUnlocked: 15, usesPerVehicle: 1, usesRemaining: 450, icon: "lasso.sparkles", purchased: false, startingItem: false, 
-                      speedMultiplier: 0.15, moneyMultiplier: 0, type: InventoryType.equipment) //TODO replace basic polisher when purchased
+                      speedMultiplier: 0.15, moneyMultiplier: 0, type: InventoryType.equipment), //TODO replace basic polisher when purchased
+        InventoryItem(price:999.99,
+                      name:"Test Training",
+                      desc:"Train detail workers",
+                      levelUnlocked: 15, usesPerVehicle: -1, usesRemaining: -1, icon: "person.fill", purchased: false, startingItem: false,
+                      speedMultiplier: 0.15, moneyMultiplier: 0, type: InventoryType.employee),
+        InventoryItem(price:11999.99,
+                      name:"Test Training2",
+                      desc:"Train detail workers2",
+                      levelUnlocked: 1, usesPerVehicle: -1, usesRemaining: -1, icon: "person.fill", purchased: false, startingItem: false,
+                      speedMultiplier: 0.15, moneyMultiplier: 0, type: InventoryType.employee)
     ]
 }
 
