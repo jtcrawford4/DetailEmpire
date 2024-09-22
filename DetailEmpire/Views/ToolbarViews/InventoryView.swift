@@ -10,7 +10,7 @@ struct InventoryView: View {
         
         //TODO refill all button
         VStack{
-            Text("Inventory - add current metrics here")
+//            Text("Inventory - add current metrics here")
             HStack(spacing: 0){
                 ToggleButton(selectedButton: $selectedTab, tag: 0, text: "Products")
                 ToggleButton(selectedButton: $selectedTab, tag: 1, text: "Equipment")

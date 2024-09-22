@@ -7,6 +7,7 @@ struct GameView: View {
     @StateObject var buildings = Buildings()
     @State private var selectedTab = 0
     @State var displayMenuModal = false
+    @State var debugEnabled = false
     
     init() {
 //        UITabBar.appearance().backgroundColor = UIColor.systemBlue
@@ -48,15 +49,10 @@ struct GameView: View {
                             .frame(width: 30, height: 30)
                     })
                     .fullScreenCover(isPresented: $displayMenuModal, content: {
-                        MenuModalView()
+                        MenuModalView(gameState: gameState, debugEnabled: $debugEnabled)
                     })
-//                    .fullScreenCover(item: displayMenuModal, content:  MenuModalView())
-//                    .fullScreenCover(isPresented: $displayMenuModal) {
-//                        MenuModalView()
-//                    }
-//                    .fullScreenCover(isPresented: $displayMenuModal, content: MenuModalView.init)
                 }
-                .padding(.horizontal, 50)
+                .padding(.horizontal, 30)
                 VStack{
                     HStack {
                         Image(systemName: "dollarsign.circle")
@@ -112,17 +108,6 @@ struct GameView: View {
         .padding(.top, -10)
         .tint(.white)
     }
-}
-
-struct BackgroundBlurView: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        DispatchQueue.main.async {
-            view.superview?.superview?.backgroundColor = .clear
-        }
-        return view
-    }
-    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 func openMainMenu() {

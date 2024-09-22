@@ -33,9 +33,10 @@ struct StoreBuildingView: View {
                                     .frame(width: 15, height: 2)
                                     .cornerRadius(4)
                                     .background(.gray)
+                                    .padding(.top, 2)
+                                    .padding(.bottom, -6)
                                 Text("\(building.vehicleSlots)")
                                     .font(Font.custom("Oswald-Light", size: 14))
-//                                    .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.green)
                             }
@@ -45,13 +46,15 @@ struct StoreBuildingView: View {
                                     .frame(width: 15, height: 2)
                                     .cornerRadius(4)
                                     .background(.gray)
+                                    .padding(.top, 2)
+                                    .padding(.bottom, -6)
                                 Text("\(building.workerSlots)")
                                     .font(Font.custom("Oswald-Light", size: 14))
-//                                    .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.green)
                             }
                         }
+                        .padding(.top, 4)
                     }
                     Spacer()
                     VStack{
@@ -59,43 +62,35 @@ struct StoreBuildingView: View {
                         if building.purchased { //TODO if purchased and not active building, gray out
                             Image(systemName: "checkmark.circle.fill")
                                 .font(.system(size: 30, weight: .bold))
-                                .foregroundColor(.green)
+                                .foregroundStyle(
+                                    .linearGradient(colors: [.pastelGreen, .mint], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                )
                         }else{
                             if gameState.level >= building.unlockLevel{
                                 Button(action: {
                                     building.buyBuilding(gameState: gameState)
-//                                    gameState.money -= building.price
-//                                    building.purchased = true
-//                                    gameState.currentBuilding = building
                                 }) {
-//                                    VStack{
-//                                        Text("PURCHASE")
-//                                            .font(.caption2)
-//                                            .fontWeight(.semibold)
-                                        HStack {
-                                            Image(systemName: "dollarsign.circle")
-                                                .font(.system(size: 16))
-                                            Text("\(Formatting.formatPrice(num: building.price))")
-                                                .fontWeight(.bold)
-                                                .foregroundColor(.white)
-                                        }
-//                                    }
+                                    HStack {
+                                        Image(systemName: "dollarsign.circle")
+                                            .font(.system(size: 16))
+                                        Text("\(Formatting.formatPrice(num: building.price))")
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                    }
                                     .font(Font.custom("Oswald-Light", size: 14))
                                 }
-                                .background(insufficientFunds ? .gray : .green)
+                                .background(LinearGradient(gradient: Gradient(colors: insufficientFunds ? [.gray, .gray.opacity(0.5)] : [.green, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing))
                                 .foregroundColor(.white)
                                 .disabled(insufficientFunds)
                                 .font(.subheadline)
                                 .cornerRadius(8)
                             }else{
                                 Text("REQUIRED LEVEL")
-                                    .font(Font.custom("Oswald-Light", size: 14))
-//                                    .font(.caption)
+                                    .font(Font.custom("Oswald-Light", size: 12))
                                     .foregroundColor(.red)
                                 Text("\(building.unlockLevel)")
                                     .font(Font.custom("Oswald-Light", size: 18))
                                     .fontWeight(.semibold)
-//                                    .font(.headline)
                                     .foregroundColor(.red)
                             }
                         }
@@ -103,17 +98,19 @@ struct StoreBuildingView: View {
                     .buttonStyle(.bordered)
                     .cornerRadius(5)
                 }
+                .foregroundColor(.white)
                 .padding(.horizontal, 10)
                 .frame(height : 60)
-                .background(.white)
+                .background(.black)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(.white, lineWidth: 4)
+                )
                 .cornerRadius(8)
-//                .clipped()
                 .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
-//                .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
             }
         }
         .contentMargins(.horizontal, 10, for: .scrollContent)
-//            .contentMargins(.vertical, 10, for: .scrollContent)
     }
 }
 

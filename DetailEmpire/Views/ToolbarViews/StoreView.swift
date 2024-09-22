@@ -10,8 +10,7 @@ struct StoreView: View {
     var body: some View {
         
         VStack{
-            Text("Store - add current metrics here")
-            
+//            Text("Store - add current metrics here")
             HStack(spacing: 0){
 //                ControlGroup{
 //                    Button(action: {}, label: {Text("test1")})
@@ -26,9 +25,6 @@ struct StoreView: View {
                 ToggleButton(selectedButton: $selectedTab, tag: 2, text: "Buildings")
             }
             .padding(.bottom, 40)
-//            .clipped()
-//            .shadow(color: Color.black.opacity(0.20), radius: 4, x: 0, y: 6)
-//            .background(.pink.opacity(0.5))
             
             switch(selectedTab){
             case 0:
@@ -41,7 +37,10 @@ struct StoreView: View {
                 StoreProductView()
             }
         }
-        .background(LinearGradient(colors: [.pink, .cyan],
+//        .background(LinearGradient(colors: [.pink, .cyan],
+//                    startPoint: .topLeading,
+//                    endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: [.black.opacity(0.7),.black.opacity(0.5), .pink.opacity(0.4)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing))
     }

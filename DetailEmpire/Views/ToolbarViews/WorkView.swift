@@ -140,7 +140,6 @@ struct WorkView: View {
                     Spacer()
                 }
             }
-//            .background(.black)
             .background(RadialGradient(colors: [.black,.green.opacity(0.5)], center: .top, startRadius: 0, endRadius: 450))
             .foregroundColor(.white)
             .overlay(
@@ -148,10 +147,7 @@ struct WorkView: View {
                     .stroke(.white, lineWidth: 4)
             )
             .cornerRadius(8)
-//            .clipped()
             .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
-//            .shadow(color: Color.black.opacity(0.4), radius: 2, x: 0, y: 6)
-//            .shadow(color: Color.black.opacity(0.5), radius: 10, x: 0, y: 0)
             .padding([.leading,.trailing,.bottom], 10)
             
             //Active Boosts

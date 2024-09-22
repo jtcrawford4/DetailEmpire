@@ -1,44 +1,5 @@
 import SwiftUI
 
-//struct BarProgressStyle: ProgressViewStyle {
-//
-//    var color: Color = .purple
-//    var height: Double = 20.0
-//    var labelFontStyle: Font = .body
-//
-//    func makeBody(configuration: Configuration) -> some View {
-//
-//        let progress = configuration.fractionCompleted ?? 0.0
-//
-//        GeometryReader { geometry in
-//
-//            VStack(alignment: .leading) {
-//                configuration.label
-//                    .font(labelFontStyle)
-//
-//                RoundedRectangle(cornerRadius: 8)
-//                    .frame(height: height)
-//                    .frame(width: geometry.size.width)
-//                    .overlay(alignment: .leading) {
-//                        RoundedRectangle(cornerRadius: 10.0)
-//                            .fill(color)
-//                            .frame(width: geometry.size.width * progress)
-//                            .overlay {
-//                                if let currentValueLabel = configuration.currentValueLabel {
-//
-//                                    currentValueLabel
-//                                        .font(.headline)
-//                                        .foregroundColor(.white)
-//                                }
-//                            }
-//                    }
-//
-//            }
-//
-//        }
-//    }
-//}
-
 struct inventoryItemListing: View{
     
     @EnvironmentObject var gameState: GameState
@@ -53,6 +14,7 @@ struct inventoryItemListing: View{
         let normalColors:[Color] = [.black,.black]
         @State var lowStock = (item.usesRemaining < 5 && item.usesRemaining != -1) || (isEquipment && item.equipmentCondition < 20 && item.usesRemaining != -1)
         @State var outOfStock = item.usesRemaining == 0 || (isEquipment && item.equipmentCondition == 0)
+        @State var insufficientFunds = gameState.money < item.price
         
         HStack{
             VStack{
@@ -69,7 +31,6 @@ struct inventoryItemListing: View{
                 Text("\(item.name.uppercased())")
                     .font(Font.custom("Oswald-Light", size: 18))
                     .fontWeight(.semibold)
-//                    .foregroundColor(.pastelGreen)
                 Text("\(item.desc)")
                     .font(Font.custom("Oswald-Light", size: 14))
                     .foregroundColor(.white)
@@ -107,9 +68,9 @@ struct inventoryItemListing: View{
                         })
                         .padding([.leading,.trailing], 25)
                         .padding([.top,.bottom], 4)
-                        .background(.red)
+                        .background(LinearGradient(gradient: Gradient(colors: insufficientFunds ? [.gray, .gray] : [.pink, .red]), startPoint: .topLeading, endPoint: .bottomTrailing))
                         .foregroundColor(.white)
-                        .disabled(gameState.money < item.price)
+                        .disabled(insufficientFunds)
                         .cornerRadius(8)
                     }else{
                         Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
@@ -117,7 +78,6 @@ struct inventoryItemListing: View{
                         Text("\(isEquipment ? item.equipmentCondition : item.usesRemaining)\(isEquipment ? "%" : "")")
                             .font(Font.custom("Oswald-Light", size: 16))
                             .fontWeight(.semibold)
-                        //TODO color based on condition
                     }
                 }else{
                     Text("\((isEquipment ? "CONDITION" : "USES REMAINING"))")
@@ -132,8 +92,6 @@ struct inventoryItemListing: View{
         }
         .padding(.horizontal, 10)
         .frame(height : 60)
-//        .background(.black)
-//        .background(RadialGradient(colors: [.black,.green.opacity(0.5)], center: .top, startRadius: 0, endRadius: 450))
         .background(LinearGradient(colors: outOfStock ? outOfStockColors : (lowStock ? lowStockColors : normalColors),
                                    startPoint: .trailing,
                                    endPoint: .leading))
@@ -143,9 +101,7 @@ struct inventoryItemListing: View{
                 .stroke(outOfStock ? outOfStockColors[0] : (lowStock ? lowStockColors[0] : .white), lineWidth: 4)
         )
         .cornerRadius(8)
-        .clipped()
         .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
-//        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
     }
 }
 
@@ -170,7 +126,7 @@ struct storeInventoryItemListing: View{
                     .fontWeight(.semibold)
                 Text("\(item.desc)")
                     .font(Font.custom("Oswald-Light", size: 14))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.gray)
             }
             Spacer()
             VStack{
@@ -178,7 +134,9 @@ struct storeInventoryItemListing: View{
                 if item.purchased || item.startingItem {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(.green)
+                        .foregroundStyle(
+                            .linearGradient(colors: [.pastelGreen, .mint], startPoint: .topLeading, endPoint: .bottomTrailing)
+                        )
                 }else{
                     if gameState.level >= item.levelUnlocked{
                         Button(action: {
@@ -188,27 +146,23 @@ struct storeInventoryItemListing: View{
                             gameState.inventoryItemMoneyMultiplier += item.moneyMultiplier
                             gameState.inventoryItemSpeedMultiplier += item.speedMultiplier
                         }) {
-//                            VStack{
-//                                Text("PURCHASE")
-//                                    .fontWeight(.semibold)
-                                HStack {
-                                    Image(systemName: "dollarsign.circle")
-                                        .font(.system(size: 16))
-                                    Text("\(item.price, specifier: "%.2f")")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                }
-//                            }
+                            HStack {
+                                Image(systemName: "dollarsign.circle")
+                                    .font(.system(size: 16))
+                                Text("\(item.price, specifier: "%.2f")")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.white)
+                            }
                             .font(Font.custom("Oswald-Light", size: 14))
                         }
-                        .background(insufficientFunds ? .gray : .green)
+                        .background(LinearGradient(gradient: Gradient(colors: insufficientFunds ? [.gray, .gray.opacity(0.5)] : [.green, .mint]), startPoint: .topLeading, endPoint: .bottomTrailing))
                         .foregroundColor(.white)
                         .disabled(insufficientFunds)
                         .font(.subheadline)
                         .cornerRadius(8)
                     }else{
                         Text("REQUIRED LEVEL")
-                            .font(Font.custom("Oswald-Light", size: 14))
+                            .font(Font.custom("Oswald-Light", size: 12))
                             .foregroundColor(.red)
                         Text("\(item.levelUnlocked)")
                             .font(Font.custom("Oswald-Light", size: 18))
@@ -220,12 +174,16 @@ struct storeInventoryItemListing: View{
             .buttonStyle(.bordered)
             .cornerRadius(5)
         }
+        .foregroundColor(.white)
         .padding(.horizontal, 10)
         .frame(height : 60)
-        .background(.white)
+        .background(.black)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.white, lineWidth: 4)
+        )
         .cornerRadius(8)
-        .clipped()
-        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
+        .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
     }
 }
 
@@ -260,7 +218,6 @@ struct employeeListingView: View{
         @State var numDetailEmployees = gameState.numDetailEmployees
 //                    @State var insufficientFunds = false
 //                    @State var buildingHasCapacity = true
-//        @State var numDetailEmployees = 1
         @State var generalManagerHired = gameState.generalManagerHired
         @State var inventoryManagerHired = gameState.inventoryMangerHired
         @State var shopManagerHired = gameState.shopManagerHired
@@ -356,13 +313,17 @@ struct employeeListingView: View{
                         .foregroundColor(.red)
                 }
             }
+            .padding(.bottom, 6)
         }
         .padding(.horizontal, 10)
         .frame(maxWidth: 150, maxHeight: 200)
         .background(LinearGradient(gradient: Gradient(colors: disableHire ? [.gray, .black.opacity(0.5)] : [bgColor[1], bgColor[0]]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(.white, lineWidth: 4)
+        )
         .cornerRadius(8)
-        .clipped()
-        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
+        .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
     }
     
 }
@@ -463,8 +424,8 @@ struct ImageOnCircle: View {
 struct MenuModalView: View {
     
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var gameState: GameState
-    @State var debugEnabled = false
+    @StateObject var gameState: GameState
+    @Binding var debugEnabled: Bool
 
     var body: some View {
         ZStack {
@@ -484,11 +445,8 @@ struct MenuModalView: View {
                     MenuButton(title: "MAIN MENU", function: openMainMenu, disabled: false)
                     Toggle("DEBUG MODE", isOn: $debugEnabled)
                         .onChange(of: debugEnabled) {
-                            if debugEnabled {
-                                print("test")
-//                                gameState.level = 25
-//                                gameState.money = 1000000
-                            }
+                            gameState.level = debugEnabled ? 25 : 1 //TODO somehow hold previous state
+                            gameState.money = debugEnabled ? 1000000 : 0 //TODO somehow hold previous state
                         }
                         .foregroundColor(.white)
                         .fontWeight(.semibold)
@@ -518,13 +476,20 @@ struct MenuModalView: View {
                Spacer()
             }
             Spacer()
-//            VStack{
-//
-//            }
-//            .padding(.vertical, 60)
         }
         .presentationBackground(LinearGradient(colors: [.pastelYellow.opacity(0.5),.black.opacity(0.95),.black.opacity(0.85),.black.opacity(0.85),.pastelYellow.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing))
 //        .background(BackgroundBlurView())
 //        .ignoresSafeArea(.all)
     }
+}
+
+struct BackgroundBlurView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }

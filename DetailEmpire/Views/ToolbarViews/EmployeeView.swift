@@ -11,7 +11,7 @@ struct EmployeeView: View {
         @State var maxEmployees = gameState.currentBuilding.workerSlots
 
         VStack{
-            Text("employee - add current metrics here")
+//            Text("employee - add current metrics here")
             //TODO
             //payroll due banner, button to pay, button to open sheet for details
             HStack(spacing: 0){
@@ -34,9 +34,12 @@ struct EmployeeView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(LinearGradient(colors: [.green, .cyan],
-             startPoint: .topLeading,
-             endPoint: .bottomTrailing))
+//        .background(LinearGradient(colors: [.green, .cyan],
+//             startPoint: .topLeading,
+//             endPoint: .bottomTrailing))
+        .background(LinearGradient(colors: [.black.opacity(0.7),.black.opacity(0.5), .green.opacity(0.4)],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing))
     }
 }
 
