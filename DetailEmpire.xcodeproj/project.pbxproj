@@ -22,6 +22,7 @@
 		E1491B992C9B453400200720 /* EmployeeHireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B982C9B453400200720 /* EmployeeHireView.swift */; };
 		E1491B9B2C9B45F300200720 /* EmployeeTrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9A2C9B45F300200720 /* EmployeeTrainingView.swift */; };
 		E1491B9D2C9B45FF00200720 /* EmployeeFinanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */; };
+		E169FC472C9F646300FF0198 /* Font Awesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = E169FC462C9F646300FF0198 /* Font Awesome.otf */; };
 		E17E8AF82C8E782E00225291 /* StoreBuildingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */; };
 		E17E8AFB2C8E91AE00225291 /* DoubleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */; };
 		E17E8AFD2C8E91E600225291 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = E17E8AFC2C8E91E600225291 /* Formatting.swift */; };
@@ -75,6 +76,7 @@
 		E1491B982C9B453400200720 /* EmployeeHireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHireView.swift; sourceTree = "<group>"; };
 		E1491B9A2C9B45F300200720 /* EmployeeTrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTrainingView.swift; sourceTree = "<group>"; };
 		E1491B9C2C9B45FF00200720 /* EmployeeFinanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeFinanceView.swift; sourceTree = "<group>"; };
+		E169FC462C9F646300FF0198 /* Font Awesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome.otf"; sourceTree = "<group>"; };
 		E17E8AF72C8E782E00225291 /* StoreBuildingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreBuildingView.swift; sourceTree = "<group>"; };
 		E17E8AFA2C8E91AE00225291 /* DoubleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExt.swift; sourceTree = "<group>"; };
 		E17E8AFC2C8E91E600225291 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		E1D805182C8FEB7D0090A8AB /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E169FC462C9F646300FF0198 /* Font Awesome.otf */,
 				E10BDC2D2C911F71000D0A3E /* Oswald-Variable.ttf */,
 				E1D805192C8FEBB20090A8AB /* Oswald-Light.ttf */,
 			);
@@ -393,6 +396,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E169FC472C9F646300FF0198 /* Font Awesome.otf in Resources */,
 				E1D8051A2C8FEBB20090A8AB /* Oswald-Light.ttf in Resources */,
 				E10BDC2E2C911F71000D0A3E /* Oswald-Variable.ttf in Resources */,
 				E1DA29AB2C80E85300AD84A6 /* Preview Assets.xcassets in Resources */,

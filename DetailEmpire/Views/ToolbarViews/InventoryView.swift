@@ -47,7 +47,8 @@ struct InventoryView: View {
                 .contentMargins(.horizontal, 10, for: .scrollContent)
             }
         }
-        .background(LinearGradient(colors: [.orange, .cyan],
+//        .background(LinearGradient(gradient: Gradient(colors: [.black.opacity(0.7),.black.opacity(0.8),.black.opacity(0.8),.black,.black.opacity(0.7),.black.opacity(0.6), .black.opacity(0.6),.black.opacity(0.7)]), startPoint: .topLeading, endPoint: .bottom))
+        .background(LinearGradient(colors: [.black.opacity(0.7),.black.opacity(0.5), .cyan.opacity(0.4)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing))
     }

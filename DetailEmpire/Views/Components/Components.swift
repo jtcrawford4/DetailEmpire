@@ -48,9 +48,9 @@ struct inventoryItemListing: View{
     var body: some View {
         
         let isEquipment = item.type == InventoryType.equipment
-        let lowStockColors:[Color] = [.yellow,.white]
-        let outOfStockColors:[Color] = [.red,.white]
-        let normalColors:[Color] = [.white,.white]
+        let lowStockColors:[Color] = [.orange,.black]
+        let outOfStockColors:[Color] = [.red,.black]
+        let normalColors:[Color] = [.black,.black]
         @State var lowStock = (item.usesRemaining < 5 && item.usesRemaining != -1) || (isEquipment && item.equipmentCondition < 20 && item.usesRemaining != -1)
         @State var outOfStock = item.usesRemaining == 0 || (isEquipment && item.equipmentCondition == 0)
         
@@ -59,9 +59,9 @@ struct inventoryItemListing: View{
                 if lowStock && !outOfStock {
                     ImageOnCircle(icon: "exclamationmark.triangle", radius: 20, circleColor: .clear, imageColor: .orange)
                 }else if outOfStock{
-                    ImageOnCircle(icon: "exclamationmark.octagon", radius: 20, circleColor: .clear, imageColor: .red)
+                    ImageOnCircle(icon: "exclamationmark.circle", radius: 20, circleColor: .clear, imageColor: .red)
                 }else{
-                    ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .green, imageColor: .white)
+                    ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .pastelGreen, imageColor: .black)
                 }
             }
             .padding(.trailing, 6)
@@ -69,9 +69,10 @@ struct inventoryItemListing: View{
                 Text("\(item.name.uppercased())")
                     .font(Font.custom("Oswald-Light", size: 18))
                     .fontWeight(.semibold)
+//                    .foregroundColor(.pastelGreen)
                 Text("\(item.desc)")
                     .font(Font.custom("Oswald-Light", size: 14))
-                    .foregroundColor(.secondary)
+                    .foregroundColor(.white)
             }
             Spacer()
             VStack{
@@ -131,12 +132,20 @@ struct inventoryItemListing: View{
         }
         .padding(.horizontal, 10)
         .frame(height : 60)
+//        .background(.black)
+//        .background(RadialGradient(colors: [.black,.green.opacity(0.5)], center: .top, startRadius: 0, endRadius: 450))
         .background(LinearGradient(colors: outOfStock ? outOfStockColors : (lowStock ? lowStockColors : normalColors),
                                    startPoint: .trailing,
                                    endPoint: .leading))
+        .foregroundColor(.white)
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(outOfStock ? outOfStockColors[0] : (lowStock ? lowStockColors[0] : .white), lineWidth: 4)
+        )
         .cornerRadius(8)
         .clipped()
-        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
+        .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
+//        .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
     }
 }
 
@@ -152,7 +161,7 @@ struct storeInventoryItemListing: View{
         
         HStack{
             VStack{
-                ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .green, imageColor: .white)
+                ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .pastelGreen, imageColor: .white)
             }
             .padding(.trailing, 6)
             VStack(alignment: .leading){
@@ -179,9 +188,9 @@ struct storeInventoryItemListing: View{
                             gameState.inventoryItemMoneyMultiplier += item.moneyMultiplier
                             gameState.inventoryItemSpeedMultiplier += item.speedMultiplier
                         }) {
-                            VStack{
-                                Text("PURCHASE")
-                                    .fontWeight(.semibold)
+//                            VStack{
+//                                Text("PURCHASE")
+//                                    .fontWeight(.semibold)
                                 HStack {
                                     Image(systemName: "dollarsign.circle")
                                         .font(.system(size: 16))
@@ -189,7 +198,7 @@ struct storeInventoryItemListing: View{
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                 }
-                            }
+//                            }
                             .font(Font.custom("Oswald-Light", size: 14))
                         }
                         .background(insufficientFunds ? .gray : .green)
@@ -358,6 +367,29 @@ struct employeeListingView: View{
     
 }
 
+struct MenuButton: View{
+    
+    var title: String
+    var function: () -> Void
+    var disabled: Bool
+    
+    var body: some View{
+        Button("\(title)", action: function)
+            .frame(maxWidth: .infinity)
+            .foregroundColor(.pastelYellow.opacity(disabled ? 0.5 : 1))
+            .background(.black)
+            .cornerRadius(5)
+            .overlay(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(.pastelYellow.opacity(disabled ? 0.5 : 1), lineWidth: 2)
+            )
+        .buttonStyle(.bordered)
+        .font(Font.custom("Oswald-Light", size: 22))
+        .fontWeight(.ultraLight)
+        .padding(.horizontal, 100)
+    }
+}
+
 struct ToggleButton: View{
     
     @Binding var selectedButton: Int
@@ -405,6 +437,10 @@ struct ImageOnCircle: View {
             Circle()
                 .fill(circleColor)
                 .frame(width: radius * 2, height: radius * 2)
+//                .overlay(
+//                    Circle()
+//                        .stroke(.white, lineWidth: 2)
+//                )
             
             // Use this implementation for an SF Symbol
             Image(systemName: icon)
@@ -412,6 +448,8 @@ struct ImageOnCircle: View {
                 .aspectRatio(1.0, contentMode: .fit)
                 .frame(width: squareSide, height: squareSide)
                 .foregroundColor(imageColor)
+//                .shadow(color: Color.black.opacity(0.3), radius: 0, x: 0, y: 2)
+                
             
             // Use this implementation for an image in your assets folder.
 //            Image(icon)
@@ -419,5 +457,74 @@ struct ImageOnCircle: View {
 //                .aspectRatio(1.0, contentMode: .fit)
 //                .frame(width: squareSide, height: squareSide)
         }
+    }
+}
+
+struct MenuModalView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var gameState: GameState
+    @State var debugEnabled = false
+
+    var body: some View {
+        ZStack {
+            VStack{
+                VStack{
+                    Image("logo_white")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                    Text("DETAIL EMPIRE")
+                        .font(Font.custom("Oswald-Light", size: 18))
+                        .fontWeight(.ultraLight)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 50)
+                }
+                Spacer()
+                VStack{
+                    MenuButton(title: "MAIN MENU", function: openMainMenu, disabled: false)
+                    Toggle("DEBUG MODE", isOn: $debugEnabled)
+                        .onChange(of: debugEnabled) {
+                            if debugEnabled {
+                                print("test")
+//                                gameState.level = 25
+//                                gameState.money = 1000000
+                            }
+                        }
+                        .foregroundColor(.white)
+                        .fontWeight(.semibold)
+                        .padding(.horizontal, 100)
+                        .padding(.top, 20)
+                        .tint(.pastelYellow)
+                    
+                    Button(action: {
+                        dismiss()
+                    }, label: {
+                        Text("DISMISS")
+                    })
+                    .buttonStyle(.bordered)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(.pastelRed)
+                    .background(.black)
+                    .cornerRadius(5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(.pastelRed, lineWidth: 2)
+                    )
+                    .padding(.horizontal, 100)
+                    .padding(.top, 60)
+                }
+                .font(Font.custom("Oswald-Light", size: 22))
+                .fontWeight(.ultraLight)
+               Spacer()
+            }
+            Spacer()
+//            VStack{
+//
+//            }
+//            .padding(.vertical, 60)
+        }
+        .presentationBackground(LinearGradient(colors: [.pastelYellow.opacity(0.5),.black.opacity(0.95),.black.opacity(0.85),.black.opacity(0.85),.pastelYellow.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing))
+//        .background(BackgroundBlurView())
+//        .ignoresSafeArea(.all)
     }
 }

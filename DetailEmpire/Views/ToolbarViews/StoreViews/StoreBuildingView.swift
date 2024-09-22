@@ -16,7 +16,7 @@ struct StoreBuildingView: View {
                 
                 HStack{
                     VStack{
-                        ImageOnCircle(icon: "\(building.icon)", radius: 20, circleColor: .green, imageColor: .white)
+                        ImageOnCircle(icon: "\(building.icon)", radius: 20, circleColor: .pastelPurple, imageColor: .white)
                     }
                     .padding(.trailing, 10)
                     VStack(alignment: .leading){
@@ -68,10 +68,10 @@ struct StoreBuildingView: View {
 //                                    building.purchased = true
 //                                    gameState.currentBuilding = building
                                 }) {
-                                    VStack{
-                                        Text("PURCHASE")
+//                                    VStack{
+//                                        Text("PURCHASE")
 //                                            .font(.caption2)
-                                            .fontWeight(.semibold)
+//                                            .fontWeight(.semibold)
                                         HStack {
                                             Image(systemName: "dollarsign.circle")
                                                 .font(.system(size: 16))
@@ -79,7 +79,7 @@ struct StoreBuildingView: View {
                                                 .fontWeight(.bold)
                                                 .foregroundColor(.white)
                                         }
-                                    }
+//                                    }
                                     .font(Font.custom("Oswald-Light", size: 14))
                                 }
                                 .background(insufficientFunds ? .gray : .green)
@@ -107,8 +107,9 @@ struct StoreBuildingView: View {
                 .frame(height : 60)
                 .background(.white)
                 .cornerRadius(8)
-                .clipped()
-                .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
+//                .clipped()
+                .shadow(color: Color.black.opacity(0.4), radius: 0, x: 0, y: 4)
+//                .shadow(color: Color.black.opacity(0.15), radius: 4, x: 2, y: 2)
             }
         }
         .contentMargins(.horizontal, 10, for: .scrollContent)

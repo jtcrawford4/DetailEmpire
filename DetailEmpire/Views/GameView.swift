@@ -6,6 +6,7 @@ struct GameView: View {
     @StateObject var storeItems = StoreItems()
     @StateObject var buildings = Buildings()
     @State private var selectedTab = 0
+    @State var displayMenuModal = false
     
     init() {
 //        UITabBar.appearance().backgroundColor = UIColor.systemBlue
@@ -18,8 +19,8 @@ struct GameView: View {
         @State var inventoryEmpty = gameState.inventory.isAnyItemEmpty()
         @State var payrollDue = gameState.payrollDue
         
-        VStack {
-            HStack(){
+        VStack{
+            HStack{
                 HStack{
                     //TODO include a ticker for notifications
                         //payroll due, inventory manager purchased, etc
@@ -27,11 +28,10 @@ struct GameView: View {
                         .font(Font.custom("Oswald-Light", size: 28))
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                    //TODO circle level progress?
+                    
                     ProgressView("\(gameState.xp)/\(gameState.xpToNextLevel)", value: Float(Double(gameState.xp)/Double(gameState.xpToNextLevel)))
                         .progressViewStyle(.linear)
                         .font(Font.custom("Oswald-Light", size: 14))
-                    //                       .progressViewStyle(BarProgressStyle(height: 20.0))
                         .tint(.pink)
                         .background(Color.black.opacity(0.5))
                         .cornerRadius(8)
@@ -39,25 +39,35 @@ struct GameView: View {
                         .scaleEffect(x: 1, y: 1, anchor: .center)
                         .foregroundColor(.white)
                 }
-                Spacer(minLength: 100)
                 VStack{
-                    Button(action: {}, label:{
-                        HStack {
-                            Image(systemName: "dollarsign.circle")
-                                .font(.system(size: 18))
-                                .foregroundColor(.white)
-                            Spacer()
-                            Text("\(gameState.money, specifier: "%.2f")")
-                                .font(Font.custom("Oswald-Light", size: 14))
-                                .fontWeight(.semibold)
-                                .foregroundColor(.white)
-                        }
-                        .font(.callout)
-                        .padding([.vertical, .leading], 4)
-                        .padding(.trailing, 10)
+                    Button(action: {
+                        displayMenuModal.toggle()
+                    }, label: {
+                        Image("logo_white")
+                            .resizable()
+                            .frame(width: 30, height: 30)
                     })
-                    .background(Color.black.opacity(0.5))
-                    .cornerRadius(8)
+                    .fullScreenCover(isPresented: $displayMenuModal, content: {
+                        MenuModalView()
+                    })
+//                    .fullScreenCover(item: displayMenuModal, content:  MenuModalView())
+//                    .fullScreenCover(isPresented: $displayMenuModal) {
+//                        MenuModalView()
+//                    }
+//                    .fullScreenCover(isPresented: $displayMenuModal, content: MenuModalView.init)
+                }
+                .padding(.horizontal, 50)
+                VStack{
+                    HStack {
+                        Image(systemName: "dollarsign.circle")
+                            .font(.system(size: 18))
+                            .foregroundColor(.white)
+                        Spacer()
+                        Text("\(gameState.money, specifier: "%.2f")")
+                            .font(Font.custom("Oswald-Light", size: 14))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
                 }
             }
             .padding(.bottom, 10)
@@ -104,7 +114,25 @@ struct GameView: View {
     }
 }
 
+struct BackgroundBlurView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+func openMainMenu() {
+    if let window = UIApplication.shared.windows.first {
+        window.rootViewController = UIHostingController(rootView: ContentView())
+        window.makeKeyAndVisible()
+    }
+}
 
 #Preview {
     GameView()
+        .environmentObject(GameState())
 }
