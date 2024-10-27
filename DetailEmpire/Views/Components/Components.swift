@@ -95,6 +95,7 @@ struct inventoryItemListing: View{
         .background(LinearGradient(colors: outOfStock ? outOfStockColors : (lowStock ? lowStockColors : normalColors),
                                    startPoint: .trailing,
                                    endPoint: .leading))
+        //TODO gradient with tier colors
         .foregroundColor(.white)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
@@ -177,7 +178,8 @@ struct storeInventoryItemListing: View{
         .foregroundColor(.white)
         .padding(.horizontal, 10)
         .frame(height : 60)
-        .background(.black)
+//        .background(.black)
+        .background(LinearGradient(colors: [item.getItemTierColor(tier: item.tier).opacity(0.4), .black, .black], startPoint: .leading, endPoint: .trailing))
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(.white, lineWidth: 4)

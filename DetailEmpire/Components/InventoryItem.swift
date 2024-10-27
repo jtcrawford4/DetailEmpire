@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 class InventoryItem:Identifiable, ObservableObject{
     var id = UUID()
@@ -16,10 +17,11 @@ class InventoryItem:Identifiable, ObservableObject{
     var moneyMultiplier:Double
     var type: InventoryType
     @Published var equipmentCondition:Int = 100
+    var tier: InventoryItemTier
     //color background for category?
     //special ability. different class? link by id?
     
-    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, speedMultiplier: Double, moneyMultiplier: Double, type: InventoryType) {
+    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, speedMultiplier: Double, moneyMultiplier: Double, type: InventoryType, tier: InventoryItemTier) {
         self.id = id
         self.price = price
         self.name = name
@@ -34,6 +36,7 @@ class InventoryItem:Identifiable, ObservableObject{
         self.speedMultiplier = speedMultiplier
         self.moneyMultiplier = moneyMultiplier
         self.type = type
+        self.tier = tier
     }
     
     func purchaseFromStore(item:InventoryItem){
@@ -58,9 +61,28 @@ class InventoryItem:Identifiable, ObservableObject{
         }
     }
     
+    func getItemTierColor(tier: InventoryItemTier) -> Color {
+        switch tier {
+            case .common:
+                return .black
+            case .uncommon:
+                return .green
+            case .rare:
+                return .orange
+            case .epic:
+                return .purple
+        }
+        
+    }
+    
 }
 
 enum InventoryType: Identifiable{
     var id : UUID {return UUID()}
     case product, equipment, employee, unassigned
+}
+
+enum InventoryItemTier: Identifiable{
+    var id : UUID {return UUID()}
+    case common, uncommon, rare, epic
 }

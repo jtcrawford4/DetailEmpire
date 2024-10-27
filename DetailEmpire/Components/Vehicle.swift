@@ -61,6 +61,9 @@ class Vehicle:ObservableObject{
                 let workerMoneyMultiplier = gameState.workerMoneyMultiplier > 0 ? gameState.workerMoneyMultiplier : 1
                 let inventoryItemMoneyMultiplier = gameState.inventoryItemMoneyMultiplier > 0 ? gameState.inventoryItemMoneyMultiplier : 1
                 let totalRevenue = self.baseRevenue * workerMoneyMultiplier * inventoryItemMoneyMultiplier
+                print("workerMoneyMultiplier: \(workerMoneyMultiplier)")
+                print("iventoryMoneyMultiplier: \(inventoryItemMoneyMultiplier)")
+                print("totalRevenue: \(totalRevenue)")
                 let employees = gameState.currentBuilding.employees
                 for item in inventory {
                     item.use()
@@ -85,7 +88,7 @@ class Vehicle:ObservableObject{
                 gameState.xp += self.xp //TODO xp multiplier
                 if gameState.xp >= gameState.xpToNextLevel {
                     gameState.level += 1
-                    gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * 2.8))
+                    gameState.xpToNextLevel = Int(round(Double(gameState.xpToNextLevel) * gameState.xpToNextLevelMultiplier))
                     gameState.totalXp += gameState.xp
                     gameState.xp = 0
                 }

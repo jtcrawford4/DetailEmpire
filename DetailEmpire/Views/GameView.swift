@@ -1,17 +1,48 @@
 import SwiftUI
 
+class GradientTabBarController: UITabBarController {
+
+        let gradientlayer = CAGradientLayer()
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setGradientBackground(colorOne: .yellow, colorTwo: .red)
+        }
+
+        func setGradientBackground(colorOne: UIColor, colorTwo: UIColor)  {
+            gradientlayer.frame = tabBar.bounds
+            gradientlayer.colors = [colorOne.cgColor, colorTwo.cgColor]
+            gradientlayer.locations = [0, 1]
+            gradientlayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+            gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+            self.tabBar.layer.insertSublayer(gradientlayer, at: 0)
+        }
+}
+
 struct GameView: View {
     
     @StateObject var gameState = GameState()
     @StateObject var storeItems = StoreItems()
     @StateObject var buildings = Buildings()
-    @State private var selectedTab = 0
+    @State private var selectedTab = 2
     @State var displayMenuModal = false
     @State var debugEnabled = false
     
     init() {
-//        UITabBar.appearance().backgroundColor = UIColor.systemBlue
+//        let gradientlayer = CAGradientLayer()
+//        gradientlayer.frame = tabBar.bounds
+//        gradientlayer.colors = [Color.white, Color.green]
+//        layerGradient.frame = CGRect(x: 0, y: 0, width: tabBar.bounds.width,height: tabBar.bounds.height)
+//        gradientlayer.locations = [0, 1]
+//        gradientlayer.startPoint = CGPoint(x: 1.0, y: 0.0)
+//        gradientlayer.endPoint = CGPoint(x: 0.0, y: 0.0)
+//        UITabBar.appearance().backgroundColor = UIColor.gray
+//        UITabBar.appearance().shadowImage = UIImage(named: "tab-shadow")?.withRenderingMode(.alwaysTemplate)
         UITabBar.appearance().unselectedItemTintColor = UIColor.black
+//        UITabBar.appearance().layer.addSublayer(gradientlayer)
+//            .layer.insertSublayer(layerGradient, at:0)
+
+//        UITabBar.appearance().isTranslucent = true
 //        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Oswald-Light", size: 10)!], for: .selected)
     }
 
@@ -71,13 +102,13 @@ struct GameView: View {
             .background(.black)
         }
         TabView(selection: $selectedTab) {
-            WorkView()
+            EmployeeView()
                 .tabItem {
-                    Image(systemName: "car.2.fill")
-                    Text("Work")
-                        .font(Font.custom("Oswald-Light", size: 10))
+                    Image(systemName: "person.fill")
+                    Text("Employee")
                 }
                 .tag(0)
+                .badge(payrollDue ? "!" : nil)
             InventoryView()
                 .tabItem {
                     Image(systemName: "shippingbox")
@@ -85,19 +116,26 @@ struct GameView: View {
                 }
                 .tag(1)
                 .badge(inventoryEmpty ? "!" : nil)
-            StoreView()
+            WorkView()
                 .tabItem {
-                    Image(systemName: "dollarsign.circle.fill")
-                    Text("Store")
+                    Image(systemName: "car.2.fill")
+                    Text("Work")
+                        .font(Font.custom("Oswald-Light", size: 10))
                 }
                 .tag(2)
-            EmployeeView()
+            StoreView()
                 .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Employee")
+                    Image(systemName: "house.fill")
+                    Text("Store")
                 }
                 .tag(3)
-                .badge(payrollDue ? "!" : nil)
+            FinanceView()
+                .tabItem {
+                    Image(systemName: "dollarsign.circle.fill")
+                    Text("Finance")
+                }
+                .tag(4)
+            
         }
         .environmentObject(gameState)
         .environmentObject(storeItems)
