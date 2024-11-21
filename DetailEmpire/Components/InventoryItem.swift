@@ -16,12 +16,14 @@ class InventoryItem:Identifiable, ObservableObject{
     var speedMultiplier:Double
     var moneyMultiplier:Double
     var type: InventoryType
+    var subType: InventorySubType?
+    var replaceCategoryOnPurchase:Bool
     @Published var equipmentCondition:Int = 100
     var tier: InventoryItemTier
     //color background for category?
     //special ability. different class? link by id?
     
-    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, speedMultiplier: Double, moneyMultiplier: Double, type: InventoryType, tier: InventoryItemTier) {
+    init(id: UUID = UUID(), price: Double, name: String, desc: String, levelUnlocked: Int, usesPerVehicle: Int, usesRemaining: Int, icon: String, purchased: Bool, startingItem: Bool, speedMultiplier: Double, moneyMultiplier: Double, type: InventoryType, subType: InventorySubType? = nil, replaceCategoryOnPurchase: Bool, tier: InventoryItemTier) {
         self.id = id
         self.price = price
         self.name = name
@@ -36,12 +38,29 @@ class InventoryItem:Identifiable, ObservableObject{
         self.speedMultiplier = speedMultiplier
         self.moneyMultiplier = moneyMultiplier
         self.type = type
+        self.subType = subType
+        self.replaceCategoryOnPurchase = replaceCategoryOnPurchase
         self.tier = tier
     }
     
-    func purchaseFromStore(item:InventoryItem){
-//        gameState.money -= self.price
-        
+    func purchaseFromStore(item:InventoryItem, inventory: InventoryItems, gameState: GameState){
+        if item.replaceCategoryOnPurchase && item.subType != nil {
+            let matchedItems = inventory.inventoryItems.filter{$0.subType == item.subType}
+            for item in matchedItems {
+                if item.moneyMultiplier > 0 && gameState.inventoryItemMoneyMultiplier > 0 {
+                    gameState.inventoryItemMoneyMultiplier -= item.moneyMultiplier
+                }
+                if item.speedMultiplier > 0 && gameState.inventoryItemSpeedMultiplier > 0{
+                    gameState.inventoryItemSpeedMultiplier -= item.speedMultiplier
+                }
+            }
+            inventory.inventoryItems = inventory.inventoryItems.filter{$0.subType != item.subType}
+        }
+        gameState.money -= item.price
+        item.purchased = true
+        gameState.inventoryItemMoneyMultiplier += item.moneyMultiplier
+        gameState.inventoryItemSpeedMultiplier += item.speedMultiplier
+        inventory.addItem(item: item)
     }
     
     func use(){
@@ -72,7 +91,6 @@ class InventoryItem:Identifiable, ObservableObject{
             case .epic:
                 return .purple
         }
-        
     }
     
 }
@@ -80,6 +98,11 @@ class InventoryItem:Identifiable, ObservableObject{
 enum InventoryType: Identifiable{
     var id : UUID {return UUID()}
     case product, equipment, employee, unassigned
+}
+
+enum InventorySubType: Identifiable{
+    var id : UUID {return UUID()}
+    case microfiber, exteriorCoating, vacuum
 }
 
 enum InventoryItemTier: Identifiable{

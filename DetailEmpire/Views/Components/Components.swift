@@ -118,6 +118,7 @@ struct storeInventoryItemListing: View{
         
         HStack{
             VStack{
+                //TODO circle color based on category?
                 ImageOnCircle(icon: "\(item.icon)", radius: 20, circleColor: .pastelGreen, imageColor: .white)
             }
             .padding(.trailing, 6)
@@ -128,6 +129,9 @@ struct storeInventoryItemListing: View{
                 Text("\(item.desc)")
                     .font(Font.custom("Oswald-Light", size: 14))
                     .foregroundColor(.gray)
+//                Text("\(item.desc)")
+//                    .font(Font.custom("Oswald-Light", size: 10))
+//                    .foregroundColor(.gray)
             }
             Spacer()
             VStack{
@@ -141,11 +145,7 @@ struct storeInventoryItemListing: View{
                 }else{
                     if gameState.level >= item.levelUnlocked{
                         Button(action: {
-                            gameState.money -= item.price
-                            item.purchased = true
-                            inventory.addItem(item: item)
-                            gameState.inventoryItemMoneyMultiplier += item.moneyMultiplier
-                            gameState.inventoryItemSpeedMultiplier += item.speedMultiplier
+                            item.purchaseFromStore(item: item, inventory: inventory, gameState: gameState)
                         }) {
                             HStack {
                                 Image(systemName: "dollarsign.circle")
